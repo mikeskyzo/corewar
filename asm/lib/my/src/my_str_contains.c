@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int my_str_contains(char c, char *str)
+int my_str_contains(char c, char const *str)
 {
 	for (int i = 0; str[i]; i++) {
 		if (str[i] == c)

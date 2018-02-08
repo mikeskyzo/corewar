@@ -16,7 +16,7 @@
 
 #define ABS(value) (value < 0) ? -value : value
 
-int	my_str_contains(char c, char *str);
+int	my_str_contains(char c, char const *str);
 int	free_null_terminated_word_array(void **array);
 int	my_putchar(char c);
 int	my_isneg(int nb);
