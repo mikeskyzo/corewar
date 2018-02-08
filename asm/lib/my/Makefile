@@ -7,6 +7,7 @@
 SRC_DIR		=	$(realpath ./src)
 
 SRC_FILES	=	my_convert_base.c \
+			my_str_contains.c \
 			free_null_terminated_array.c \
 			my_int_to_str.c \
 			my_find_prime_sup.c \
