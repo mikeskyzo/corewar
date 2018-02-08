@@ -7,7 +7,8 @@
 
 SRC_DIR		=	$(realpath src)
 
-SRC_FILES	=	main.c
+SRC_FILES	=	main.c						\
+			op.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
