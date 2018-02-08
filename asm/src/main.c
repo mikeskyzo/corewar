@@ -19,9 +19,10 @@ int main(int ac, char **av)
 
 	if (fd == -1)
 		return (84);
-	if (is_file_valid(fd, &data))
+	if (is_file_valid(fd, &data)) {
 		my_printf("File is valid\n");
-	else
+		my_printf("Champ name: %s, champ description: %s, size: %i\n", data.header.prog_name, data.header.comment, data.header.prog_size);
+	} else
 		my_printf("File is invalid\n");
 	close(fd);
 	return (0);

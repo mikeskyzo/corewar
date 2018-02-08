@@ -23,7 +23,7 @@ void clean_str(char **str)
 			new_str[pos_in_new_str] = word_array[i][j];
 			pos_in_new_str++;
 		}
-		new_str[pos_in_new_str] = ' ';
+		new_str[pos_in_new_str] = (word_array[i + 1]) ? ' ' : '\0';
 		pos_in_new_str++;
 	}
 	free_null_terminated_word_array((void **)word_array);

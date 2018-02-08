@@ -43,7 +43,7 @@ my_strlen(NAME_CMD_STRING) + 1];
 	} else {
 		for (int i = 0; instruction[i + \
 my_strlen(COMMENT_CMD_STRING) + 1] && i < COMMENT_LENGTH; i++)
-			data->header.prog_name[i] = instruction[i + \
+			data->header.comment[i] = instruction[i + \
 my_strlen(COMMENT_CMD_STRING) + 1];
 	}
 	return (0);
