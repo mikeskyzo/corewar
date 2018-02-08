@@ -8,12 +8,13 @@
 #include "my.h"
 #include "asm.h"
 #include <sys/types.h>
-#include <sys.stat.h>
+#include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 int main(int ac, char **av)
 {
-	int fd = open(av[1], O_RDONLY);
+	int fd = (ac >= 1) ? open(av[1], O_RDONLY) : -1;
 	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, NULL};
 
 	if (fd == -1)

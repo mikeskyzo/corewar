@@ -8,6 +8,7 @@
 #include "my.h"
 #include "asm.h"
 #include "op.h"
+#include "get_next_line.h"
 #include <unistd.h>
 
 int is_comment(char *instruction)

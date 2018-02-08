@@ -26,7 +26,7 @@ void clean_str(char **str)
 		new_str[pos_in_new_str] = ' ';
 		pos_in_new_str++;
 	}
-	free_null_terminated_word_array(word_array);
+	free_null_terminated_word_array((void **)word_array);
 	free(*str);
 	*str = new_str;
 }
