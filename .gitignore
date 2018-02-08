@@ -4,6 +4,3 @@
 *.gcda
 *.out
 .vscode
-vscode
-asm
-corewar
