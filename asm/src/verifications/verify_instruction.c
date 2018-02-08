@@ -18,7 +18,7 @@ int get_instruction_size(char **params, op_t *op, assembly_data_t *data)
 		my_strcpy(data->error_msg, ERR_INVALID_NB_ARG);
 		return (-1);
 	}
-	for (int i = 0; op->nbr_args; i++) {
+	for (int i = 0; i < op->nbr_args; i++) {
 		type = (is_register(params[i + 1]) | \
 is_direct(params[i + 1]) | is_indirect(params[i + 1]));
 		if (type & op->type[i]) {
