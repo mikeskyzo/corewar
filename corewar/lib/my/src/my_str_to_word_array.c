@@ -1,75 +1,93 @@
 /*
 ** EPITECH PROJECT, 2017
-** CPool_Day08_2017
+** Pool
 ** File description:
-** split a str into words
+** my_str_to_word_array
 */
 
 #include <stdlib.h>
 #include "my.h"
 
-static int count_words_in_str(char const *str);
-static int is_alphanumeric(char c);
-static int count_letter(char const *str, int word_start);
-static void add_word(char const *str, int pos_str, char **tab, int *pos_tab);
+static short is_delim(char c, char *delimiter);
 
-char **my_str_to_word_array(char const *str)
+int count_word(char const *str, char *delim)
 {
-	int words = count_words_in_str(str);
-	char **tab = malloc(sizeof(*tab) * (words + 2));
-	int pos_in_tab = 0;
-	int pos_in_str = 0;
+	int counter = 0;
 
-	if (is_alphanumeric(str[pos_in_str])) {
-		add_word(str, pos_in_str - 1, tab, &pos_in_tab);
-	}
-	for (pos_in_str = 0; str[pos_in_str] != '\0'; pos_in_str++) {
-		if (is_alphanumeric(str[pos_in_str]) == 0) {
-			add_word(str, pos_in_str, tab, &pos_in_tab);
-		}
-	}
-	tab[pos_in_tab] = 0;
-	return (tab);
-}
-
-void add_word(char const *str, int pos_str, char **tab, int *pos_tab)
-{
-	int letters = count_letter(str, pos_str + 1);
-	char *cur_str;
-
-	if (letters == 0)
-		return;
-	cur_str = malloc(sizeof(*cur_str) * (letters + 1));
-	my_strncpy(cur_str, &str[pos_str + 1], letters);
-	cur_str[letters] = '\0';
-	tab[*pos_tab] = cur_str;
-	*pos_tab += 1;
-}
-
-int count_letter(char const *str, int word_start)
-{
-	int letters = 0;
-
-	for (int i = 0; is_alphanumeric(str[i + word_start]); i++)
-		letters++;
-	return (letters);
-}
-
-int count_words_in_str(char const *str)
-{
-	int words = 0;
-
-	for (int i = 0; str[i] != '\0'; i++) {
-		if (is_alphanumeric(str[i]) == 0 && count_letter(str, i + 1)) {
-			words++;
-		}
-	}
-	return (words);
-}
-
-int is_alphanumeric(char c)
-{
-	if (c < '0' || (c > '9' && c < 'A') || (c > 'Z' && c < 'a') || c > 'z')
+	if (str == NULL)
 		return (0);
-	return (1);
+	for (int i = 0; str[i + 1] != 0; i++) {
+		if (is_delim(str[i], delim) && !is_delim(str[i + 1], delim)) {
+			counter++;
+		}
+	}
+	return (counter);
+}
+
+int get_next_word_size(char const *str, int index, char *delim)
+{
+	int i = 0;
+
+	if (str == NULL)
+		return (0);
+	if (str[index] == '"') {
+		index++;
+		for (i = index; str[i] != 0 && str[i] != '"'; i++);
+		return (i);
+	}
+	for (i = index; str[i] != 0 && !is_delim(str[i], delim); i++);
+	return (i);
+}
+
+char *get_next_word(char const *str, int index, char *delim)
+{
+	int i;
+	char *res = malloc(get_next_word_size(str, index, delim) + 1);
+
+	if (str == NULL || delim == NULL)
+		return (NULL);
+	if (str[index] == '"') {
+		index++;
+		for (i = index; str[i] != 0 && str[i] != '"'; i++)
+			res[i - index] = str[i];
+		res[i - 1] = 0;
+		return (res);
+	}
+	for (i = index; str[i] != 0 && !is_delim(str[i], delim); i++) {
+		res[i - index] = str[i];
+	}
+	res[i] = 0;
+	return (res);
+}
+
+char **my_str_to_word_array(char const *str, char *delim)
+{
+	int counter = 0;
+	int i = 0;
+	char **arr = malloc((count_word(str, delim) + 2) * sizeof(char *));
+
+	if (str == NULL || arr == NULL || delim == NULL)
+		return (NULL);
+	if (!is_delim(str[0], delim)) {
+		arr[counter++] = get_next_word(str, 0, delim);
+		i++;
+	}
+	for (; str[i] != 0; i++) {
+		if (is_delim(str[i], delim) && !is_delim(str[i + 1], delim)) {
+			arr[counter++] = get_next_word(&str[i + 1], 0, delim);
+			i += my_strlen(arr[counter - 1]);
+		}
+	}
+	arr[counter] = NULL;
+	return (arr);
+}
+
+short is_delim(char c, char *delimiter)
+{
+	if (c == 0)
+		return (1);
+	for (int i = 0; delimiter[i] != 0; i++)
+		if (delimiter[i] == c)
+			return (1);
+	return (0);
 }
