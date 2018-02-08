@@ -13,7 +13,8 @@ SRC_FILES	=	main.c						\
 
 VERIF_DIR	=	$(realpath src/verifications)
 
-VERIF_FILES	=	verif_live.c
+VERIF_FILES	=	verify_instruction.c				\
+			detect_types.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(VERIF_DIR)/, $(VERIF_FILES))
 

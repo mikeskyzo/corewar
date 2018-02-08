@@ -18,6 +18,13 @@ struct assembly_data_s {
 
 typedef struct assembly_data_s assembly_data_t;
 
+int verify_instruction(char *instruction);
 op_t *get_op_by_mnemonic(char *mnemonique);
+
+int is_register(char *param);
+int is_direct(char *param);
+int is_indirect(char *param);
+int is_label_set(char *param);
+int is_label_get(char *param);
 
 #endif

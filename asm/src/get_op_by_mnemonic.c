@@ -5,6 +5,7 @@
 ** Get an op_t by it's mnemonic
 */
 
+#include "my.h"
 #include "op.h"
 #include <unistd.h>
 
