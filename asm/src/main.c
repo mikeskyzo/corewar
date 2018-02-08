@@ -15,7 +15,7 @@
 int main(int ac, char **av)
 {
 	int fd = (ac >= 1) ? open(av[1], O_RDONLY) : -1;
-	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, NULL};
+	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, NULL, {0}};
 
 	if (fd == -1)
 		return (84);

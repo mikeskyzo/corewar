@@ -58,11 +58,9 @@ int process_instruction(char *instruction, assembly_data_t *data)
 	if (is_header_info(instruction))
 		process_header_info(instruction, data);
 	else
-		size = verify_instruction(instruction);
-	if (size == -1) {
-		my_puterror("Error: invalid file\n");
+		size = verify_instruction(instruction, data);
+	if (size == -1)
 		return (-1);
-	}
 	(data->header.prog_size) += size;
 	return (0);
 }
@@ -73,12 +71,14 @@ int is_file_valid(int fd, assembly_data_t *data)
 	int was_valid = 0;
 
 	instruction = get_next_line(fd);
-	while (instruction) {
+	for (int i = 1; instruction; i++) {
 		clean_str(&instruction);
-		was_valid = process_instruction(instruction, data);
+		was_valid = !process_instruction(instruction, data);
 		free(instruction);
-		if (!was_valid)
+		if (!was_valid) {
+			my_printf("Error on line %i :%s\n", i, data->error_msg);
 			return (0);
+		}
 		instruction = get_next_line(fd);
 	}
 	lseek(fd, 0, SEEK_SET);
