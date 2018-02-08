@@ -69,11 +69,15 @@ int process_instruction(char *instruction, assembly_data_t *data)
 int is_file_valid(int fd, assembly_data_t *data)
 {
 	char *instruction = NULL;
+	int was_valid = 0;
 
 	instruction = get_next_line(fd);
 	while (instruction) {
 		clean_str(&instruction);
+		was_valid = process_instruction(instruction, data);
 		free(instruction);
+		if (!was_valid)
+			return (0);
 		instruction = get_next_line(fd);
 	}
 	lseek(fd, 0, SEEK_SET);

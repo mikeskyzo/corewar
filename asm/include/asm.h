@@ -20,6 +20,7 @@ typedef struct assembly_data_s assembly_data_t;
 
 void clean_str(char **str);
 
+int is_file_valid(int fd, assembly_data_t *data);
 int verify_instruction(char *instruction);
 
 int size_of_type_byte(op_t *mnemonic);
