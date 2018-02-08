@@ -16,3 +16,13 @@ int free_null_terminated_word_array(void **array)
 	free(array);
 	return (0);
 }
+
+int array_size(void **array)
+{
+	int size = 0;
+
+	if (array == NULL)
+		return (0);
+	for (int size = 0; array[size]; size++);
+	return (size);
+}
