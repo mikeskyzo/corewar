@@ -17,3 +17,13 @@ op_t *get_op_by_mnemonic(char *mnemonique)
 	}
 	return (NULL);
 }
+
+int size_of_type_byte(op_t *mnemonic)
+{
+	if (!my_strcmp("live", mnemonic->mnemonique) || \
+!my_strcmp("zjump", mnemonic->mnemonique) || \
+!my_strcmp("fork", mnemonic->mnemonique) || \
+!my_strcmp("lfork", mnemonic->mnemonique))
+		return (0);
+	return (1);
+}

@@ -19,6 +19,8 @@ struct assembly_data_s {
 typedef struct assembly_data_s assembly_data_t;
 
 int verify_instruction(char *instruction);
+
+int size_of_type_byte(op_t *mnemonic);
 op_t *get_op_by_mnemonic(char *mnemonique);
 
 int is_register(char *param);
