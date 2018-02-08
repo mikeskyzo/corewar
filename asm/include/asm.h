@@ -18,4 +18,6 @@ struct assembly_data_s {
 
 typedef struct assembly_data_s assembly_data_t;
 
+op_t *get_op_by_mnemonic(char *mnemonique);
+
 #endif

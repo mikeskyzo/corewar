@@ -7,10 +7,15 @@
 
 SRC_DIR		=	$(realpath src)
 
-SRC_FILES	=	main.c \
-			op.c \
+SRC_FILES	=	main.c						\
+			op.c						\
+			get_op_by_mnemonic.c
 
-SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+VERIF_DIR	=	$(realpath src/verifications)
+
+VERIF_FILES	=	verif_live.c
+
+SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(VERIF_DIR)/, $(VERIF_FILES))
 
 OBJ		=	$(SRC:%.c=%.o)
 
