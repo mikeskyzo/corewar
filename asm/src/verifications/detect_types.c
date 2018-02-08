@@ -20,7 +20,7 @@ int is_register(char *param)
 	if (param[0] != 'r')
 		return (0);
 	if (number >= 1 && number <= REG_NUMBER && my_str_isnum(&param[1]))
-		return (1);
+		return (T_REG);
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int is_direct(char *param)
 	if (param[0] != DIRECT_CHAR)
 		return (0);
 	if (my_str_isnum(&param[1]) || is_label_get(&param[1]))
-		return (1);
+		return (T_DIR);
 	return (0);
 }
 
@@ -42,7 +42,7 @@ int is_indirect(char *param)
 	if (param == NULL)
 		return (0);
 	if (my_str_isnum(param) || is_label_get(param))
-		return (1);
+		return (T_IND);
 	return (0);
 }
 
@@ -54,7 +54,7 @@ int is_label_set(char *param)
 		if (my_str_contains(param[i], LABEL_CHARS))
 			continue;
 		if (param[i] == LABEL_CHAR && param[i + 1] == '\0')
-			return (1);
+			return (T_LAB);
 		break;
 	}
 	return (0);
@@ -72,6 +72,6 @@ int is_label_get(char *param)
 		break;
 	}
 	if (param[i] == '\0')
-		return (1);
+		return (T_LAB);
 	return (0);
 }
