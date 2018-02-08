@@ -23,6 +23,6 @@ int array_size(void **array)
 
 	if (array == NULL)
 		return (0);
-	for (int size = 0; array[size]; size++);
+	for (size = 0; array[size]; size++);
 	return (size);
 }
