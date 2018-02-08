@@ -11,7 +11,21 @@
 
 int get_instruction_size(char **params, op_t *op)
 {
-	return (0);
+	char type = 0;
+	int size = 0;
+
+	if (array_size((void **)params) - 1 != op->nbr_args)
+		return (-1);
+	for (int i = 0; op->nbr_args; i++) {
+		type = (is_register(params[i + 1]) | \
+is_direct(params[i + 1]) | is_indirect(params[i + 1]));
+		if (type & op->type[i]) {
+			size += (type);
+			continue;
+		}
+		return (-1);
+	}
+	return (size);
 }
 
 int verify_instruction(char *instruction)
@@ -32,5 +46,5 @@ int verify_instruction(char *instruction)
 		return (-1);
 	size = get_instruction_size(word_tab, op);
 	free_null_terminated_word_array((void **)word_tab);
-	return (size);
+	return ((size != -1) ? (size + 1 + size_of_type_byte(op)) : -1);
 }
