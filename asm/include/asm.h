@@ -18,6 +18,8 @@ struct assembly_data_s {
 
 typedef struct assembly_data_s assembly_data_t;
 
+void clean_str(char **str);
+
 int verify_instruction(char *instruction);
 
 int size_of_type_byte(op_t *mnemonic);
