@@ -8,10 +8,10 @@
 SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	main.c						\
-			op.c							\
-			get_op_by_mnemonic.c			\
-			clean_str.c						\
-			write/args_manager.c			\
+			op.c						\
+			get_op_by_mnemonic.c				\
+			clean_str.c					\
+			write/args_manager.c				\
 			write/op_manager.c				\
 			write/writer.c					\
 
@@ -19,7 +19,8 @@ VERIF_DIR	=	$(realpath src/verifications)
 
 VERIF_FILES	=	verify_instruction.c				\
 			verify_file.c					\
-			detect_types.c
+			detect_types.c					\
+			parse_labels_and_verify_instruction.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(VERIF_DIR)/, $(VERIF_FILES))
 

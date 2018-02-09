@@ -49,16 +49,16 @@ my_strlen(COMMENT_CMD_STRING) + 1];
 	return (0);
 }
 
-int process_instruction(char *instruction, assembly_data_t *data)
+int process_instruction(char *line, assembly_data_t *data)
 {
 	int size = 0;
 
-	if (is_comment(instruction) || instruction[0] == '\0')
+	if (is_comment(line) || line[0] == '\0')
 		return (0);
-	if (is_header_info(instruction))
-		process_header_info(instruction, data);
+	if (is_header_info(line))
+		process_header_info(line, data);
 	else
-		size = verify_instruction(instruction, data);
+		size = parse_label_and_return_instruction_size(line, data);
 	if (size == -1)
 		return (-1);
 	(data->header.prog_size) += size;
