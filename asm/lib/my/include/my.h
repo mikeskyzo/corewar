@@ -58,6 +58,7 @@ int	my_show_word_array(char * const *tab);
 char **my_str_to_word_array(char const *str, char *delim);
 char	*my_convert_base(char const *nbr, char const *base_from, \
 char const *base_to);
+char *my_char_to_str(char c);
 
 int	my_printf(const char *format, ...);
 int	display_uint_base(unsigned int nbr, char const *base, int dummy);
@@ -95,6 +96,7 @@ int option_flag_hash(char *options, char const * to_display);
 int hash(char *options, int str_len);
 char *option_precision(char *str, int len);
 int option_width(char *options, int length, int star_value, char c);
+
 
 typedef struct printf_arg {
 	char type;

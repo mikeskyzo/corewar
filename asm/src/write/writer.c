@@ -7,12 +7,26 @@
 
 #include <unistd.h>
 #include "op.h"
+#include "asm.h"
 
 static void write_header(int fd, header_t header);
 
-void writer(char *str, int fd, assembly_data_t *datas)
+void writer(int fd, assembly_data_t *datas)
 {
 	write_header(fd, datas->header);
+	write_program(fd, datas);
+}
+
+void write_program(int fd, assembly_data_t *datas)
+{
+	char *line = get_next_line(0);
+
+	while (line != NULL) {
+		if (line[0] == COMMENT_CHAR)
+			continue;
+		run_op(fd, line);
+		line = get_next_line(0);
+	}
 }
 
 void write_header(int fd, header_t header)

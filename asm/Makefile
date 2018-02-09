@@ -8,9 +8,12 @@
 SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	main.c						\
-			op.c						\
-			get_op_by_mnemonic.c				\
-			clean_str.c
+			op.c							\
+			get_op_by_mnemonic.c			\
+			clean_str.c						\
+			write/args_managers.c			\
+			write/op.c						\
+			write/writer.c					\
 
 VERIF_DIR	=	$(realpath src/verifications)
 

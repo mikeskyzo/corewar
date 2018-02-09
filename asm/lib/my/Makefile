@@ -56,7 +56,8 @@ SRC_FILES	=	my_convert_base.c \
 			printf_funcs/run_options.c \
 			printf_funcs/constants.c \
 			printf_funcs/str_contains.c \
-			get_next_line.c
+			get_next_line.c				\
+			my_char_to_str.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
