@@ -28,7 +28,7 @@ my_char_to_str(SEPARATOR_CHAR));
 
 	write(fd, index, sizeof(char));
 	for (int i = 0; args[i] != NULL; i++) {
-		size = get_arg_size(args[i]);
+		size = get_arg_type_size(args[i]);
 		write(fd, get_arg_value(args[i]), size);
 	}
 }
