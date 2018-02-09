@@ -35,11 +35,11 @@ int my_puterror_nbr_base(int nbr, char const *base)
 	if (nbr < 0) {
 		my_puterror_char('-');
 		if (nbr / base_size != 0)
-			my_putnbr_base(-(nbr / base_size), base);
+			my_puterror_nbr_base(-(nbr / base_size), base);
 	}
 	else {
 		if (nbr / base_size != 0)
-			my_putnbr_base(nbr / base_size, base);
+			my_puterror_nbr_base(nbr / base_size, base);
 	}
 	if (nbr == -2147483648)
 		nbr = nbr + base_size;
