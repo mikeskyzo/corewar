@@ -5,12 +5,13 @@
 ** Main function for the asm part
 */
 
-#include "my.h"
-#include "asm.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "my.h"
+#include "asm.h"
+#include "writer.h"
 
 int main(int ac, char **av)
 {
@@ -22,6 +23,7 @@ int main(int ac, char **av)
 	if (is_file_valid(fd, &data)) {
 		my_printf("File is valid\n");
 		my_printf("Champ name: %s, champ description: %s, size: %i\n", data.header.prog_name, data.header.comment, data.header.prog_size);
+		writer(fd, &data);
 	} else
 		my_printf("File is invalid\n");
 	close(fd);

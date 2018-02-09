@@ -8,6 +8,8 @@
 #ifndef _ASM_WRITER_
 #define _ASM_WRITER_
 
+#include "asm.h"
+
 typedef struct {
 	args_type_t type;
 	int value;
