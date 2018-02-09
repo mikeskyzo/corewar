@@ -13,6 +13,8 @@
 
 int is_comment(char *instruction)
 {
+	if (instruction == NULL)
+		return (0);
 	if (instruction[0] == COMMENT_CHAR)
 		return (1);
 	return (0);
