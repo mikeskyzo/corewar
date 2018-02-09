@@ -45,9 +45,7 @@ $(NAME):	libs
 
 libs:
 		$(MAKE) -C $(LIB_DIR)my
-		$(MAKE) clean -C $(LIB_DIR)my
 		$(MAKE) -C $(LIB_DIR)mylist
-		$(MAKE) clean -C $(LIB_DIR)mylist
 
 cclean:
 		$(RM) $(CCTMP)

@@ -40,3 +40,15 @@ Test(is_direct, test_the_is_direct_function)
 	cr_expect(!is_direct("A"));
 	cr_expect(!is_direct("1r"));
 }
+
+Test(is_indirect, test_the_is_indirect_function)
+{
+	cr_expect(is_indirect("1"));
+	cr_expect(is_indirect("18"));
+	cr_expect(is_indirect(":label"));
+	cr_expect(!is_indirect(""));
+	cr_expect(!is_indirect("%5"));
+	cr_expect(!is_indirect("notalabel:"));
+	cr_expect(!is_indirect("A"));
+	cr_expect(!is_indirect("r1"));
+}
