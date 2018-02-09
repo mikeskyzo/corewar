@@ -20,11 +20,11 @@ typedef struct {
 	int size;
 } type_chars_size_t;
 
-void writer(int fd, assembly_data_t *datas);
 int get_arg_type_size(char *arg);
 int get_arg_value(char *arg);
 void run_op(int fd, char *line);
 void run_specific_op(int fd, op_t op, int index, char **parsed_line);
 short start_with(char *str, char *start);
+void writer(int fd, int read_fd, assembly_data_t *datas);
 
 #endif
