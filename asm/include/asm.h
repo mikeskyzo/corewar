@@ -32,7 +32,6 @@ int parse_label_and_return_instruction_size(char *instruction, \
 assembly_data_t *data);
 int verify_instruction(char *instruction, assembly_data_t *data);
 
-int size_of_type_byte(op_t *mnemonic);
 op_t *get_op_by_mnemonic(char *mnemonique);
 
 int is_register(char *param);
