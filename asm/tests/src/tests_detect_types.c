@@ -66,5 +66,19 @@ Test(is_label_set, test_if_str_is_a_label_set)
 	cr_expect(!is_label_set("lAbel:"));
 	cr_expect(!is_label_set("r1"));
 	cr_expect(!is_label_set(":label"));
+	cr_expect(!is_label_set(":label:"));
 	cr_expect(!is_label_set(NULL));
+}
+
+Test(is_label_get, test_if_str_is_a_label_get)
+{
+	cr_expect(is_label_get(":label"));
+	cr_expect(is_label_get(":live"));
+	cr_expect(is_label_get(":04j_z"));
+	cr_expect(!is_label_get(""));
+	cr_expect(!is_label_get(":lAbel"));
+	cr_expect(!is_label_get("r1"));
+	cr_expect(!is_label_get("label:"));
+	cr_expect(!is_label_get(":label:"));
+	cr_expect(!is_label_get(NULL));
 }
