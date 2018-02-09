@@ -35,5 +35,6 @@ int main(int ac, char **av)
 	else
 		write_error_message(&data);
 	close(fd);
+	dict_destroy(data.labels);
 	return (0);
 }
