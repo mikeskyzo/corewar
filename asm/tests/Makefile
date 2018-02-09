@@ -7,13 +7,24 @@
 
 SRC_DIR		=	$(realpath ../src)
 
-SRC_FILES	=	verifications/detect_types.c
+SRC_FILES	=	verifications/detect_types.c			\
+			verifications/parse_labels_and_verify_instruction.c \
+			verifications/verify_file.c			\
+			verifications/verify_instruction.c		\
+			write/args_manager.c				\
+			write/op_manager.c				\
+			write/writer.c					\
+			clean_str.c					\
+			get_op_by_mnemonic.c				\
+			op.c						\
+
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 TESTS_DIR	=	$(realpath ./src)
 
-TESTS_FILES	=	tests_detect_types.c
+TESTS_FILES	=	tests_detect_types.c				\
+			tests_is_comment.c
 
 SRC_TESTS	=	$(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 
