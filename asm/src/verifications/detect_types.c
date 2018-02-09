@@ -51,7 +51,7 @@ int is_label_set(char *param)
 	if (param == NULL)
 		return (0);
 	for (int i = 0; param[i]; i++) {
-		if (my_str_contains(param[i], LABEL_CHARS))
+		if (my_str_contains(param[i], LABEL_CHARS) != -1)
 			continue;
 		if (param[i] == LABEL_CHAR && param[i + 1] == '\0')
 			return (T_LAB);
@@ -67,7 +67,7 @@ int is_label_get(char *param)
 	if (param == NULL || param[0] != LABEL_CHAR)
 		return (0);
 	for (i = 1; param[i]; i++) {
-		if (my_str_contains(param[i], LABEL_CHARS))
+		if (my_str_contains(param[i], LABEL_CHARS) != -1)
 			continue;
 		break;
 	}
