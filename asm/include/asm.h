@@ -21,6 +21,7 @@ struct assembly_data_s {
 	header_t header;
 	linked_dict_t *labels;
 	char error_msg[ERROR_MSG_SIZE];
+	int error_line;
 };
 
 typedef struct assembly_data_s assembly_data_t;

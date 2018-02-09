@@ -76,7 +76,7 @@ int is_file_valid(int fd, assembly_data_t *data)
 		was_valid = !process_instruction(instruction, data);
 		free(instruction);
 		if (!was_valid) {
-			my_printf("Error on line %i :%s\n", i, data->error_msg);
+			data->error_line = i;
 			return (0);
 		}
 		instruction = get_next_line(fd);

@@ -13,20 +13,28 @@
 #include "asm.h"
 #include "writer.h"
 
+void write_error_message(assembly_data_t *data)
+{
+	my_puterror("Error on line ");
+	my_puterror_nbr(data->error_line);
+	my_puterror(" :");
+	my_puterror(data->error_msg);
+	my_puterror("\n");
+}
+
 int main(int ac, char **av)
 {
 	int fd = (ac >= 1) ? open(av[1], O_RDONLY) : -1;
 	int write_fd = (ac >= 2) ? open(av[2], O_RDWR) : -1;
-	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, NULL, {0}};
+	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, 0, {0}, 0};
 
 	if (fd == -1 || write_fd == -1)
 		return (84);
-	if (is_file_valid(fd, &data)) {
-		my_printf("File is valid\n");
-		my_printf("Champ name: %s, champ description: %s, size: %i\n", data.header.prog_name, data.header.comment, data.header.prog_size);
+	if (is_file_valid(fd, &data))
 		writer(write_fd, fd, &data);
-	} else
-		my_printf("File is invalid\n");
+	else
+		write_error_message(&data);
 	close(fd);
+	dict_destroy(data.labels);
 	return (0);
 }
