@@ -11,10 +11,13 @@
 void dict_destroy(linked_dict_t *dict)
 {
 	linked_dict_t *cur = dict;
+	char *label = (char *)((void **)cur->data)[0];
 
 	while (dict) {
 		cur = dict;
 		dict = dict->next;
+		label = (char *)((void **)cur->data)[0];
+		free(label);
 		free(cur->data);
 		free(cur);
 	}
