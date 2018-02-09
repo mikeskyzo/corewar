@@ -14,9 +14,11 @@ void run_op(int fd, char *line)
 {
 	char **parsed_line = my_str_to_word_array(line, " ");
 
+	if (parsed_line[0] == NULL)
+		return;
 	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
 		if (my_strcmp(parsed_line[0], op_tab[i].mnemonique) == 0) {
-			run_specific_op(fd, op_tab[i], i, parsed_line);
+			run_specific_op(fd, op_tab[i], i + 1, parsed_line);
 		}
 	}
 }
@@ -41,8 +43,9 @@ short start_with(char *str, char *start)
 {
 	if (my_strlen(str) < my_strlen(start))
 		return (0);
-	for (int i = 0; start[i] != 0; i++)
+	for (int i = 0; start[i] != 0; i++) {
 		if (str[i] != start[i])
 			return (0);
+	}
 	return (1);
 }

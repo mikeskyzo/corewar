@@ -30,5 +30,5 @@ int get_arg_type_size(char *arg)
 
 int get_arg_value(char *arg)
 {
-	return (my_getnbr(arg));
+	return (my_getnbr(&arg[1]));
 }
