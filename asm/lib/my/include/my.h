@@ -16,6 +16,9 @@
 
 #define ABS(value) (value < 0) ? -value : value
 
+int	my_puterror_char(char c);
+int	my_puterror_nbr_base(int nbr, char const *base);
+int	my_puterror_nbr(int nb);
 int	my_str_contains(char c, char const *str);
 int	array_size(void **array);
 int	free_null_terminated_word_array(void **array);
