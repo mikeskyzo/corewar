@@ -5,6 +5,7 @@
 ** Operators manager
 */
 
+#include <unistd.h>
 #include "my.h"
 #include "asm.h"
 #include "writer.h"
@@ -24,12 +25,15 @@ void run_specific_op(int fd, op_t op, int index, char **parsed_line)
 {
 	char **args = my_str_to_word_array(parsed_line[1],\
 my_char_to_str(SEPARATOR_CHAR));
-	int size;
+	int size = 0;
+	int arg_val = 0;
 
-	write(fd, index, sizeof(char));
+	(void)op;
+	write(fd, &index, sizeof(char));
 	for (int i = 0; args[i] != NULL; i++) {
+		arg_val = get_arg_value(args[i]);
 		size = get_arg_type_size(args[i]);
-		write(fd, get_arg_value(args[i]), size);
+		write(fd, &arg_val, size);
 	}
 }
 

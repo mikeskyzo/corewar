@@ -21,8 +21,6 @@ typedef struct {
 } type_chars_size_t;
 
 void writer(int fd, assembly_data_t *datas);
-void write_program(int fd, assembly_data_t *datas);
-void write_header(int fd, header_t header);
 int get_arg_type_size(char *arg);
 int get_arg_value(char *arg);
 void run_op(int fd, char *line);
