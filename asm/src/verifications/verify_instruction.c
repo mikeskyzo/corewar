@@ -9,6 +9,16 @@
 #include "asm.h"
 #include "op.h"
 
+static int get_type_size(int type, op_t *op)
+{
+	switch (type) {
+		case T_REG: return (1);
+		case T_DIR: return ((op->uses_ind) ? IND_SIZE : DIR_SIZE);
+		case T_IND: return (IND_SIZE);
+		default: return (-1);
+	}
+}
+
 int get_instruction_size(char **params, op_t *op, assembly_data_t *data)
 {
 	char type = 0;
@@ -22,7 +32,7 @@ int get_instruction_size(char **params, op_t *op, assembly_data_t *data)
 		type = (is_register(params[i + 1]) | \
 is_direct(params[i + 1]) | is_indirect(params[i + 1]));
 		if (type & op->type[i]) {
-			size += (type);
+			size += get_type_size(type, op);
 			continue;
 		}
 		my_strcpy(data->error_msg, ERR_INVALID_ARG_TYPE);
@@ -51,5 +61,5 @@ int verify_instruction(char *instruction, assembly_data_t *data)
 	}
 	size = get_instruction_size(word_tab, op, data);
 	free_null_terminated_word_array((void **)word_tab);
-	return ((size != -1) ? (size + 1 + size_of_type_byte(op)) : -1);
+	return ((size != -1) ? (size + 1 + op->encode_byte) : -1);
 }

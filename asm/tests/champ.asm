@@ -2,4 +2,5 @@
 	.name "Just a test"
   .comment "just a comment"
 
-live %4
+live %1
+zjmp %4
