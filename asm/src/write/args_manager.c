@@ -17,7 +17,7 @@ type_chars_size_t types_sizes[] = {
 	{NULL, 0}
 };
 
-int get_arg_type_size(char *arg)
+int get_arg_type(char *arg)
 {
 	if (arg == NULL)
 		return (-1);

@@ -33,8 +33,8 @@ my_char_to_str(SEPARATOR_CHAR));
 	(void)op;
 	write(fd, &index, sizeof(char));
 	for (int i = 0; args[i] != NULL; i++) {
-		arg_val = get_arg_value(args[i]);
-		size = get_arg_type_size(args[i]);
+		arg_val = get_big_endians(get_arg_value(args[i]));
+		size = get_type_size(get_arg_type(args[i]), &op);
 		write(fd, &arg_val, size);
 	}
 }

@@ -40,5 +40,6 @@ int is_direct(char *param);
 int is_indirect(char *param);
 int is_label_set(char *param);
 int is_label_get(char *param);
+int get_type_size(int type, op_t *op);
 
 #endif

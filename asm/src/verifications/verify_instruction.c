@@ -9,7 +9,7 @@
 #include "asm.h"
 #include "op.h"
 
-static int get_type_size(int type, op_t *op)
+int get_type_size(int type, op_t *op)
 {
 	switch (type) {
 		case T_REG: return (1);
