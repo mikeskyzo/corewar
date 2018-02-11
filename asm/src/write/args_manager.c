@@ -30,5 +30,9 @@ int get_arg_type(char *arg)
 
 int get_arg_value(char *arg)
 {
-	return (my_getnbr(&arg[1]));
+	int index = 0;
+
+	if (arg[0] < '0' || arg[0] > '9')
+		index = 1;
+	return (my_getnbr(&arg[index]));
 }
