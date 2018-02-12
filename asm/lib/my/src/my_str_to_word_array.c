@@ -14,7 +14,7 @@ int count_word(char const *str, char *delim)
 {
 	int counter = 0;
 
-	if (str == NULL)
+	if (str == NULL || delim == NULL || my_strlen(str) <= 0)
 		return (0);
 	for (int i = 0; str[i + 1] != 0; i++) {
 		if (is_delim(str[i], delim) && !is_delim(str[i + 1], delim)) {
@@ -64,9 +64,10 @@ char **my_str_to_word_array(char const *str, char *delim)
 {
 	int counter = 0;
 	int i = 0;
-	char **arr = malloc((count_word(str, delim) + 2) * sizeof(char *));
+	char **arr;
 
-	if (str == NULL || arr == NULL || delim == NULL)
+	arr = malloc((count_word(str, delim) + 2) * sizeof(char *));
+	if (my_strlen(str) <= 0 || arr == NULL || delim == NULL)
 		return (NULL);
 	if (!is_delim(str[0], delim)) {
 		arr[counter++] = get_next_word(str, 0, delim);

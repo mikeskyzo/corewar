@@ -14,6 +14,8 @@ void run_op(int fd, char *line)
 {
 	char **parsed_line = my_str_to_word_array(line, " ");
 
+	if (parsed_line == NULL)
+		return;
 	if (parsed_line[0] == NULL)
 		return;
 	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
