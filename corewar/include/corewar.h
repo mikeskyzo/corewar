@@ -18,6 +18,9 @@ struct champ_s
 	header_t header;
 	int nb_next_ins;
 	int nb_cycle_live;
+	BYTE *pc;
+	bool carry;
+	BYTE registers[REG_SIZE * REG_NUMBER];
 };
 
 typedef struct champ_s champ_t;
