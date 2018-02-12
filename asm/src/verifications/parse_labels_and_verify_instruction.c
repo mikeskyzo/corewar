@@ -22,8 +22,9 @@ assembly_data_t *data)
 	if (words == NULL)
 		return (-1);
 	if (is_label_set(words[0])) {
-		dict_add(&(data->labels), words[0], &current_prog_size);
 		label_length = my_strlen(words[0]);
+		words[0][label_length - 1] = '\0';
+		dict_add(&(data->labels), words[0], &current_prog_size);
 	}
 	free_null_terminated_word_array((void **)words);
 	if (instruction[label_length] != '\0')
