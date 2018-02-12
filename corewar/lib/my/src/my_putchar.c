@@ -18,3 +18,8 @@ int	my_putchar_cond(char c, int condition)
 		return (write(1, &c, 1));
 	return (0);
 }
+
+int	my_puterror_char(char c)
+{
+	return (write(2, &c, 1));
+}
