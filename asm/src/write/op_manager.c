@@ -10,17 +10,22 @@
 #include "asm.h"
 #include "writer.h"
 
-void run_op(int fd, char *line)
+void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 {
 	char **parsed_line = my_str_to_word_array(line, " ");
+	int instruct_size = 0;
+	op_t op;
+	int op_index;
 
 	if (parsed_line[0] == NULL)
 		return;
-	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
-		if (my_strcmp(parsed_line[0], op_tab[i].mnemonique) == 0) {
-			run_specific_op(fd, op_tab[i], i + 1, parsed_line);
-		}
-	}
+	op = get_op(parsed_line[0]);
+	if (op.mnemonique == NULL)
+		return;
+	op_index = get_op_index(op) + 1;
+	write(fd, &op_index, sizeof(char));
+	instruct_size += run_specific_op(fd, pos, parsed_line, datas);
+	*pos += instruct_size;
 }
 
 char get_arg_type_encode(int arg_type)
@@ -36,7 +41,7 @@ char get_arg_type_encode(int arg_type)
 	return (0);
 }
 
-void write_encode_byte(int fd, char **args)
+int write_encode_byte(int fd, char **args)
 {
 	char encode = 0;
 	int arg_type = -1;
@@ -51,24 +56,31 @@ void write_encode_byte(int fd, char **args)
 		encode += get_arg_type_encode(arg_type);
 	}
 	write(fd, &encode, sizeof(encode));
+	return (sizeof(encode));
 }
 
-void run_specific_op(int fd, op_t op, int index, char **parsed_line)
+int run_specific_op(int fd, int *pos, char **parsed_line,\
+assembly_data_t *datas)
 {
+	op_t op;
 	char **args = my_str_to_word_array(parsed_line[1],\
 my_char_to_str(SEPARATOR_CHAR));
 	int size = 0;
 	int arg_val = 0;
+	int res = 0;
 
-	(void)op;
-	write(fd, &index, sizeof(char));
+	op = get_op(parsed_line[0]);
+	size += sizeof(char);
 	if (op.encode_byte)
-		write_encode_byte(fd, args);
+		res += write_encode_byte(fd, args);
 	for (int i = 0; args[i] != NULL; i++) {
 		size = get_type_size(get_arg_type(args[i]), &op);
-		arg_val = get_big_endians(get_arg_value(args[i]), size);
+		arg_val = get_big_endians(get_arg_value(args[i], pos, datas),\
+size);
+		res += size;
 		write(fd, &arg_val, size);
 	}
+	return (res);
 }
 
 short start_with(char *str, char *start)

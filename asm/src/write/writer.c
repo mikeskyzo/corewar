@@ -23,12 +23,13 @@ void writer(int fd, int read_fd, assembly_data_t *datas)
 void write_program(int fd, int read_fd, assembly_data_t *datas)
 {
 	char *line = get_next_line(read_fd);
+	int pos = 0;
 
 	(void)datas;
 	while (line != NULL) {
 		clean_str(&line);
 		if (line[0] != COMMENT_CHAR) {
-			run_op(fd, line);
+			run_op(fd, line, &pos, datas);
 		}
 		line = get_next_line(read_fd);
 	}
