@@ -17,7 +17,7 @@ struct champ_s
 	int nb_cycle_live;
 };
 
-typedef struct champ_s chmp_t;
+typedef struct champ_s champ_t;
 
 extern champ_t champ_tab[];
 
