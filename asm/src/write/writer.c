@@ -39,8 +39,8 @@ void write_program(int fd, int read_fd, assembly_data_t *datas)
 
 void write_header(int fd, header_t header)
 {
-	header.magic = get_big_endians(header.magic, 4);
-	header.prog_size = get_big_endians(header.prog_size, 4);
+	header.magic = header.magic, 4;
+	header.prog_size = header.prog_size, 4;
 	write(fd, &header, sizeof(header));
 }
 

@@ -21,6 +21,8 @@ void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 		free_null_terminated_word_array((void **)parsed_line);
 		return;
 	}
+	if (is_label_set(parsed_line[0]))
+		return;
 	op = get_op(parsed_line[0]);
 	if (op.mnemonique == NULL) {
 		free_null_terminated_word_array((void **)parsed_line);
