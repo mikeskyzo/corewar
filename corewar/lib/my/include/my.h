@@ -16,6 +16,12 @@
 
 #define ABS(value) (value < 0) ? -value : value
 
+int	my_puterror_char(char c);
+int	my_puterror_nbr_base(int nbr, char const *base);
+int	my_puterror_nbr(int nb);
+int	my_str_contains(char c, char const *str);
+int	array_size(void **array);
+int	free_null_terminated_word_array(void **array);
 int	my_putchar(char c);
 int	my_isneg(int nb);
 int	my_put_nbr(int nb);
@@ -52,9 +58,10 @@ char	*my_strcat(char *dest, char const *src);
 char	*my_strncat(char *dest, char const *src, int nb);
 char	*my_strdup(char const *src);
 int	my_show_word_array(char * const *tab);
-char	**my_str_to_word_array(char const *str, char *delim);
+char **my_str_to_word_array(char const *str, char *delim);
 char	*my_convert_base(char const *nbr, char const *base_from, \
 char const *base_to);
+char *my_char_to_str(char c);
 
 int	my_printf(const char *format, ...);
 int	display_uint_base(unsigned int nbr, char const *base, int dummy);
@@ -92,6 +99,7 @@ int option_flag_hash(char *options, char const * to_display);
 int hash(char *options, int str_len);
 char *option_precision(char *str, int len);
 int option_width(char *options, int length, int star_value, char c);
+
 
 typedef struct printf_arg {
 	char type;

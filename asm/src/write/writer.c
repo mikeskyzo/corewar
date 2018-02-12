@@ -6,6 +6,7 @@
 */
 
 #include <unistd.h>
+#include "my.h"
 #include "get_next_line.h"
 #include "op.h"
 #include "asm.h"
@@ -23,25 +24,27 @@ void writer(int fd, int read_fd, assembly_data_t *datas)
 void write_program(int fd, int read_fd, assembly_data_t *datas)
 {
 	char *line = get_next_line(read_fd);
+	int pos = 0;
 
 	(void)datas;
 	while (line != NULL) {
 		clean_str(&line);
 		if (line[0] != COMMENT_CHAR) {
-			run_op(fd, line);
+			run_op(fd, line, &pos, datas);
 		}
+		free(line);
 		line = get_next_line(read_fd);
 	}
 }
 
 void write_header(int fd, header_t header)
 {
-	header.magic = get_big_endians(header.magic);
-	header.prog_size = get_big_endians(header.prog_size);
+	header.magic = get_big_endians(header.magic, 4);
+	header.prog_size = get_big_endians(header.prog_size, 4);
 	write(fd, &header, sizeof(header));
 }
 
-int get_big_endians(int val)
+int get_big_endians(int val, int size)
 {
 	unsigned int x = 0x76543210;
 	char *checker = (char *)&x;
@@ -53,5 +56,11 @@ int get_big_endians(int val)
 
 	if (*checker == 0x76)
 		return (val);
+	switch (size) {
+		case 1: return (val);
+		case 2:	return ((val >> 8) | (val & 0xff) << 8);
+		case 3: return (val);
+		case 4: return (b0 | b1 | b2 | b3);
+	}
 	return (res);
 }

@@ -10,33 +10,84 @@
 #include "asm.h"
 #include "writer.h"
 
-void run_op(int fd, char *line)
+void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 {
 	char **parsed_line = my_str_to_word_array(line, " ");
+	int instruct_size = 0;
+	op_t op;
+	int op_index;
 
-	if (parsed_line[0] == NULL)
+	if (parsed_line == NULL || parsed_line[0] == NULL) {
+		free_null_terminated_word_array((void **)parsed_line);
 		return;
-	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
-		if (my_strcmp(parsed_line[0], op_tab[i].mnemonique) == 0) {
-			run_specific_op(fd, op_tab[i], i + 1, parsed_line);
-		}
 	}
+	op = get_op(parsed_line[0]);
+	if (op.mnemonique == NULL) {
+		free_null_terminated_word_array((void **)parsed_line);
+		return;
+	}
+	op_index = get_op_index(op) + 1;
+	write(fd, &op_index, sizeof(char));
+	instruct_size += run_specific_op(fd, pos, parsed_line, datas);
+	*pos += instruct_size;
+	free_null_terminated_word_array((void **)parsed_line);
 }
 
-void run_specific_op(int fd, op_t op, int index, char **parsed_line)
+char get_arg_type_encode(int arg_type)
 {
-	char **args = my_str_to_word_array(parsed_line[1],\
-my_char_to_str(SEPARATOR_CHAR));
+	switch (arg_type) {
+		case T_REG:
+			return (0b01);
+		case T_DIR:
+			return (0b10);
+		case T_IND:
+			return (0b11);
+	}
+	return (0);
+}
+
+int write_encode_byte(int fd, char **args)
+{
+	char encode = 0;
+	int arg_type = -1;
+
+	for (int i = 0; i < 4; i++) {
+		if (args[i] == NULL) {
+			encode = encode << 2;
+			continue;
+		}
+		arg_type = get_arg_type(args[i]);
+		encode = encode << 2;
+		encode += get_arg_type_encode(arg_type);
+	}
+	write(fd, &encode, sizeof(encode));
+	return (sizeof(encode));
+}
+
+int run_specific_op(int fd, int *pos, char **parsed_line,\
+assembly_data_t *datas)
+{
+	op_t op;
+	char *sep_str = my_char_to_str(SEPARATOR_CHAR);
+	char **args = my_str_to_word_array(parsed_line[1], sep_str);
 	int size = 0;
 	int arg_val = 0;
+	int res = 0;
 
-	(void)op;
-	write(fd, &index, sizeof(char));
+	op = get_op(parsed_line[0]);
+	size += sizeof(char);
+	if (op.encode_byte)
+		res += write_encode_byte(fd, args);
 	for (int i = 0; args[i] != NULL; i++) {
-		arg_val = get_big_endians(get_arg_value(args[i]));
 		size = get_type_size(get_arg_type(args[i]), &op);
+		arg_val = get_big_endians(get_arg_value(args[i], pos, datas),\
+size);
+		res += size;
 		write(fd, &arg_val, size);
 	}
+	free(sep_str);
+	free_null_terminated_word_array((void **)args);
+	return (res);
 }
 
 short start_with(char *str, char *start)

@@ -20,12 +20,16 @@ typedef struct {
 	int size;
 } type_chars_size_t;
 
-int get_arg_value(char *arg);
-void run_op(int fd, char *line);
-void run_specific_op(int fd, op_t op, int index, char **parsed_line);
 short start_with(char *str, char *start);
 void writer(int fd, int read_fd, assembly_data_t *datas);
 int get_arg_type(char *arg);
-int get_big_endians(int val);
+int get_big_endians(int val, int size);
+int get_arg_value(char *arg, int *pos, assembly_data_t *datas);
+int get_op_index(op_t op);
+void run_op(int fd, char *line, int *pos, assembly_data_t *datas);
+int run_specific_op(int fd, int *pos, char **parsed_line,\
+assembly_data_t *datas);
+op_t get_op(char *mnemonique);
+int get_op_index(op_t op);
 
 #endif

@@ -46,7 +46,7 @@ int verify_instruction(char *instruction, assembly_data_t *data)
 	char **word_tab = NULL;
 	op_t *op = NULL;
 	int size = 0;
-	char cut[3] = " \t\0";
+	char cut[4] = " \t\0";
 
 	if (instruction == NULL)
 		return (-1);

@@ -27,3 +27,24 @@ int my_putnbr_base(int nbr, char const *base)
 	my_putchar(base[nbr % base_size]);
 	return (0);
 }
+
+int my_puterror_nbr_base(int nbr, char const *base)
+{
+	int base_size = my_strlen(base);
+
+	if (nbr < 0) {
+		my_puterror_char('-');
+		if (nbr / base_size != 0)
+			my_puterror_nbr_base(-(nbr / base_size), base);
+	}
+	else {
+		if (nbr / base_size != 0)
+			my_puterror_nbr_base(nbr / base_size, base);
+	}
+	if (nbr == -2147483648)
+		nbr = nbr + base_size;
+	if (nbr < 0)
+		nbr = nbr * -1;
+	my_puterror_char(base[nbr % base_size]);
+	return (0);
+}
