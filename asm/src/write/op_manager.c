@@ -17,17 +17,20 @@ void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 	op_t op;
 	int op_index;
 
-	if (parsed_line == NULL)
+	if (parsed_line == NULL || parsed_line[0] == NULL) {
+		free_null_terminated_word_array((void **)parsed_line);
 		return;
-	if (parsed_line[0] == NULL)
-		return;
+	}
 	op = get_op(parsed_line[0]);
-	if (op.mnemonique == NULL)
+	if (op.mnemonique == NULL) {
+		free_null_terminated_word_array((void **)parsed_line);
 		return;
+	}
 	op_index = get_op_index(op) + 1;
 	write(fd, &op_index, sizeof(char));
 	instruct_size += run_specific_op(fd, pos, parsed_line, datas);
 	*pos += instruct_size;
+	free_null_terminated_word_array((void **)parsed_line);
 }
 
 char get_arg_type_encode(int arg_type)
@@ -65,8 +68,8 @@ int run_specific_op(int fd, int *pos, char **parsed_line,\
 assembly_data_t *datas)
 {
 	op_t op;
-	char **args = my_str_to_word_array(parsed_line[1],\
-my_char_to_str(SEPARATOR_CHAR));
+	char *sep_str = my_char_to_str(SEPARATOR_CHAR);
+	char **args = my_str_to_word_array(parsed_line[1], sep_str);
 	int size = 0;
 	int arg_val = 0;
 	int res = 0;
@@ -82,6 +85,8 @@ size);
 		res += size;
 		write(fd, &arg_val, size);
 	}
+	free(sep_str);
+	free_null_terminated_word_array((void **)args);
 	return (res);
 }
 

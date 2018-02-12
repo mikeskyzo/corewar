@@ -6,6 +6,7 @@
 */
 
 #include <unistd.h>
+#include "my.h"
 #include "get_next_line.h"
 #include "op.h"
 #include "asm.h"
@@ -31,6 +32,7 @@ void write_program(int fd, int read_fd, assembly_data_t *datas)
 		if (line[0] != COMMENT_CHAR) {
 			run_op(fd, line, &pos, datas);
 		}
+		free(line);
 		line = get_next_line(read_fd);
 	}
 }

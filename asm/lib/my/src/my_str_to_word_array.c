@@ -67,8 +67,10 @@ char **my_str_to_word_array(char const *str, char *delim)
 	char **arr;
 
 	arr = malloc((count_word(str, delim) + 2) * sizeof(char *));
-	if (my_strlen(str) <= 0 || arr == NULL || delim == NULL)
+	if (my_strlen(str) <= 0 || arr == NULL || delim == NULL) {
+		free(arr);
 		return (NULL);
+	}
 	if (!is_delim(str[0], delim)) {
 		arr[counter++] = get_next_word(str, 0, delim);
 		i++;

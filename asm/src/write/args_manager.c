@@ -30,17 +30,16 @@ int get_arg_type(char *arg)
 
 int get_arg_value(char *arg, int *pos, assembly_data_t *datas)
 {
-	int label_pos;
+	int *label_pos;
 	int index = 0;
 
 	if (is_label_get(&arg[1])) {
-		label_pos = *((int *)dict_fetch(datas->labels, &arg[2]));
-		if (label_pos == -1) {
+		label_pos = (int *)dict_fetch(datas->labels, &arg[2]);
+		if (*label_pos == -1) {
 			my_puterror("Cannot find label !\n");
 			return (0);
 		}
-		printf("%i\n", label_pos - *pos);
-		return (label_pos - *pos);
+		return (*label_pos - *pos);
 	}
 	if (arg[0] < '0' || arg[0] > '9')
 		index = 1;
