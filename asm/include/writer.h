@@ -26,6 +26,6 @@ void run_specific_op(int fd, op_t op, int index, char **parsed_line);
 short start_with(char *str, char *start);
 void writer(int fd, int read_fd, assembly_data_t *datas);
 int get_arg_type(char *arg);
-int get_big_endians(int val);
+int get_big_endians(int val, int size);
 
 #endif

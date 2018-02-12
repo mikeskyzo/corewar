@@ -23,6 +23,36 @@ void run_op(int fd, char *line)
 	}
 }
 
+char get_arg_type_encode(int arg_type)
+{
+	switch (arg_type) {
+		case T_REG:
+			return (0b01);
+		case T_DIR:
+			return (0b10);
+		case T_IND:
+			return (0b11);
+	}
+	return (0);
+}
+
+void write_encode_byte(int fd, char **args)
+{
+	char encode = 0;
+	int arg_type = -1;
+
+	for (int i = 0; i < 4; i++) {
+		if (args[i] == NULL) {
+			encode = encode << 2;
+			continue;
+		}
+		arg_type = get_arg_type(args[i]);
+		encode = encode << 2;
+		encode += get_arg_type_encode(arg_type);
+	}
+	write(fd, &encode, sizeof(encode));
+}
+
 void run_specific_op(int fd, op_t op, int index, char **parsed_line)
 {
 	char **args = my_str_to_word_array(parsed_line[1],\
@@ -32,9 +62,11 @@ my_char_to_str(SEPARATOR_CHAR));
 
 	(void)op;
 	write(fd, &index, sizeof(char));
+	if (op.encode_byte)
+		write_encode_byte(fd, args);
 	for (int i = 0; args[i] != NULL; i++) {
-		arg_val = get_big_endians(get_arg_value(args[i]));
 		size = get_type_size(get_arg_type(args[i]), &op);
+		arg_val = get_big_endians(get_arg_value(args[i]), size);
 		write(fd, &arg_val, size);
 	}
 }

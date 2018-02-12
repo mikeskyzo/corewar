@@ -8,4 +8,6 @@
 .name "zork"
 .comment "just a basic living prog"
 
+#live %4
 live %4
+sti r4,%4,r3
