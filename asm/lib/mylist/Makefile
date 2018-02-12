@@ -7,7 +7,7 @@
 
 CC	=	gcc
 
-CFLAGS	+=	-I ./include -W -Wall -pedantic
+CFLAGS	+=	-I ./include -W -Wall -Wextra
 
 SRC_DIR	=	src/
 
