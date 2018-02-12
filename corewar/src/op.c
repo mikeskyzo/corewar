@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "op.h"
-#include "writer.h"
+#include <stdbool.h>
 
 op_t	op_tab[] = {
 	{"live", 1, {T_DIR}, 1, 10, false, false, "alive"},
