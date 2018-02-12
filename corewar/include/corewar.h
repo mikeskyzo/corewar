@@ -9,6 +9,9 @@
 # define COREWAR_H_
 
 #include "op.h"
+#include "mylist.h"
+
+#define BYTE char
 
 struct champ_s
 {
@@ -18,6 +21,16 @@ struct champ_s
 };
 
 typedef struct champ_s champ_t;
+
+struct vm_s
+{
+	linked_list_t *programs;
+	BYTE ram[MEM_SIZE];
+	int current_cycle;
+	int cycle_to_die;
+};
+
+typedef struct vm_s vm_t;
 
 extern champ_t champ_tab[];
 

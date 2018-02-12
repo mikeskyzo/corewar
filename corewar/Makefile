@@ -8,7 +8,8 @@
 SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	main.c						\
-			op.c
+			op.c						\
+			create_vm.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
