@@ -17,6 +17,8 @@ void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 	op_t op;
 	int op_index;
 
+	if (parsed_line == NULL)
+		return;
 	if (parsed_line[0] == NULL)
 		return;
 	op = get_op(parsed_line[0]);
