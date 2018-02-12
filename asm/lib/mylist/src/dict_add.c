@@ -37,5 +37,5 @@ void dict_add(linked_dict_t **dict, char *label, void *data)
 
 	var[0] = my_strdup(label);
 	var[1] = data;
-	append(dict, var);
+	push(dict, var);
 }

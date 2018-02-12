@@ -20,6 +20,6 @@ void append(linked_list_t **list, void *item)
 		return;
 	}
 	for (int i = 0; i < my_list_size(*list) - 1; i++)
-		cur = (cur != NULL) ? cur->next : 0;
+		cur = (cur != NULL) ? cur->next : NULL;
 	cur->next = new;
 }
