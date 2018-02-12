@@ -16,14 +16,15 @@ OBJ		=	$(SRC:%.c=%.o)
 
 NAME		=	corewar
 
-INCLUDE		=	-I include -I lib/my/include
+INCLUDE		=	-I include -I lib/my/include -I lib/mylist/include
 
 CFLAGS		=	-Wall -Wextra
 CFLAGS		+=	$(INCLUDE)
 
 LIB_DIR		=	lib/
 
-LIB_FLAGS	=	-L $(LIB_DIR)my -lmy
+LIB_FLAGS	=	-L $(LIB_DIR)my -lmy \
+			-L $(LIB_DIR)mylist -lmylist
 
 LIB		=	$(LIB_DIR)my/libmy.a
 
@@ -36,7 +37,9 @@ $(NAME):	$(LIB) $(OBJ)
 
 $(LIB):
 		$(MAKE) -C $(LIB_DIR)my
+		$(MAKE) -C $(LIB_DIR)mylist
 		$(MAKE) clean -C $(LIB_DIR)my
+		$(MAKE) clean -C $(LIB_DIR)mylist
 
 clean:
 		$(RM) $(OBJ)
