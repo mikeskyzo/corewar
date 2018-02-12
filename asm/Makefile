@@ -15,6 +15,7 @@ SRC_FILES	=	main.c						\
 			write/op_manager.c				\
 			write/writer.c					\
 			write/get_op.c					\
+			write/label_set_manager.c		\
 
 VERIF_DIR	=	$(realpath src/verifications)
 
