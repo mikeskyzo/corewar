@@ -37,7 +37,7 @@ void *dict_fetch(linked_dict_t *dict, char *label)
 
 	for (; cur != 0; cur = cur->next) {
 		if (!my_strcmp(((void **)(cur->data))[0], label))
-			return (&(((void **)(cur->data))[1]));
+			return (((void **)(cur->data))[1]);
 	}
 	return ((void *)- 1);
 }
