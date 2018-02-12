@@ -8,6 +8,8 @@
 #ifndef _OP_H_
 #define _OP_H_
 
+#include <stdbool.h>
+
 #define MEM_SIZE		(6*1024)
 #define IDX_MOD			512 /* modulo of the index < */
 #define MAX_ARGS_NUMBER		4 /* this may not be changed 2^*IND_SIZE */
@@ -43,6 +45,8 @@ struct op_s
 	args_type_t	type[MAX_ARGS_NUMBER];
 	char		code;
 	int		nbr_cycles;
+	bool		encode_byte;
+	bool		uses_ind;
 	char		*comment;
 };
 
