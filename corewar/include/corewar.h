@@ -11,6 +11,9 @@
 #include "op.h"
 #include "mylist.h"
 
+#define LIVE_STR "The player %d(%s) is alive.\n" /* player number/player name */
+#define WON_STR "The player %d(%s) has won.\n" /* player number/player name */
+
 typedef char byte_t;
 
 struct champ_s
@@ -40,7 +43,10 @@ typedef struct vm_s vm_t;
 champ_t *get_champion_by_number(vm_t *vm, int champion_nb);
 champ_t *get_champion_by_name(vm_t *vm, const char *name);
 
-/* Functions vm (mnemonics) */
-int vm_live(int champion_number);
+/*
+** Functions vm (mnemonics) prototyped as follow:
+** int vm_FUNCNAME(vm_t *vm, params_you_need)
+*/
+int vm_live(vm_t *vm, int champion_nb);
 
 #endif
