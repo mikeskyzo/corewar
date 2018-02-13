@@ -23,7 +23,8 @@ TESTS_FILES	=	tests_get_as_int.c				\
 			tests_create_vm.c				\
 			tests_create_blank_champion.c			\
 			tests_get_champion.c				\
-			tests_vm_live.c
+			tests_vm_live.c					\
+			tests_vm_ld.c
 
 SRC_TESTS	=	$(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 
