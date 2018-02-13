@@ -22,6 +22,7 @@ champ_t *get_champion_by_number(vm_t *vm, int champion_nb)
 		curr_champ = (champ_t *)curr_index->data;
 		if (curr_champ->champion_nb == champion_nb)
 			return (curr_champ);
+		curr_index = curr_index->next;
 	}
 	return (NULL);
 }
@@ -38,6 +39,7 @@ champ_t *get_champion_by_name(vm_t *vm, const char *name)
 		curr_champ = (champ_t *)curr_index->data;
 		if (!my_strcmp(name, curr_champ->header.prog_name))
 			return (curr_champ);
+		curr_index = curr_index->next;
 	}
 	return (NULL);
 }

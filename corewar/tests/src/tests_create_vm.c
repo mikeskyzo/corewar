@@ -11,7 +11,7 @@
 #include "corewar.h"
 #include <criterion/criterion.h>
 
-Test(create_vm, vm_created_was_initialized)
+Test(create_vm, vm_created_was_initialized, .timeout=10)
 {
 	vm_t *vm = create_vm();
 

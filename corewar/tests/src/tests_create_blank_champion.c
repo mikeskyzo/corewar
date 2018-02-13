@@ -11,7 +11,7 @@
 #include "corewar.h"
 #include <criterion/criterion.h>
 
-Test(create_blank_champion, champion_is_initialized)
+Test(create_blank_champion, champion_is_initialized, .timeout=10)
 {
 	champ_t *champ = create_blank_champion();
 

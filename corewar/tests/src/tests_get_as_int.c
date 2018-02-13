@@ -11,7 +11,7 @@
 #include "corewar.h"
 #include <criterion/criterion.h>
 
-Test(get_indirect_as_int, return_is_expected)
+Test(get_indirect_as_int, return_is_expected, .timeout=10)
 {
 	byte_t indirect[IND_SIZE] = {0};
 
@@ -24,7 +24,7 @@ Test(get_indirect_as_int, return_is_expected)
 	cr_expect(get_indirect_as_int(NULL) == 0);
 }
 
-Test(get_direct_as_int, return_is_expected)
+Test(get_direct_as_int, return_is_expected, .timeout=10)
 {
 	byte_t direct[DIR_SIZE] = {0};
 
