@@ -11,6 +11,7 @@ SRC_FILES	=	get_as_int.c					\
 			op.c						\
 			get_champion.c					\
 			create_vm.c					\
+			create_blank_champion.c				\
 			vm_functions/vm_live.c				\
 			vm_functions/vm_ld.c
 
