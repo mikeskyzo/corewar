@@ -36,6 +36,10 @@ struct vm_s
 
 typedef struct vm_s vm_t;
 
+/* Accessors */
+champ_t *get_champion_by_number(vm_t *vm, int champion_nb);
+champ_t *get_champion_by_name(vm_t *vm, const char *name);
+
 /* Functions vm (mnemonics) */
 int vm_live(int champion_number);
 
