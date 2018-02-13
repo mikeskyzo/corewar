@@ -10,10 +10,9 @@
 #include "corewar.h"
 #include "my.h"
 
-int vm_live(vm_t *vm, byte_t *instruction_pos)
+int vm_live(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 {
 	int champion_nb = 0;
-	champ_t *champion = NULL;
 
 	if (vm == NULL || instruction_pos == NULL)
 		return (-1);
