@@ -39,7 +39,6 @@ int get_arg_value(char *arg, int *pos, assembly_data_t *datas)
 			my_puterror("Cannot find label !\n");
 			return (0);
 		}
-		printf("%i\n", (short)((unsigned short)(label_pos - *pos)));
 		return ((unsigned short)(label_pos - *pos));
 	}
 	if (arg[0] < '0' || arg[0] > '9')

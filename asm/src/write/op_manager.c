@@ -16,7 +16,6 @@ void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 	int instruct_size = 0;
 	op_t op;
 	int op_index;
-	int i;
 
 	if (parsed_line == NULL || parsed_line[0] == NULL) {
 		free_null_terminated_word_array((void **)parsed_line);

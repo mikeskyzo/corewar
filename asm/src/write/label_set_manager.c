@@ -17,6 +17,6 @@ void label_set_manager(char ***parsed_line, char *line)
 	new_parsed_line = my_str_to_word_array(line, " \t");
 	if (new_parsed_line == NULL)
 		return;
-	free_null_terminated_word_array(*parsed_line);
+	free_null_terminated_word_array((void **)*parsed_line);
 	*parsed_line = new_parsed_line;
 }
