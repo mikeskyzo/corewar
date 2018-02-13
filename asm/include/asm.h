@@ -27,6 +27,7 @@ struct assembly_data_s {
 typedef struct assembly_data_s assembly_data_t;
 
 void clean_str(char **str);
+void clean_word_array(char ***word_array);
 
 int is_file_valid(int fd, assembly_data_t *data);
 int parse_label_and_return_instruction_size(char *instruction, \

@@ -34,6 +34,13 @@ void clean_str(char **str)
 	*str = new_str;
 }
 
+void clean_word_array(char ***word_array)
+{
+	for (int i = 0; word_array[0][i] != NULL; i++) {
+		clean_str(&(word_array[0][i]));
+	}
+}
+
 void clean_free(char **word_array, char **str)
 {
 	free_null_terminated_word_array((void **)word_array);

@@ -12,7 +12,7 @@
 
 void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 {
-	char **parsed_line = my_str_to_word_array(line, " ");
+	char **parsed_line = my_str_to_word_array(line, " ,");
 	int instruct_size = 0;
 	op_t op;
 	int op_index;
@@ -30,7 +30,9 @@ void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 	}
 	op_index = get_op_index(op) + 1;
 	write(fd, &op_index, sizeof(char));
-	*pos += run_specific_op(fd, pos, parsed_line, datas) + 1;
+	instruct_size += run_specific_op(fd, pos, parsed_line, datas);
+	instruct_size += sizeof(char);
+	*pos += instruct_size;
 	free_null_terminated_word_array((void **)parsed_line);
 }
 
@@ -47,17 +49,25 @@ char get_arg_type_encode(int arg_type)
 	return (0);
 }
 
-int write_encode_byte(int fd, char **args)
+int write_encode_byte(int fd, char **parsed_line)
 {
 	char encode = 0;
 	int arg_type = -1;
+	bool end_passed = false;
 
-	for (int i = 0; i < 4; i++) {
-		if (args[i] == NULL) {
+	if (parsed_line == NULL)
+		return (0);
+	for (int i = 1; i < 5; i++) {
+		if (end_passed || parsed_line[i] == NULL) {
+			end_passed = true;
 			encode = encode << 2;
 			continue;
 		}
-		arg_type = get_arg_type(args[i]);
+		printf("%s\n", parsed_line[i]);
+
+		arg_type = get_arg_type(parsed_line[i]);
+		if (arg_type == -1)
+			continue;
 		encode = encode << 2;
 		encode += get_arg_type_encode(arg_type);
 	}
@@ -70,7 +80,6 @@ assembly_data_t *datas)
 {
 	op_t op;
 	char *sep_str = my_char_to_str(SEPARATOR_CHAR);
-	char **args = my_str_to_word_array(parsed_line[1], sep_str);
 	int size = 0;
 	int arg_val = 0;
 	int res = 0;
@@ -78,16 +87,15 @@ assembly_data_t *datas)
 	op = get_op(parsed_line[0]);
 	size += sizeof(char);
 	if (op.encode_byte)
-		res += write_encode_byte(fd, args);
-	for (int i = 0; args[i] != NULL; i++) {
-		size = get_type_size(get_arg_type(args[i]), &op);
-		arg_val = get_big_endians(get_arg_value(args[i], pos, datas),\
-size);
+		res += write_encode_byte(fd, parsed_line);
+	for (int i = 1; parsed_line[i] != NULL; i++) {
+		size = get_type_size(get_arg_type(parsed_line[i]), &op);
+		arg_val = get_big_endians(\
+get_arg_value(parsed_line[i], pos, datas), size);
 		res += size;
 		write(fd, &arg_val, size);
 	}
 	free(sep_str);
-	free_null_terminated_word_array((void **)args);
 	return (res);
 }
 
