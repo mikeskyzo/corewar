@@ -11,7 +11,7 @@
 #include "op.h"
 #include "mylist.h"
 
-#define BYTE char
+typedef char byte_t;
 
 struct champ_s
 {
@@ -19,9 +19,9 @@ struct champ_s
 	int champion_nb;
 	int nb_next_ins;
 	int nb_cycle_live;
-	BYTE *pc;
+	byte_t *pc;
 	bool carry;
-	BYTE registers[REG_SIZE * REG_NUMBER];
+	byte_t registers[REG_SIZE * REG_NUMBER];
 };
 
 typedef struct champ_s champ_t;
@@ -29,7 +29,7 @@ typedef struct champ_s champ_t;
 struct vm_s
 {
 	linked_list_t *programs;
-	BYTE ram[MEM_SIZE];
+	byte_t ram[MEM_SIZE];
 	int current_cycle;
 	int cycle_to_die;
 };
