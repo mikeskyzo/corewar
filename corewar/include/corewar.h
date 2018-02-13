@@ -16,6 +16,7 @@
 struct champ_s
 {
 	header_t header;
+	int champion_nb;
 	int nb_next_ins;
 	int nb_cycle_live;
 	BYTE *pc;
@@ -34,7 +35,5 @@ struct vm_s
 };
 
 typedef struct vm_s vm_t;
-
-extern champ_t champ_tab[];
 
 #endif
