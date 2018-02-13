@@ -14,6 +14,7 @@ int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ)
 {
 	byte_t *register_start = NULL;
 	byte_t *indirect_start = NULL;
+	int indirect_value = 0;
 	byte_t register_nb = 0;
 
 	if (instruction_pos == NULL || champ == NULL)
@@ -21,10 +22,11 @@ int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ)
 	register_nb = *(instruction_pos + 2 + IND_SIZE);
 	if (register_nb < 1 || register_nb > 16)
 		return (-1);
-	indirect_start = (instruction_pos + 2);
+	indirect_value = get_indirect_as_int(instruction_pos + 2);
+	indirect_start = champ->pc + indirect_value % IDX_MOD;
 	register_start = &(champ->registers[(register_nb - 1) * REG_SIZE]);
-	for (int i = 1; i <= MIN(REG_SIZE, IND_SIZE); i++)
-		register_start[REG_SIZE - i] = indirect_start[IND_SIZE - i];
+	for (int i = 0; i < REG_SIZE; i++)
+		register_start[i] = indirect_start[i];
 	return (0);
 }
 

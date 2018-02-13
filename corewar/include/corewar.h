@@ -61,6 +61,9 @@ typedef struct vm_s vm_t;
 champ_t *get_champion_by_number(vm_t *vm, int champion_nb);
 champ_t *get_champion_by_name(vm_t *vm, const char *name);
 
+int get_direct_as_int(byte_t *start);
+int get_indirect_as_int(byte_t *start);
+
 /*
 ** Functions vm (mnemonics) prototyped as follow:
 ** int vm_FUNCNAME(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
