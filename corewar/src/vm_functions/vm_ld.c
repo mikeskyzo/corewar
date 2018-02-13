@@ -10,10 +10,7 @@
 #include "corewar.h"
 #include "my.h"
 
-static int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ);
-static int load_direct_to_register(byte_t *instruction_pos, champ_t *champ);
-
-int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ)
+static int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ)
 {
 	byte_t *register_start = NULL;
 	byte_t *indirect_start = NULL;
@@ -33,7 +30,7 @@ int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ)
 	return (0);
 }
 
-int load_direct_to_register(byte_t *instruction_pos, champ_t *champ)
+static int load_direct_to_register(byte_t *instruction_pos, champ_t *champ)
 {
 	byte_t *register_start = NULL;
 	byte_t *direct_start = NULL;
