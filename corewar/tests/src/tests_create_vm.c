@@ -21,5 +21,6 @@ Test(create_vm, vm_created_was_initialized)
 		cr_expect(vm->programs == NULL);
 		for (int i = 0; i < MEM_SIZE; i++)
 			cr_expect(vm->ram[i] == 0);
+		free(vm);
 	}
 }
