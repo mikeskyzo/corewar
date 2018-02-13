@@ -5,13 +5,17 @@
 ## Compile the corewar part
 ##
 
+FUNC_DIR	=	$(realpath src/vm_functions)
+
+FUNC_FILES	=	live.c
+
 SRC_DIR		=	$(realpath src)
 
 SRC_FILES	=	main.c						\
 			op.c						\
 			create_vm.c
 
-SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(FUNC_DIR)/, $(FUNC_FILES))
 
 OBJ		=	$(SRC:%.c=%.o)
 

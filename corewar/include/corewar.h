@@ -36,4 +36,7 @@ struct vm_s
 
 typedef struct vm_s vm_t;
 
+/* Functions vm (mnemonics) */
+int vm_live(int champion_number);
+
 #endif
