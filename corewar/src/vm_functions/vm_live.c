@@ -16,7 +16,8 @@ int vm_live(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 
 	if (vm == NULL || instruction_pos == NULL)
 		return (-1);
-	champion_nb = *(instruction_pos + 1);
+	champion_nb = (instruction_pos[1] << 24 | instruction_pos[2] << 16 | \
+instruction_pos[3] << 8 | instruction_pos[4]);
 	champion = get_champion_by_number(vm, champion_nb);
 	if (champion)
 		my_printf(LIVE_STR, champion_nb, champion->header.prog_name);
