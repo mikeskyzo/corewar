@@ -9,3 +9,8 @@
 
 #include "corewar.h"
 #include "my.h"
+
+int vm_ld(vm_t *vm, byte_t *instruction_pos)
+{
+	return (0);
+}

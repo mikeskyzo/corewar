@@ -45,8 +45,11 @@ champ_t *get_champion_by_name(vm_t *vm, const char *name);
 
 /*
 ** Functions vm (mnemonics) prototyped as follow:
-** int vm_FUNCNAME(vm_t *vm, params_you_need)
+** int vm_FUNCNAME(vm_t *vm, byte_t *instruction_pos)
+** vm will be the vm and instruction_pos a pointer to the mnemonic called
+** the functions will return the size of himself in memory (ex live return 5)
 */
-int vm_live(vm_t *vm, int champion_nb);
+int vm_live(vm_t *vm, byte_t *instruction_pos);
+int vm_ld(vm_t *vm, byte_t *instruction_pos);
 
 #endif
