@@ -58,6 +58,7 @@ struct vm_s
 typedef struct vm_s vm_t;
 
 vm_t *create_vm(void);
+champ_t *create_blank_champion(void);
 
 /* Accessors */
 champ_t *get_champion_by_number(vm_t *vm, int champion_nb);

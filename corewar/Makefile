@@ -16,7 +16,8 @@ SRC_FILES	=	main.c						\
 			op.c						\
 			create_vm.c					\
 			get_champion.c					\
-			get_as_int.c
+			get_as_int.c					\
+			create_blank_champion.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(FUNC_DIR)/, $(FUNC_FILES))
 
