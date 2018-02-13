@@ -7,7 +7,8 @@
 
 FUNC_DIR	=	$(realpath src/vm_functions)
 
-FUNC_FILES	=	live.c
+FUNC_FILES	=	vm_live.c					\
+			vm_ld.c
 
 SRC_DIR		=	$(realpath src)
 
