@@ -21,6 +21,7 @@ Test(get_indirect_as_int, return_is_expected)
 	indirect[IND_SIZE - 1] = 6;
 	indirect[IND_SIZE - 2] = 3;
 	cr_expect(get_indirect_as_int(indirect) == 774);
+	cr_expect(get_indirect_as_int(NULL) == 0);
 }
 
 Test(get_direct_as_int, return_is_expected)
@@ -38,4 +39,5 @@ Test(get_direct_as_int, return_is_expected)
 	direct[DIR_SIZE - 3] = 0x6;
 	direct[DIR_SIZE - 4] = 0x3;
 	cr_expect(get_direct_as_int(direct) == 50725638);
+	cr_expect(get_direct_as_int(NULL) == 0);
 }
