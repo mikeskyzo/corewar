@@ -50,13 +50,13 @@ Test(vm_and, perform_and_with_indirects, .timeout=10)
 {
 	vm_t *vm = create_vm();
 	champ_t *champion = create_blank_champion();
-	byte_t instruction[7] = {0x06, 0xf4, 0x40, 0x33, 0x90, 0x66, 0x03};
+	byte_t instruction[7] = {0x06, 0xf4, 0x00, 0x01, 0x00, 0x02, 0x03};
 
 	cr_expect(vm_and(vm, instruction, champion) == 7);
 	cr_expect(champion->registers[8] == 0x00);
 	cr_expect(champion->registers[9] == 0x00);
 	cr_expect(champion->registers[10] == 0x00);
-	cr_expect(champion->registers[11] == 0x22);
+	cr_expect(champion->registers[11] == 0x00);
 }
 
 Test(vm_and, mixed_register_direct, .timeout=10)
@@ -81,11 +81,11 @@ Test(vm_and, mixed_direct_indirect, .timeout=10)
 	vm_t *vm = create_vm();
 	champ_t *champion = create_blank_champion();
 	byte_t instruction[9] = {0x06, 0xb4, 0x09, 0x55, 0x33, 0x44, \
-0xff, 0x99, 0x01};
+0x00, 0x02, 0x01};
 
 	cr_expect(vm_and(vm, instruction, champion) == 9);
-	cr_expect(champion->registers[0] == 0x00);
-	cr_expect(champion->registers[1] == 0x00);
+	cr_expect(champion->registers[0] == 0x09);
+	cr_expect(champion->registers[1] == 0x55);
 	cr_expect(champion->registers[2] == 0x33);
-	cr_expect(champion->registers[3] == 0x00);
+	cr_expect(champion->registers[3] == 0x44);
 }
