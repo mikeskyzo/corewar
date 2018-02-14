@@ -11,7 +11,7 @@
 #include "corewar.h"
 #include <criterion/criterion.h>
 
-/* r1 : 336, r2 : 4106, r3 should be : 4442 (0x115A)->0x00 0x00 0x17 0x90 */
+/* r1 : 336, r2 : 4106, r3 should be : 4442 (0x115A)->0x00 0x00 0x11 0x5a */
 Test(vm_add, register_were_added_basic, .timeout=10)
 {
 	vm_t *vm = create_vm();
@@ -31,8 +31,8 @@ Test(vm_add, register_were_added_basic, .timeout=10)
 	cr_expect(vm_add(vm, instruction, champion) == 5);
 	cr_expect(champion->registers[8] == 0x00);
 	cr_expect(champion->registers[9] == 0x00);
-	cr_expect(champion->registers[10] == 0x17);
-	cr_expect(champion->registers[11] == 0x90);
+	cr_expect(champion->registers[10] == 0x11);
+	cr_expect(champion->registers[11] == 0x5a);
 }
 
 Test(vm_add, register_were_added_looping, .timeout=10)
