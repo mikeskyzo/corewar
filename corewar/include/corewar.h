@@ -79,5 +79,6 @@ int vm_live(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 int vm_ld(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 int vm_st(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 int vm_add(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+int vm_sub(vm_t *vm, byte_t *instruction, champ_t *champ);
 
 #endif
