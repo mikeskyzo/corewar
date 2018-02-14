@@ -12,7 +12,14 @@
 
 static void perform_sub(byte_t *from_1, byte_t *from_2, byte_t *to)
 {
+	int register_from_1 = get_register_as_int(from_1);
+	int register_from_2 = get_register_as_int(from_2);
+	int result = register_from_1 - register_from_2;
 
+	to[0] = (result >> 24) & 0xff;
+	to[1] = (result >> 16) & 0xff;
+	to[2] = (result >> 8) & 0xff;
+	to[3] = (result >> 0) & 0xff;
 }
 
 int vm_sub(vm_t *vm, byte_t *instruction, champ_t *champ)

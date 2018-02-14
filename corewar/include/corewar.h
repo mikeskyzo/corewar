@@ -32,7 +32,7 @@
 #define THIRD_PARAM_TYPE(value) ((value & THIRD_PARAM_MASK) >> 2)
 #define FOURTH_PARAM_TYPE(value) ((value & FOURTH_PARAM_MASK))
 
-typedef char byte_t;
+typedef unsigned char byte_t;
 
 struct champ_s
 {
