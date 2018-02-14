@@ -12,5 +12,5 @@
 
 int vm_add(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 {
-	return (0);
+	return (5);
 }
