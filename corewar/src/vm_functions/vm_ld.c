@@ -27,6 +27,7 @@ static int load_indirect_to_register(byte_t *instruction_pos, champ_t *champ)
 	register_start = &(champ->registers[(register_nb - 1) * REG_SIZE]);
 	for (int i = 0; i < REG_SIZE; i++)
 		register_start[i] = indirect_start[i];
+	champ->carry = ((get_register_as_int(register_start) == 0) ? 1 : 0);
 	return (0);
 }
 
@@ -45,6 +46,7 @@ static int load_direct_to_register(byte_t *instruction_pos, champ_t *champ)
 	register_start = &(champ->registers[(register_nb - 1) * REG_SIZE]);
 	for (int i = 1; i <= MIN(REG_SIZE, DIR_SIZE); i++)
 		register_start[REG_SIZE - i] = direct_start[DIR_SIZE - i];
+	champ->carry = ((get_register_as_int(register_start) == 0) ? 1 : 0);
 	return (0);
 }
 

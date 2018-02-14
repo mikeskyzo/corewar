@@ -41,5 +41,6 @@ int vm_add(vm_t *vm, byte_t *instruction, champ_t *champ)
 	to = &(champ->registers[(*(instruction + 4) - 1) * REG_SIZE]);
 	for (int i = REG_SIZE - 1; i >= 0; i--)
 		to[i] = perform_add(first_from[i], second_from[i], &carry);
+	champ->carry = ((get_register_as_int(to) == 0) ? 1 : 0);
 	return (5);
 }
