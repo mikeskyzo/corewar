@@ -16,7 +16,7 @@ Test(vm_sub, register_were_substracted_basic, .timeout=10)
 {
 	vm_t *vm = create_vm();
 	champ_t *champion = create_blank_champion();
-	byte_t instruction[5] = {0x04, 0x54, 0x01, 0x02, 0x03};
+	byte_t instruction[5] = {0x05, 0x54, 0x01, 0x02, 0x03};
 
 	if (vm == NULL || champion == NULL)
 		cr_expect_fail();
@@ -39,7 +39,7 @@ Test(vm_sub, register_were_substracted_looping, .timeout=10)
 {
 	vm_t *vm = create_vm();
 	champ_t *champion = create_blank_champion();
-	byte_t instruction[5] = {0x04, 0x54, 0x01, 0x02, 0x03};
+	byte_t instruction[5] = {0x05, 0x54, 0x01, 0x02, 0x03};
 
 	if (vm == NULL || champion == NULL)
 		cr_expect_fail();
