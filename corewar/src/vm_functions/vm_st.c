@@ -12,6 +12,15 @@
 
 static int register_to_indirect(byte_t *instruction_pos, champ_t *champion)
 {
+	byte_t register_from = ((*(instruction_pos + 2)) - 1) * REG_SIZE;
+	int indirect_value = get_indirect_as_int(instruction_pos + 3);
+	byte_t *to = NULL;
+
+	if (register_from < 0 || register_from > (15 * REG_SIZE))
+		return (-1);
+	to = champion->pc + indirect_value % IDX_MOD;
+	for (int i = 0; i < REG_SIZE; i++)
+		to[i] = champion->registers[register_from + i];
 	return (3 + IND_SIZE);
 }
 
