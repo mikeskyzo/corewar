@@ -23,8 +23,8 @@ Test(vm_st, register_to_register, .timeout=10)
 		champ->registers[0] = (byte_t)0xd0;
 		champ->registers[1] = (byte_t)0x00;
 		champ->registers[2] = (byte_t)0x01;
-		champ->registers[2] = (byte_t)0x03;
-		vm_st(vm, instruction, champ);
+		champ->registers[3] = (byte_t)0x03;
+		cr_expect(vm_st(vm, instruction, champ) == 4);
 		cr_expect(champ->registers[1 * REG_SIZE + 0] == (byte_t)0xd0);
 		cr_expect(champ->registers[1 * REG_SIZE + 1] == (byte_t)0x00);
 		cr_expect(champ->registers[1 * REG_SIZE + 2] == (byte_t)0x01);
@@ -48,7 +48,7 @@ Test(vm_st, register_to_indirect, .timeout=10)
 		champ->registers[1] = (byte_t)0x00;
 		champ->registers[2] = (byte_t)0x01;
 		champ->registers[2] = (byte_t)0x03;
-		vm_st(vm, instruction, champ);
+		cr_expect(vm_st(vm, instruction, champ) == 5);
 		cr_expect(instruction[1] == (byte_t)0xd0);
 		cr_expect(instruction[2] == (byte_t)0x00);
 		cr_expect(instruction[3] == (byte_t)0x01);
