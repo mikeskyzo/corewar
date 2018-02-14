@@ -10,6 +10,17 @@
 #include "my.h"
 #include "corewar.h"
 
+int get_register_as_int(byte_t *start)
+{
+	int result = 0;
+
+	if (start == NULL)
+		return (0);
+	for (int i = 0; i < REG_SIZE; i++)
+		result = (result << 8) | (start[i]);
+	return (result);
+}
+
 int get_direct_as_int(byte_t *start)
 {
 	int result = 0;

@@ -64,6 +64,7 @@ champ_t *create_blank_champion(void);
 champ_t *get_champion_by_number(vm_t *vm, int champion_nb);
 champ_t *get_champion_by_name(vm_t *vm, const char *name);
 
+int get_register_as_int(byte_t *start);
 int get_direct_as_int(byte_t *start);
 int get_indirect_as_int(byte_t *start);
 

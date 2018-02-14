@@ -41,3 +41,21 @@ Test(get_direct_as_int, return_is_expected, .timeout=10)
 	cr_expect(get_direct_as_int(direct) == 50725638);
 	cr_expect(get_direct_as_int(NULL) == 0);
 }
+
+Test(get_register_as_int, return_is_expected, .timeout=10)
+{
+	byte_t register_val[REG_SIZE] = {0};
+
+	register_val[DIR_SIZE - 1] = 0x0;
+	register_val[DIR_SIZE - 2] = 0x1;
+	cr_expect(get_direct_as_int(register_val) == 256);
+	register_val[DIR_SIZE - 1] = 0x6;
+	register_val[DIR_SIZE - 2] = 0x3;
+	cr_expect(get_direct_as_int(register_val) == 774);
+	register_val[DIR_SIZE - 1] = 0x6;
+	register_val[DIR_SIZE - 2] = 0x3;
+	register_val[DIR_SIZE - 3] = 0x6;
+	register_val[DIR_SIZE - 4] = 0x3;
+	cr_expect(get_direct_as_int(register_val) == 50725638);
+	cr_expect(get_direct_as_int(NULL) == 0);
+}
