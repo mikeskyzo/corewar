@@ -11,7 +11,6 @@
 char *get_next_line(int fd);
 
 int my_limit_strlen(char *str, char end);
-int my_strdupcat(char **dest, char *src);
 int my_read(char **dest, int fd);
 char *extract_result(char *buffer);
 
