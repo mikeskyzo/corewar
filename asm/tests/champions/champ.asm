@@ -12,7 +12,7 @@ debut:		fork	%:attaque
 		fork	%:live1
 		fork	%:back_wall1
 		zjmp	%:debut
-
+	
 attaque:	fork	%:first_atk
 		fork	%:second_atk
 		fork	%:live1

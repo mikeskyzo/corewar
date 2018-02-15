@@ -63,8 +63,6 @@ int write_encode_byte(int fd, char **parsed_line)
 			encode = encode << 2;
 			continue;
 		}
-		printf("%s\n", parsed_line[i]);
-
 		arg_type = get_arg_type(parsed_line[i]);
 		if (arg_type == -1)
 			continue;
@@ -92,6 +90,7 @@ assembly_data_t *datas)
 		size = get_type_size(get_arg_type(parsed_line[i]), &op);
 		arg_val = get_big_endians(\
 get_arg_value(parsed_line[i], pos, datas), size);
+		printf("%i\n", arg_val);
 		res += size;
 		write(fd, &arg_val, size);
 	}

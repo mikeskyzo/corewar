@@ -28,13 +28,15 @@ int get_arg_type(char *arg)
 	return (-1);
 }
 
-int get_arg_value(char *arg, int *pos, assembly_data_t *datas)
+unsigned short get_arg_value(char *arg, int *pos, assembly_data_t *datas)
 {
 	int label_pos = 0;
 	int index = 0;
+	short has_mod = arg[0] == '%';
 
-	if (is_label_get(&arg[1])) {
-		label_pos = *((int *)dict_fetch(datas->labels, &arg[2]));
+	if (is_label_get(&arg[has_mod])) {
+		label_pos = *((int *)dict_fetch(datas->labels,\
+&arg[1 + has_mod]));
 		if (label_pos == -1) {
 			my_puterror("Cannot find label !\n");
 			return (0);
@@ -43,5 +45,5 @@ int get_arg_value(char *arg, int *pos, assembly_data_t *datas)
 	}
 	if (arg[0] < '0' || arg[0] > '9')
 		index = 1;
-	return (my_getnbr(&arg[index]));
+	return ((unsigned short)my_getnbr(&arg[index]));
 }
