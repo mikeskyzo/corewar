@@ -22,8 +22,8 @@ char *my_strcat(char *dest, char const *src)
 
 int my_strdupcat(char **dest, char *src)
 {
-	int dest_len = my_limit_strlen(*dest, '\0');
-	int src_len = my_limit_strlen(src, '\0');
+	int dest_len = my_strlen(*dest);
+	int src_len = my_strlen(src);
 	char *new_str = malloc(sizeof(*new_str) * (dest_len + src_len + 1));
 	int i = 0;
 	int j = 0;
