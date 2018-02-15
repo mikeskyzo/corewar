@@ -50,13 +50,22 @@ champ_t *loop_read(char **av, int *i, champ_t *champ_tab)
 		}
 	else
 		dump = check_option(av, &*i);
+	dump++;
 	return (champ_tab);
 }
 
-champ_t *read_arg(char **av)
+champ_t *read_arg(char **av, int ac)
 {
 	champ_t *champ_tab;
 
+	if (ac < 1) {
+		puts_help();
+		exit(84);
+	}
+	if (my_strcmp(av[1], "-h") == 0 || my_strcmp(av[1], "--help") == 0) {
+		puts_help();
+		exit(0);
+	}
 	champ_tab = malloc(sizeof(champ_t) * 2);
 	if (champ_tab == NULL) {
 		my_puterror("Fail to malloc\n");

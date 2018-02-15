@@ -63,7 +63,7 @@ struct vm_s
 
 typedef struct vm_s vm_t;
 
-champ_t *read_arg(char**);
+champ_t *read_arg(char**, int);
 champ_t get_champ(char*, int, int);
 
 void puts_help(void);
