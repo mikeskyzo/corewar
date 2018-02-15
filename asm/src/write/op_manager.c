@@ -89,7 +89,7 @@ assembly_data_t *datas)
 	for (int i = 1; parsed_line[i] != NULL; i++) {
 		size = get_type_size(get_arg_type(parsed_line[i]), &op);
 		arg_val = get_big_endians(\
-get_arg_value(parsed_line[i], pos, datas), size);
+get_arg_value(parsed_line[i], pos, datas, size), size);
 		printf("%i\n", arg_val);
 		res += size;
 		write(fd, &arg_val, size);

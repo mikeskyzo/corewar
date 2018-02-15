@@ -28,7 +28,19 @@ int get_arg_type(char *arg)
 	return (-1);
 }
 
-unsigned short get_arg_value(char *arg, int *pos, assembly_data_t *datas)
+static int caster(int size, int val)
+{
+	switch (size)
+	{
+		case 1: return ((unsigned char)val);
+		case 2: return ((unsigned short)val);
+		case 3: return ((unsigned int)val);
+	}
+	return (val);
+}
+
+unsigned int get_arg_value(char *arg, int *pos, assembly_data_t *datas,\
+int size)
 {
 	int label_pos = 0;
 	int index = 0;
@@ -43,7 +55,8 @@ unsigned short get_arg_value(char *arg, int *pos, assembly_data_t *datas)
 		}
 		return ((unsigned short)(label_pos - *pos));
 	}
-	if (arg[0] < '0' || arg[0] > '9')
+	if ((arg[0] < '0' || arg[0] > '9') && arg[0] != '-' && arg[0] != '+')
 		index = 1;
-	return ((unsigned short)my_getnbr(&arg[index]));
+	printf("%s - %i\n", arg, size);
+	return (caster(size, my_getnbr(&arg[index])));
 }

@@ -31,6 +31,7 @@ assembly_data_t *datas);
 op_t get_op(char *mnemonique);
 int get_op_index(op_t op);
 void label_set_manager(char ***parsed_line, char *line);
-unsigned short get_arg_value(char *arg, int *pos, assembly_data_t *datas);
+unsigned int get_arg_value(char *arg, int *pos, assembly_data_t *datas,\
+int size);
 
 #endif
