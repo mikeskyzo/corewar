@@ -45,7 +45,7 @@ get_indirect_as_int(arg), champion->pc));
 	}
 }
 
-int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_xor(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 {
 	int value1 = 0;
 	int value2 = 0;
