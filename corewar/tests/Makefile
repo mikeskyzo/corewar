@@ -17,7 +17,9 @@ SRC_FILES	=	get_as_int.c					\
 			vm_functions/vm_st.c				\
 			vm_functions/vm_add.c				\
 			vm_functions/vm_sub.c				\
-			vm_functions/vm_and.c
+			vm_functions/vm_and.c				\
+			vm_functions/vm_or.c				\
+			vm_functions/vm_xor.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
@@ -32,7 +34,9 @@ TESTS_FILES	=	tests_get_as_int.c				\
 			tests_vm_st.c					\
 			tests_vm_add.c					\
 			tests_vm_sub.c					\
-			tests_vm_and.c
+			tests_vm_and.c					\
+			tests_vm_or.c					\
+			tests_vm_xor.c
 
 SRC_TESTS	=	$(addprefix $(TESTS_DIR)/, $(TESTS_FILES))
 
