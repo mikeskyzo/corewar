@@ -7,14 +7,14 @@
 
 SRC_DIR		=	$(realpath src)
 
-SRC_FILES	=	main.c						\
-			op.c							\
+SRC_FILES	=	main.c					\
+			op.c					\
 			get_op_by_mnemonic.c			\
-			clean_str.c						\
+			clean_str.c				\
 			write/args_manager.c			\
-			write/op_manager.c				\
-			write/writer.c					\
-			write/get_op.c					\
+			write/op_manager.c			\
+			write/writer.c				\
+			write/get_op.c				\
 			write/label_set_manager.c		\
 
 VERIF_DIR	=	$(realpath src/verifications)

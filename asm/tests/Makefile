@@ -11,9 +11,11 @@ SRC_FILES	=	verifications/detect_types.c			\
 			verifications/parse_labels_and_verify_instruction.c \
 			verifications/verify_file.c			\
 			verifications/verify_instruction.c		\
-			write/args_manager.c				\
-			write/op_manager.c				\
-			write/writer.c					\
+			write/args_manager.c			\
+			write/op_manager.c			\
+			write/writer.c				\
+			write/get_op.c				\
+			write/label_set_manager.c				\
 			clean_str.c					\
 			get_op_by_mnemonic.c				\
 			op.c						\
