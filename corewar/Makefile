@@ -11,7 +11,8 @@ FUNC_FILES	=	vm_live.c					\
 			vm_ld.c						\
 			vm_st.c						\
 			vm_add.c					\
-			vm_sub.c
+			vm_sub.c					\
+			vm_and.c
 
 SRC_DIR		=	$(realpath src)
 
