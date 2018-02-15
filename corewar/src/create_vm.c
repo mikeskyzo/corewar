@@ -7,6 +7,7 @@
 
 /* File created the 12/02/2018 at 10:56:37 by julian.frabel@epitech.eu */
 
+#include "my.h"
 #include "op.h"
 #include "corewar.h"
 #include <unistd.h>

@@ -100,7 +100,6 @@ int hash(char *options, int str_len);
 char *option_precision(char *str, int len);
 int option_width(char *options, int length, int star_value, char c);
 
-
 typedef struct printf_arg {
 	char type;
 	int (*func)(va_list, char *options);
