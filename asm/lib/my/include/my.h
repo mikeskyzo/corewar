@@ -57,6 +57,7 @@ int	my_getnbr_base(char const *str, char const *base);
 char	*my_strcat(char *dest, char const *src);
 char	*my_strncat(char *dest, char const *src, int nb);
 char	*my_strdup(char const *src);
+int 	my_strdupcat(char **dest, char *src);
 int	my_show_word_array(char * const *tab);
 char **my_str_to_word_array(char const *str, char *delim);
 char	*my_convert_base(char const *nbr, char const *base_from, \

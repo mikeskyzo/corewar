@@ -21,7 +21,7 @@ int my_limit_strlen(char *str, char end)
 	return (len);
 }
 
-int my_strdupcat(char **dest, char *src)
+static int my_strdupcat(char **dest, char *src)
 {
 	int dest_len = my_limit_strlen(*dest, '\0');
 	int src_len = my_limit_strlen(src, '\0');
