@@ -59,3 +59,10 @@ Test(get_register_as_int, return_is_expected, .timeout=10)
 	cr_expect(get_direct_as_int(register_val) == 50725638);
 	cr_expect(get_direct_as_int(NULL) == 0);
 }
+
+Test(get_indirect_value_as_int, return_is_expected, .timeout=10)
+{
+	byte_t ram[5] = {0x01, 0x66, 0x72, 0xaa, 0xd0};
+
+	cr_expect(get_indirect_value_as_int(1, ram) == 1718790864);
+}

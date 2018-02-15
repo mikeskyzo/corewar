@@ -12,5 +12,9 @@
 
 int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 {
+	byte_t params = 0;
+
+	if (vm == NULL || instruction_pos == NULL || champion == NULL)
+		return (-1);
 	return (0);
 }

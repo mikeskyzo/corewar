@@ -32,6 +32,9 @@
 #define THIRD_PARAM_TYPE(value) ((value & THIRD_PARAM_MASK) >> 2)
 #define FOURTH_PARAM_TYPE(value) ((value & FOURTH_PARAM_MASK))
 
+#define SIZEOF_PARAM(type) ((type == REGISTER_TYPE) ? REG_SIZE : \
+((type == DIRECT_TYPE) ? DIR_SIZE : IND_SIZE))
+
 typedef unsigned char byte_t;
 
 struct champ_s
@@ -67,6 +70,7 @@ champ_t *get_champion_by_name(vm_t *vm, const char *name);
 int get_register_as_int(byte_t *start);
 int get_direct_as_int(byte_t *start);
 int get_indirect_as_int(byte_t *start);
+int get_indirect_value_as_int(int indirect, byte_t *pc);
 
 /*
 ** Functions vm (mnemonics) prototyped as follow:

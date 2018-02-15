@@ -42,3 +42,14 @@ int get_indirect_as_int(byte_t *start)
 		result = (result << 8) | (start[i]);
 	return (result);
 }
+
+int get_indirect_value_as_int(int indirect, byte_t *pc)
+{
+	int result = 0;
+
+	if (pc == NULL)
+		return (0);
+	for (int i = 0; i < 4; i++)
+		result = (result << 8) | (*(pc + (indirect + i) % IDX_MOD));
+	return (result);
+}
