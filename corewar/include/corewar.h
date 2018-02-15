@@ -43,6 +43,9 @@ struct champ_s
 	int champion_nb;
 	int nb_next_ins;
 	int nb_cycle_live;
+	char *prog;
+	int nb_prog;
+	int load;
 	byte_t *pc;
 	bool carry;
 	byte_t registers[REG_SIZE * REG_NUMBER];
@@ -59,6 +62,11 @@ struct vm_s
 };
 
 typedef struct vm_s vm_t;
+
+champ_t *read_arg(char**);
+champ_t get_champ(char*, int, int);
+
+void puts_help(void);
 
 vm_t *create_vm(void);
 champ_t *create_blank_champion(void);
