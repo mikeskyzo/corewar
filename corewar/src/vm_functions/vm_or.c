@@ -2,10 +2,10 @@
 ** EPITECH PROJECT, 2017
 ** CPE_corewar
 ** File description:
-** Perform the and option of the vm
+** or function
 */
 
-/* File created the 15/02/2018 at 13:14:30 by julian.frabel@epitech.eu */
+/* File created the 15/02/2018 at 15:02:19 by julian.frabel@epitech.eu */
 
 #include "my.h"
 #include "corewar.h"
@@ -45,7 +45,7 @@ get_indirect_as_int(arg), champion->pc));
 	}
 }
 
-int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_or(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 {
 	int value1 = 0;
 	int value2 = 0;
@@ -56,7 +56,7 @@ int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 		return (-1);
 	value1 = get_value(instruction_pos, champion, 1);
 	value2 = get_value(instruction_pos, champion, 2);
-	result = value1 & value2;
+	result = value1 | value2;
 	set_register_value(result, champion, instruction_pos);
 	champion->carry = !(result);
 	return (3 + SIZEOF_PARAM(FIRST_PARAM_TYPE(types)) + \

@@ -32,7 +32,7 @@
 #define THIRD_PARAM_TYPE(value) ((value & THIRD_PARAM_MASK) >> 2)
 #define FOURTH_PARAM_TYPE(value) ((value & FOURTH_PARAM_MASK))
 
-#define SIZEOF_PARAM(type) ((type == REGISTER_TYPE) ? REG_SIZE : \
+#define SIZEOF_PARAM(type) ((type == REGISTER_TYPE) ? 1 : \
 ((type == DIRECT_TYPE) ? DIR_SIZE : IND_SIZE))
 
 typedef unsigned char byte_t;
@@ -85,5 +85,7 @@ int vm_st(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 int vm_add(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 int vm_sub(vm_t *vm, byte_t *instruction, champ_t *champ);
 int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+int vm_or(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+int vm_xor(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 
 #endif
