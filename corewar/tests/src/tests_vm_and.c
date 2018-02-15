@@ -52,6 +52,7 @@ Test(vm_and, perform_and_with_indirects, .timeout=10)
 	champ_t *champion = create_blank_champion();
 	byte_t instruction[7] = {0x06, 0xf4, 0x00, 0x01, 0x00, 0x02, 0x03};
 
+	champion->pc = instruction;
 	cr_expect(vm_and(vm, instruction, champion) == 7);
 	cr_expect(champion->registers[8] == 0x00);
 	cr_expect(champion->registers[9] == 0x00);
@@ -83,6 +84,7 @@ Test(vm_and, mixed_direct_indirect, .timeout=10)
 	byte_t instruction[9] = {0x06, 0xb4, 0x09, 0x55, 0x33, 0x44, \
 0x00, 0x02, 0x01};
 
+	champion->pc = instruction;
 	cr_expect(vm_and(vm, instruction, champion) == 9);
 	cr_expect(champion->registers[0] == 0x09);
 	cr_expect(champion->registers[1] == 0x55);

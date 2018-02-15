@@ -32,7 +32,7 @@
 #define THIRD_PARAM_TYPE(value) ((value & THIRD_PARAM_MASK) >> 2)
 #define FOURTH_PARAM_TYPE(value) ((value & FOURTH_PARAM_MASK))
 
-#define SIZEOF_PARAM(type) ((type == REGISTER_TYPE) ? REG_SIZE : \
+#define SIZEOF_PARAM(type) ((type == REGISTER_TYPE) ? 1 : \
 ((type == DIRECT_TYPE) ? DIR_SIZE : IND_SIZE))
 
 typedef unsigned char byte_t;
