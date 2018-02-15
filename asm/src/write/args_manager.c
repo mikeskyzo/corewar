@@ -57,6 +57,5 @@ int size)
 	}
 	if ((arg[0] < '0' || arg[0] > '9') && arg[0] != '-' && arg[0] != '+')
 		index = 1;
-	printf("%s - %i\n", arg, size);
 	return (caster(size, my_getnbr(&arg[index])));
 }
