@@ -30,10 +30,18 @@ static int compute_rampos(champ_t *champ_tab, int champ_ind, int champ_nb)
 static void load_in_ram(vm_t *vm, champ_t *champ, int ram_pos)
 {
 	for (int i = 0; i < champ->header.prog_size; i++)
-		vm->ram[ram_pos + i] = champ->prog[i];
+		vm->ram[(ram_pos + i) % MEM_SIZE] = champ->prog[i];
 }
 
 int load_champ(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb)
+{
+	for (int i = 0; i < champ_nb; i++)
+		load_in_ram(vm, &(champ[i]), \
+compute_rampos(champ, i, champ_nb));
+	return (NULL);
+}
+
+int load_champ_at(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb)
 {
 	for (int i = 0; i < champ_nb; i++)
 		load_in_ram(vm, &(champ[i]), \
