@@ -25,6 +25,7 @@ SRC_FILES	=	main.c						\
 			get_as_int.c					\
 			create_blank_champion.c				\
 			get_champ.c					\
+			load_champ.c					\
 			read_arg.c					\
 			puts_help.c
 
