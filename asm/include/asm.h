@@ -15,6 +15,10 @@
 #define ERR_INVALID_NB_ARG "invalid number of arguments."
 #define ERR_INVALID_ARG_TYPE "invalid type of argument."
 #define ERR_EMPTY_FILE "empty file."
+#define ERR_NAME_REDEFINED "name can only be defined once."
+#define ERR_COMMENT_REDEFINED "comment can only be defined once."
+#define ERR_TOO_LONG_NAME "program name is too long."
+#define ERR_TOO_LONG_COMMENT "comment is too long."
 
 #define ERROR_MSG_SIZE 128
 
