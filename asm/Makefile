@@ -22,7 +22,8 @@ VERIF_DIR	=	$(realpath src/verifications)
 VERIF_FILES	=	verify_instruction.c				\
 			verify_file.c					\
 			detect_types.c					\
-			parse_labels_and_verify_instruction.c
+			parse_labels_and_verify_instruction.c		\
+			header_info.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(VERIF_DIR)/, $(VERIF_FILES))
 
