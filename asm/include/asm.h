@@ -19,6 +19,8 @@
 #define ERR_COMMENT_REDEFINED "comment can only be defined once."
 #define ERR_TOO_LONG_NAME "program name is too long."
 #define ERR_TOO_LONG_COMMENT "comment is too long."
+#define ERR_NO_NAME_DEFINED "no name specified."
+#define WARNING_NO_COMMENT_DEFINED "asm : warning : no comment specified.\n"
 
 #define ERROR_MSG_SIZE 128
 

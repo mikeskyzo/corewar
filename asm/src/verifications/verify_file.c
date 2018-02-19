@@ -35,6 +35,17 @@ int process_instruction(char *line, assembly_data_t *data)
 	return (0);
 }
 
+int is_valid_header(assembly_data_t *data)
+{
+	if (my_strlen(data->header.prog_name) == 0) {
+		my_strcpy(data->error_msg, ERR_NO_NAME_DEFINED);
+		return (0);
+	}
+	if (my_strlen(data->header.comment) == 0)
+		my_puterror(WARNING_NO_COMMENT_DEFINED);
+	return (1);
+}
+
 int is_file_valid(int fd, assembly_data_t *data)
 {
 	char *instruction = NULL;
@@ -56,5 +67,5 @@ int is_file_valid(int fd, assembly_data_t *data)
 		instruction = get_next_line(fd);
 	}
 	lseek(fd, 0, SEEK_SET);
-	return (1);
+	return (is_valid_header(data));
 }
