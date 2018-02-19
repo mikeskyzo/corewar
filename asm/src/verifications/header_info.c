@@ -15,31 +15,26 @@
 
 int is_header_info(char *instruction)
 {
-	if (!my_strncmp(instruction, NAME_CMD_STRING, \
-my_strlen(NAME_CMD_STRING)) && (instruction[my_strlen(NAME_CMD_STRING)] == ' ' \
-|| instruction[my_strlen(NAME_CMD_STRING)] == '\0'))
+	int name_cmd_len = my_strlen(NAME_CMD_STRING);
+	int comment_cmd_len = my_strlen(COMMENT_CMD_STRING);
+
+	if (!my_strncmp(instruction, NAME_CMD_STRING, name_cmd_len) && \
+(instruction[name_cmd_len] == ' ' || instruction[name_cmd_len] == '\0'))
 		return (1);
-	if (!my_strncmp(instruction, COMMENT_CMD_STRING, \
-my_strlen(COMMENT_CMD_STRING)) && \
-(instruction[my_strlen(COMMENT_CMD_STRING)] == ' ' \
-|| instruction[my_strlen(COMMENT_CMD_STRING)] == '\0'))
+	if (!my_strncmp(instruction, COMMENT_CMD_STRING, comment_cmd_len) && \
+(instruction[comment_cmd_len] == ' ' || instruction[comment_cmd_len] == '\0'))
 		return (1);
 	return (0);
 }
 
-int process_header_info(char *instruction, assembly_data_t *data)
+int process_header_info(char *line, assembly_data_t *data)
 {
-	if (!my_strncmp(instruction, NAME_CMD_STRING, \
-my_strlen(NAME_CMD_STRING))) {
-		for (int i = 0; instruction[i + \
-my_strlen(NAME_CMD_STRING) + 1] && i < PROG_NAME_LENGTH; i++)
-			data->header.prog_name[i] = instruction[i + \
-my_strlen(NAME_CMD_STRING) + 1];
-	} else {
-		for (int i = 0; instruction[i + \
-my_strlen(COMMENT_CMD_STRING) + 1] && i < COMMENT_LENGTH; i++)
-			data->header.comment[i] = instruction[i + \
-my_strlen(COMMENT_CMD_STRING) + 1];
-	}
+	int name_cmd_len = my_strlen(NAME_CMD_STRING);
+	int comment_cmd_len = my_strlen(COMMENT_CMD_STRING);
+
+	if (!my_strncmp(line, NAME_CMD_STRING, name_cmd_len))
+		my_strcpy(data->header.prog_name, &line[name_cmd_len + 1]);
+	else
+		my_strcpy(data->header.comment, &line[comment_cmd_len + 1]);
 	return (0);
 }
