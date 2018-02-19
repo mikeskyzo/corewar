@@ -21,7 +21,7 @@ typedef struct {
 } type_chars_size_t;
 
 short start_with(char *str, char *start);
-void writer(int fd, int read_fd, assembly_data_t *datas);
+void writer(char *file_name, int read_fd, assembly_data_t *datas);
 int get_arg_type(char *arg);
 int get_big_endians(int val, int size);
 int get_op_index(op_t op);

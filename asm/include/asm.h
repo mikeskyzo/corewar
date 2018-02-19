@@ -14,6 +14,7 @@
 #define ERR_OP_NOT_FOUND "unknown instruction."
 #define ERR_INVALID_NB_ARG "invalid number of arguments."
 #define ERR_INVALID_ARG_TYPE "invalid type of argument."
+#define ERR_EMPTY_FILE "empty file."
 
 #define ERROR_MSG_SIZE 128
 

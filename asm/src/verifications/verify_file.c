@@ -73,6 +73,10 @@ int is_file_valid(int fd, assembly_data_t *data)
 	int was_valid = 0;
 
 	instruction = get_next_line(fd);
+	if (instruction == NULL) {
+		my_strcpy(data->error_msg, ERR_EMPTY_FILE);
+		return (0);
+	}
 	for (int i = 1; instruction; i++) {
 		clean_str(&instruction);
 		was_valid = !process_instruction(instruction, data);
