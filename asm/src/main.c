@@ -51,15 +51,17 @@ int main(int ac, char **av)
 	char *file_name = (ac >= 1) ? get_write_name(av[1]) : "file";
 	int write_fd = (ac >= 1) ? open(file_name, O_CREAT | O_RDWR, 0755) : -1;
 	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, 0, {0}, 0};
+	int is_valid = 0;
 
 	free(file_name);
 	if (fd == -1 || write_fd == -1)
 		return (84);
-	if (is_file_valid(fd, &data))
+	is_valid = is_file_valid(fd, &data);
+	if (is_valid)
 		writer(write_fd, fd, &data);
 	else
 		write_error_message(&data);
 	close(fd);
 	dict_destroy(data.labels);
-	return (0);
+	return ((is_valid) ? 0 : 84);
 }
