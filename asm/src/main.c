@@ -15,9 +15,12 @@
 
 void write_error_message(assembly_data_t *data)
 {
-	my_puterror("Error on line ");
-	my_puterror_nbr(data->error_line);
-	my_puterror(" :");
+	my_puterror("asm: error : ");
+	if (data->error_line) {
+		my_puterror("line ");
+		my_puterror_nbr(data->error_line);
+		my_puterror(" : ");
+	}
 	my_puterror(data->error_msg);
 	my_puterror("\n");
 }
