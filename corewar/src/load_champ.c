@@ -32,10 +32,14 @@ static int compute_rampos(champ_t *champ_tab, int champ_ind, int champ_nb)
 	return (rampos);
 }
 
-static void load_in_ram(vm_t *vm, champ_t *champ, unsigned int ram_pos)
+static int load_in_ram(vm_t *vm, champ_t *champ, unsigned int ram_pos)
 {
 	for (int i = 0; i < champ->header.prog_size; i++)
-		vm->ram[(ram_pos + i) % MEM_SIZE] = champ->prog[i];
+		if (vm->ram[(ram_pos + i) % MEM_SIZE] != 0)
+			return (84);
+		else
+			vm->ram[(ram_pos + i) % MEM_SIZE] = champ->prog[i];
+	return (0);
 }
 
 int load_champ(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb)
@@ -53,10 +57,14 @@ int load_champ_all(vm_t *vm, champ_t *champ, int champ_nb)
 	int rampos = 0;
 
 	for (int i = 0; i < champ_nb; i++) {
-		rampos = compute_rampos(champ, i, champ_nb);
+		if ((champ[i]).load < 0)
+			rampos = compute_rampos(champ, i, champ_nb);
+		else
+			rampos = (champ[i]).load;
 		if (rampos < 0)
 			return (-1);
-		load_in_ram(vm, &(champ[i]), rampos);
+		if (load_in_ram(vm, &(champ[i]), rampos) == 84)
+			return (84);
 	}
 	return (0);
 }
