@@ -27,7 +27,8 @@ SRC_FILES	=	main.c						\
 			get_champ.c					\
 			load_champ.c					\
 			read_arg.c					\
-			puts_help.c
+			puts_help.c					\
+			init_game.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(FUNC_DIR)/, $(FUNC_FILES))
 

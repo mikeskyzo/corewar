@@ -21,6 +21,8 @@ vm_t *create_vm(void)
 		my_puterror("Could not create vm!\n");
 		return (NULL);
 	}
+	new_vm->nb_champ = 0;
+	new_vm->champ_tab = NULL;
 	new_vm->current_cycle = 0;
 	new_vm->cycle_to_die = CYCLE_TO_DIE;
 	new_vm->programs = NULL;

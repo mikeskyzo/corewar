@@ -30,7 +30,7 @@ int check_option(char **av, int *i)
 	return (option);
 }
 
-champ_t *loop_read(char **av, int *i, champ_t *champ_tab)
+champ_t *loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 {
 	int dump;
 	static int n = 0;
@@ -44,6 +44,7 @@ champ_t *loop_read(char **av, int *i, champ_t *champ_tab)
 			load = check_option(av, &*i);
 		else {
 			champ_tab[n] = get_champ(av[*i], load, nb_prog);
+			nb_champ++;
 			load = 0;
 			nb_prog = 0;
 			n++;
@@ -54,7 +55,7 @@ champ_t *loop_read(char **av, int *i, champ_t *champ_tab)
 	return (champ_tab);
 }
 
-champ_t *read_arg(char **av, int ac)
+champ_t *read_arg(char **av, int ac, int *nb_champ)
 {
 	champ_t *champ_tab;
 
@@ -72,6 +73,6 @@ champ_t *read_arg(char **av, int ac)
 		exit(84);
 	}
 	for (int i = 1; av[i]; i++)
-		champ_tab = loop_read(av, &i, champ_tab);
+		champ_tab = loop_read(av, &i, champ_tab, &*nb_champ);
 	return (champ_tab);
 }

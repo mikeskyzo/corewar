@@ -10,8 +10,8 @@
 
 int main(int ac, char **av)
 {
-	champ_t *champ;
+	vm_t *vm;
 
-	champ = read_arg(av, ac);
+	vm = init_game(ac, av);
 	return (0);
 }
