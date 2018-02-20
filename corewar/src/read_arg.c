@@ -34,8 +34,8 @@ champ_t *loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 {
 	int dump;
 	static int n = 0;
-	static int load = 0;
-	static int nb_prog = 0;
+	static int load = -1;
+	static int nb_prog = -1;
 
 	if (my_strcmp("-dump", av[*i]) != 0)
 		if (my_strcmp("-n", av[*i]) == 0)
@@ -44,9 +44,9 @@ champ_t *loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 			load = check_option(av, &*i);
 		else {
 			champ_tab[n] = get_champ(av[*i], load, nb_prog);
-			nb_champ++;
-			load = 0;
-			nb_prog = 0;
+			nb_champ[0]++;
+			load = -1;
+			nb_prog = -1;
 			n++;
 		}
 	else

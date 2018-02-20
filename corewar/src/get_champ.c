@@ -67,6 +67,7 @@ champ_t read_champ(char *file, int *fd)
 	}
 	champ.header.magic = reverse_endian(champ.header.magic, 4);
 	champ.header.prog_size = reverse_endian(champ.header.prog_size, 4);
+	champ.alive = true;
 	return (champ);
 }
 
