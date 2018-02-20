@@ -14,6 +14,14 @@
 #define ERR_OP_NOT_FOUND "unknown instruction."
 #define ERR_INVALID_NB_ARG "invalid number of arguments."
 #define ERR_INVALID_ARG_TYPE "invalid type of argument."
+#define ERR_EMPTY_FILE "empty file."
+#define ERR_NAME_REDEFINED "name can only be defined once."
+#define ERR_COMMENT_REDEFINED "comment can only be defined once."
+#define ERR_TOO_LONG_NAME "program name is too long."
+#define ERR_TOO_LONG_COMMENT "comment is too long."
+#define ERR_NO_NAME_DEFINED "no name specified."
+#define ERR_MULTIPLE_LABEL_DEFINITION "multiple definitions of the label."
+#define WARNING_NO_COMMENT_DEFINED "asm : warning : no comment specified.\n"
 
 #define ERROR_MSG_SIZE 128
 
@@ -28,6 +36,9 @@ typedef struct assembly_data_s assembly_data_t;
 
 void clean_str(char **str);
 void clean_word_array(char ***word_array);
+
+int is_header_info(char *instruction);
+int process_header_info(char *instruction, assembly_data_t *data);
 
 int is_file_valid(int fd, assembly_data_t *data);
 int parse_label_and_return_instruction_size(char *instruction, \

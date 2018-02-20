@@ -20,37 +20,6 @@ int is_comment(char *instruction)
 	return (0);
 }
 
-int is_header_info(char *instruction)
-{
-	if (!my_strncmp(instruction, NAME_CMD_STRING, \
-my_strlen(NAME_CMD_STRING)) && (instruction[my_strlen(NAME_CMD_STRING)] == ' ' \
-|| instruction[my_strlen(NAME_CMD_STRING)] == '\0'))
-		return (1);
-	if (!my_strncmp(instruction, COMMENT_CMD_STRING, \
-my_strlen(COMMENT_CMD_STRING)) && \
-(instruction[my_strlen(COMMENT_CMD_STRING)] == ' ' \
-|| instruction[my_strlen(COMMENT_CMD_STRING)] == '\0'))
-		return (1);
-	return (0);
-}
-
-int process_header_info(char *instruction, assembly_data_t *data)
-{
-	if (!my_strncmp(instruction, NAME_CMD_STRING, \
-my_strlen(NAME_CMD_STRING))) {
-		for (int i = 0; instruction[i + \
-my_strlen(NAME_CMD_STRING) + 1] && i < PROG_NAME_LENGTH; i++)
-			data->header.prog_name[i] = instruction[i + \
-my_strlen(NAME_CMD_STRING) + 1];
-	} else {
-		for (int i = 0; instruction[i + \
-my_strlen(COMMENT_CMD_STRING) + 1] && i < COMMENT_LENGTH; i++)
-			data->header.comment[i] = instruction[i + \
-my_strlen(COMMENT_CMD_STRING) + 1];
-	}
-	return (0);
-}
-
 int process_instruction(char *line, assembly_data_t *data)
 {
 	int size = 0;
@@ -58,13 +27,23 @@ int process_instruction(char *line, assembly_data_t *data)
 	if (is_comment(line) || line[0] == '\0')
 		return (0);
 	if (is_header_info(line))
-		process_header_info(line, data);
-	else
-		size = parse_label_and_return_instruction_size(line, data);
+		return (process_header_info(line, data));
+	size = parse_label_and_return_instruction_size(line, data);
 	if (size == -1)
 		return (-1);
 	(data->header.prog_size) += size;
 	return (0);
+}
+
+int is_valid_header(assembly_data_t *data)
+{
+	if (my_strlen(data->header.prog_name) == 0) {
+		my_strcpy(data->error_msg, ERR_NO_NAME_DEFINED);
+		return (0);
+	}
+	if (my_strlen(data->header.comment) == 0)
+		my_puterror(WARNING_NO_COMMENT_DEFINED);
+	return (1);
 }
 
 int is_file_valid(int fd, assembly_data_t *data)
@@ -73,6 +52,10 @@ int is_file_valid(int fd, assembly_data_t *data)
 	int was_valid = 0;
 
 	instruction = get_next_line(fd);
+	if (instruction == NULL) {
+		my_strcpy(data->error_msg, ERR_EMPTY_FILE);
+		return (0);
+	}
 	for (int i = 1; instruction; i++) {
 		clean_str(&instruction);
 		was_valid = !process_instruction(instruction, data);
@@ -84,5 +67,5 @@ int is_file_valid(int fd, assembly_data_t *data)
 		instruction = get_next_line(fd);
 	}
 	lseek(fd, 0, SEEK_SET);
-	return (1);
+	return (is_valid_header(data));
 }

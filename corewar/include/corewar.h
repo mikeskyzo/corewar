@@ -55,6 +55,8 @@
 
 	struct vm_s
 	{
+		int nb_champ;
+		champ_t *champ_tab;
 		linked_list_t *programs;
 		byte_t ram[MEM_SIZE];
 		int current_cycle;
@@ -63,7 +65,9 @@
 
 	typedef struct vm_s vm_t;
 
-	champ_t *read_arg(char**, int);
+	vm_t *init_game(int, char**);
+
+champ_t *read_arg(char**, int, int*);
 	champ_t get_champ(char*, int, int);
 
 	int load_champ(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb);

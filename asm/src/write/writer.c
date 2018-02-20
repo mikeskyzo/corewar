@@ -5,20 +5,52 @@
 ** Writer
 */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include "my.h"
 #include "get_next_line.h"
 #include "op.h"
+#include "match.h"
 #include "asm.h"
 #include "writer.h"
 
 static void write_header(int fd, header_t header);
 static void write_program(int fd, int read_fd, assembly_data_t *datas);
 
-void writer(int fd, int read_fd, assembly_data_t *datas)
+static char *get_write_name(char *base_name)
 {
-	write_header(fd, datas->header);
-	write_program(fd, read_fd, datas);
+	int size = 0;
+	char **arr = my_str_to_word_array(base_name, "/");
+	char *res = NULL;
+
+	if (arr == NULL)
+		return (base_name);
+	res = my_strdup(arr[array_size((void **)arr) - 1]);
+	if (res == NULL)
+		return (base_name);
+	size = my_strlen(res);
+	if (match(res, "*.s")) {
+		res[size - 1] = 0;
+		my_strdupcat(&res, "cor");
+		return (res);
+	}
+	my_strdupcat(&res, ".cor");
+	free_null_terminated_word_array((void *)arr);
+	return (res);
+}
+
+void writer(char *file_name, int read_fd, assembly_data_t *datas)
+{
+	char *create_file_name = get_write_name(file_name);
+	int write_fd = open(create_file_name, O_CREAT | O_RDWR, 0755);
+
+	free(create_file_name);
+	if (write_fd == -1)
+		return;
+	write_header(write_fd, datas->header);
+	write_program(write_fd, read_fd, datas);
 }
 
 void write_program(int fd, int read_fd, assembly_data_t *datas)
