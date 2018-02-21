@@ -14,7 +14,7 @@ vm_t *init_game(int ac, char **av)
 
 	vm = create_vm();
 	vm->champ_tab = read_arg(av, ac, &vm->nb_champ);
-	if (load_champ_all(vm, vm->champ_tab, vm->nb_champ) == -1)
+	if (load_champ_all(vm, vm->champ_tab, vm->nb_champ) == 84)
 		exit(84);
 	return (vm);
 }

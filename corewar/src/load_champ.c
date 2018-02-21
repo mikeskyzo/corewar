@@ -34,6 +34,7 @@ static int compute_rampos(champ_t *champ_tab, int champ_ind, int champ_nb)
 
 static int load_in_ram(vm_t *vm, champ_t *champ, unsigned int ram_pos)
 {
+	champ->pc = &(ram[ram_pos]);
 	for (int i = 0; i < champ->header.prog_size; i++)
 		if (vm->ram[(ram_pos + i) % MEM_SIZE] != 0)
 			return (84);
@@ -62,7 +63,7 @@ int load_champ_all(vm_t *vm, champ_t *champ, int champ_nb)
 		else
 			rampos = (champ[i]).load;
 		if (rampos < 0)
-			return (-1);
+			return (84);
 		if (load_in_ram(vm, &(champ[i]), rampos) == 84)
 			return (84);
 	}
