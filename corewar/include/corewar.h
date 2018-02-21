@@ -43,6 +43,7 @@
 		int champion_nb;
 		int nb_next_ins;
 		int nb_cycle_live;
+		bool alive;
 		char *prog;
 		int nb_prog;
 		int load;
@@ -66,8 +67,13 @@
 	typedef struct vm_s vm_t;
 
 	vm_t *init_game(int, char**);
+	void start_game(vm_t*);
 
-champ_t *read_arg(char**, int, int*);
+	void start_game(vm_t*);
+
+	void find_win(vm_t*);
+
+	champ_t *read_arg(char**, int, int*);
 	champ_t get_champ(char*, int, int);
 
 	int load_champ(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb);
