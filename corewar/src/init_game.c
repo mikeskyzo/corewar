@@ -7,6 +7,7 @@
 
 #include "corewar.h"
 #include <stdlib.h>
+#include "my.h"
 
 vm_t *init_game(int ac, char **av)
 {
@@ -14,6 +15,10 @@ vm_t *init_game(int ac, char **av)
 
 	vm = create_vm();
 	vm->champ_tab = read_arg(av, ac, &vm->nb_champ);
+	if (vm->nb_champ < 2 || vm->nb_champ > 4) {
+		my_putstr("Need 2 to 4 champ\n");
+		exit(84);
+	}
 	if (load_champ_all(vm, vm->champ_tab, vm->nb_champ) == 84)
 		exit(84);
 	return (vm);

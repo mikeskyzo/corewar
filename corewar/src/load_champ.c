@@ -34,7 +34,7 @@ static int compute_rampos(champ_t *champ_tab, int champ_ind, int champ_nb)
 
 static int load_in_ram(vm_t *vm, champ_t *champ, unsigned int ram_pos)
 {
-	champ->pc = &(ram[ram_pos]);
+	champ->pc = &(vm->ram[ram_pos]);
 	for (int i = 0; i < champ->header.prog_size; i++)
 		if (vm->ram[(ram_pos + i) % MEM_SIZE] != 0)
 			return (84);

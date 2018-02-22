@@ -8,7 +8,7 @@
 #include "corewar.h"
 #include "my.h"
 
-int two_is_alive(champ_t *champ_tab, int nb_champ)
+int nb_champ_alive(champ_t *champ_tab, int nb_champ)
 {
 	int nb_alive = 0;
 
@@ -38,11 +38,10 @@ void loop_game(vm_t *vm, champ_t champ)
 
 void start_game(vm_t *vm)
 {
-	while (two_is_alive(vm->champ_tab, vm->nb_champ) > 1) {
+	while (nb_champ_alive(vm->champ_tab, vm->nb_champ) > 1) {
 		vm->champ_tab = update_champ(vm->champ_tab, vm->nb_champ);
 		for (int i = 0; i < vm->nb_champ; i++) {
 			loop_game(vm, vm->champ_tab[i]);
-			my_printf("%s\n", vm->champ_tab[i].header.prog_name);
 		}
 	}
 	find_win(vm);

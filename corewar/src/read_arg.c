@@ -30,6 +30,20 @@ int check_option(char **av, int *i)
 	return (option);
 }
 
+int get_nb_prog(champ_t *champ_tab, int nb_champ, int nb_prog)
+{
+	int nb = 1;
+
+	if (nb_prog != -1)
+		return (nb_prog);
+	for (int i = 0; i < nb_champ; i++) {
+		if (champ_tab[i].nb_prog != i + 1)
+			break;
+		nb++;
+	}
+	return (nb);
+}
+
 champ_t *loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 {
 	int dump;
@@ -43,6 +57,7 @@ champ_t *loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 		else if (my_strcmp("-a", av[*i]) == 0)
 			load = check_option(av, &*i);
 		else {
+			nb_prog = get_nb_prog(champ_tab, *nb_champ, nb_prog);
 			champ_tab[n] = get_champ(av[*i], load, nb_prog);
 			nb_champ[0]++;
 			load = -1;
@@ -67,7 +82,7 @@ champ_t *read_arg(char **av, int ac, int *nb_champ)
 		puts_help();
 		exit(0);
 	}
-	champ_tab = malloc(sizeof(champ_t) * 2);
+	champ_tab = malloc(sizeof(champ_t) * 4);
 	if (champ_tab == NULL) {
 		my_puterror("Fail to malloc\n");
 		exit(84);

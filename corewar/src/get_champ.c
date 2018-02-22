@@ -80,6 +80,8 @@ champ_t get_champ(char *file, int load, int nb_prog)
 	champ.prog = get_prog(champ.header.prog_size, fd);
 	champ.load = load;
 	champ.nb_prog = nb_prog;
+	champ.nb_next_ins = 0;
+	champ.nb_cycle_live = 0;
 	close(fd);
 	return (champ);
 }
