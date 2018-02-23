@@ -10,11 +10,12 @@
 #include "my.h"
 #include "corewar.h"
 
-static void set_register_value(int result, champ_t *champ, byte_t *instruction)
+static void set_register_value(vm_t *vm, int result, champ_t *champ)
 {
-	byte_t types = *(instruction + 1);
-	byte_t register_nb = *(instruction + 2 + \
-SIZEOF_PARAM(FIRST_PARAM_TYPE(types)) + SIZEOF_PARAM(SECOND_PARAM_TYPE(types)));
+	byte_t types = vm->ram[(champ->pc + 1) % MEM_SIZE];
+	byte_t register_nb = vm->ram[(champ->pc + 2 + \
+SIZEOF_PARAM(FIRST_PARAM_TYPE(types)) + \
+SIZEOF_PARAM(SECOND_PARAM_TYPE(types))) % MEM_SIZE];
 	byte_t *reg_start = &(champ->registers[(register_nb - 1) * REG_SIZE]);
 
 	if (register_nb > REG_NUMBER)
@@ -25,22 +26,23 @@ SIZEOF_PARAM(FIRST_PARAM_TYPE(types)) + SIZEOF_PARAM(SECOND_PARAM_TYPE(types)));
 	reg_start[REG_SIZE - 1] = (result) & 0xff;
 }
 
-static int get_value(byte_t *instruction, champ_t *champion, int argument)
+static int get_value(vm_t *vm, champ_t *champion, int argument)
 {
-	byte_t types = *(instruction + 1);
-	byte_t *arg = (instruction + 2 + \
+	byte_t types = vm->ram[(champion->pc + 1) % MEM_SIZE];
+	int arg_pos = (champion->pc + 2 + \
 (argument - 1) * SIZEOF_PARAM(FIRST_PARAM_TYPE(types)));
 	byte_t argument_type = ((argument == 1) ? FIRST_PARAM_TYPE(types) : \
 SECOND_PARAM_TYPE(types));
 
-	if (argument_type == REGISTER_TYPE && *arg > REG_NUMBER)
+	if (argument_type == REGISTER_TYPE && \
+vm->ram[arg_pos % MEM_SIZE] > REG_NUMBER)
 		return (0);
 	switch (argument_type) {
 	case REGISTER_TYPE: return (get_register_as_int(\
-&(champion->registers[((*arg) - 1) * REG_SIZE])));
-	case DIRECT_TYPE: return (get_direct_as_int(arg));
+&(champion->registers[(vm->ram[arg_pos % MEM_SIZE] - 1) * REG_SIZE])));
+	case DIRECT_TYPE: return (get_direct_as_int(vm->ram, arg_pos));
 	case INDIRECT_TYPE: return (get_indirect_value_as_int(\
-get_indirect_as_int(arg), champion->pc));
+get_indirect_as_int(vm->ram, arg_pos), vm->ram, champion->pc));
 	default: return (0);
 	}
 }
@@ -54,10 +56,10 @@ int vm_or(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 
 	if (vm == NULL || instruction_pos == NULL || champion == NULL)
 		return (-1);
-	value1 = get_value(instruction_pos, champion, 1);
-	value2 = get_value(instruction_pos, champion, 2);
+	value1 = get_value(vm, champion, 1);
+	value2 = get_value(vm, champion, 2);
 	result = value1 | value2;
-	set_register_value(result, champion, instruction_pos);
+	set_register_value(vm, result, champion);
 	champion->carry = !(result);
 	return (3 + SIZEOF_PARAM(FIRST_PARAM_TYPE(types)) + \
 SIZEOF_PARAM(SECOND_PARAM_TYPE(types)));
