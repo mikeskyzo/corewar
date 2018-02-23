@@ -65,7 +65,7 @@ int loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 			n++;
 		}
 	else
-		dump = check_option(av, &*i);
+		dump = check_option(av, i);
 	return (dump);
 }
 
