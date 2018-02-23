@@ -30,8 +30,7 @@ void run_op(int fd, char *line, int *pos, assembly_data_t *datas)
 	}
 	op_index = get_op_index(op) + 1;
 	write(fd, &op_index, sizeof(char));
-	instruct_size += run_specific_op(fd, pos, parsed_line, datas);
-	instruct_size += sizeof(char);
+	instruct_size += run_specific_op(fd, pos, parsed_line, datas) + 1;
 	*pos += instruct_size;
 	free_null_terminated_word_array((void **)parsed_line);
 }
