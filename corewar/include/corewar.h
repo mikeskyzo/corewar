@@ -11,8 +11,10 @@
 	#include "op.h"
 	#include "mylist.h"
 
-	#define LIVE_STR "The player %d(%s) is alive.\n" /* player number/player name */
-	#define WON_STR "The player %d(%s) has won.\n" /* player number/player name */
+	/* player number/player name */
+	#define LIVE_STR "The player %d(%s) is alive.\n"
+	/* player number/player name */
+	#define WON_STR "The player %d(%s) has won.\n"
 
 	#define MAX(value1, value2) ((value1 > value2) ? value1 : value2)
 	#define MIN(value1, value2) ((value1 > value2) ? value2 : value1)
@@ -62,6 +64,7 @@
 		byte_t ram[MEM_SIZE];
 		int current_cycle;
 		int cycle_to_die;
+		int dump;
 	};
 
 	typedef struct vm_s vm_t;
@@ -73,7 +76,7 @@
 
 	void find_win(vm_t*);
 
-	champ_t *read_arg(char**, int, int*);
+	champ_t *read_arg(char**, int, int*, int*);
 	champ_t get_champ(char*, int, int);
 
 	int load_champ(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb);
