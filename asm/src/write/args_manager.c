@@ -30,8 +30,7 @@ int get_arg_type(char *arg)
 
 static int caster(int size, int val)
 {
-	switch (size)
-	{
+	switch (size) {
 		case 1: return ((unsigned char)val);
 		case 2: return ((unsigned short)val);
 		case 3: return ((unsigned int)val);
