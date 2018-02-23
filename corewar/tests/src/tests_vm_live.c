@@ -12,6 +12,12 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 
+static void load_in_ram(vm_t *vm, byte_t *instruction, int size)
+{
+	for (int i = 0; i < size; i++)
+		vm->ram[i] = instruction[i];
+}
+
 void redirect_all(void)
 {
 	cr_redirect_stderr();
@@ -26,6 +32,7 @@ Test(vm_live, correct_champion, .init=redirect_all, .timeout=10)
 
 	if (vm == NULL || champion == NULL)
 		cr_assert_fail();
+	load_in_ram(vm, instruction, 5);
 	champion->champion_nb = 1;
 	champion->header.prog_name[0] = 'A';
 	push(&(vm->programs), champion);
@@ -42,6 +49,7 @@ Test(vm_live, incorrect_champion, .init=redirect_all, .timeout=10)
 
 	if (vm == NULL)
 		cr_assert_fail();
+	load_in_ram(vm, instruction, 5);
 	cr_assert(vm_live(NULL, NULL, NULL) == -1);
 	cr_assert(vm_live(NULL, instruction, NULL) == -1);
 	cr_assert(vm_live(vm, NULL, NULL) == -1);

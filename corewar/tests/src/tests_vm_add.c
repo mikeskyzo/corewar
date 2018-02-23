@@ -11,6 +11,12 @@
 #include "corewar.h"
 #include <criterion/criterion.h>
 
+static void load_in_ram(vm_t *vm, byte_t *instruction, int size)
+{
+	for (int i = 0; i < size; i++)
+		vm->ram[i] = instruction[i];
+}
+
 /* r1 : 336, r2 : 4106, r3 should be : 4442 (0x115A)->0x00 0x00 0x11 0x5a */
 Test(vm_add, register_were_added_basic, .timeout=10)
 {
@@ -20,6 +26,7 @@ Test(vm_add, register_were_added_basic, .timeout=10)
 
 	if (vm == NULL || champion == NULL)
 		cr_expect_fail();
+	load_in_ram(vm, instruction, 5);
 	champion->registers[0] = 0x00;
 	champion->registers[1] = 0x00;
 	champion->registers[2] = 0x01;
@@ -43,6 +50,7 @@ Test(vm_add, register_were_added_looping, .timeout=10)
 
 	if (vm == NULL || champion == NULL)
 		cr_expect_fail();
+	load_in_ram(vm, instruction, 5);
 	champion->registers[0] = 0xff;
 	champion->registers[1] = 0xff;
 	champion->registers[2] = 0xff;
