@@ -22,10 +22,10 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 	if (0 < champ->nb_next_ins)
 		return;
 	for (ins_nb = 0; op_tab[ins_nb].mnemonique; ins_nb++);
-	if (0 < *(champ->pc) && *(champ->pc) < ins_nb)
+	if (0 < vm->ram[champ->pc] && vm->ram[champ->pc] < ins_nb)
 		(void)champ->pc;
 	else
-		champ->pc = (byte_t *)((long)(champ->pc + 1) % MEM_SIZE);
+		champ->pc++;
 }
 
 int vm_run(vm_t *vm)
