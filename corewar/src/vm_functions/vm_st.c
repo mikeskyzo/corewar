@@ -10,24 +10,24 @@
 #include "corewar.h"
 #include "my.h"
 
-static int register_to_indirect(byte_t *instruction_pos, champ_t *champion)
+static int register_to_indirect(byte_t *ram, champ_t *champion)
 {
-	byte_t register_from = ((*(instruction_pos + 2)) - 1) * REG_SIZE;
-	int indirect_value = get_indirect_as_int(instruction_pos + 3);
-	byte_t *to = NULL;
+	byte_t from = (ram[(champion->pc + 2) % MEM_SIZE] - 1) * REG_SIZE;
+	int indirect_value = get_indirect_as_int(ram, champion->pc + 3);
+	int to = 0;
 
-	if (register_from > (15 * REG_SIZE))
+	if (from > (15 * REG_SIZE))
 		return (-1);
 	to = champion->pc + indirect_value % IDX_MOD;
 	for (int i = 0; i < REG_SIZE; i++)
-		to[i] = champion->registers[register_from + i];
+		ram[(to + i) % MEM_SIZE] = champion->registers[from + i];
 	return (3 + IND_SIZE);
 }
 
-static int register_to_register(byte_t *instruction_pos, champ_t *champion)
+static int register_to_register(byte_t *ram, champ_t *champion)
 {
-	byte_t from = ((*(instruction_pos + 2)) - 1);
-	byte_t to = ((*(instruction_pos + 3)) - 1);
+	byte_t from = (ram[(champion->pc + 2) % MEM_SIZE] - 1);
+	byte_t to = (ram[(champion->pc + 3) % MEM_SIZE] - 1);
 
 	if (from > 15 || to > 15)
 		return (-1);
@@ -44,10 +44,10 @@ int vm_st(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 
 	if (vm == NULL || instruction_pos == NULL || champion == NULL)
 		return (-1);
-	types = *(instruction_pos + 1);
+	types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 	if (SECOND_PARAM_TYPE(types) == REGISTER_TYPE)
-		return (register_to_register(instruction_pos, champion));
+		return (register_to_register(vm->ram, champion));
 	else
-		return (register_to_indirect(instruction_pos, champion));
+		return (register_to_indirect(vm->ram, champion));
 	return (0);
 }

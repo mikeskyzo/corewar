@@ -52,7 +52,7 @@ int vm_or(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 	int value1 = 0;
 	int value2 = 0;
 	int result = 0;
-	byte_t types = *(instruction_pos + 1);
+	byte_t types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 
 	if (vm == NULL || instruction_pos == NULL || champion == NULL)
 		return (-1);

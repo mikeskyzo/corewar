@@ -56,10 +56,10 @@ Test(vm_st, register_to_indirect, .timeout=10)
 		champ->registers[2] = (byte_t)0x01;
 		champ->registers[3] = (byte_t)0x03;
 		cr_expect(vm_st(vm, instruction, champ) == 5);
-		cr_expect(instruction[1] == (byte_t)0xd0);
-		cr_expect(instruction[2] == (byte_t)0x00);
-		cr_expect(instruction[3] == (byte_t)0x01);
-		cr_expect(instruction[4] == (byte_t)0x03);
+		cr_expect(vm->ram[1] == (byte_t)0xd0);
+		cr_expect(vm->ram[2] == (byte_t)0x00);
+		cr_expect(vm->ram[3] == (byte_t)0x01);
+		cr_expect(vm->ram[4] == (byte_t)0x03);
 		free(vm);
 		free(champ);
 	}
