@@ -16,11 +16,11 @@ void find_win(vm_t *vm)
 	for (; i < vm->nb_champ; i++)
 		if (vm->champ_tab[i].alive == true)
 			break;
-	//if (i >= vm->nb_champ)
-	//	my_printf("Equality, no winner\n");
-	//else {
-	i--;
+	if (i >= vm->nb_champ)
+		my_printf("Equality, no winner\n");
+	else {
+		i--;
 		champ = vm->champ_tab[i];
 		my_printf(WON_STR, champ.nb_prog, champ.header.prog_name);
-		//}
+	}
 }

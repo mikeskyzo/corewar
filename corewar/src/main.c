@@ -13,6 +13,9 @@ int main(int ac, char **av)
 	vm_t *vm;
 
 	vm = init_game(ac, av);
-	vm_run(vm);
+	if (!vm)
+		return (84);
+	display_coredump(vm);
+	start_game(vm);
 	return (0);
 }

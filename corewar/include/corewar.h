@@ -64,6 +64,7 @@
 		byte_t ram[MEM_SIZE];
 		int current_cycle;
 		int cycle_to_die;
+		int dump;
 	};
 
 	typedef struct vm_s vm_t;
@@ -75,7 +76,7 @@
 
 	void find_win(vm_t*);
 
-	champ_t *read_arg(char**, int, int*);
+	champ_t *read_arg(char**, int, int*, int*);
 	champ_t get_champ(char*, int, int);
 
 	int load_champ(vm_t *vm, champ_t *champ, int champ_ind, int champ_nb);
@@ -111,5 +112,8 @@
 	int vm_and	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 	int vm_or	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 	int vm_xor	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+
+	int vm_run(vm_t *vm);
+	void display_coredump(vm_t *vm);
 
 #endif
