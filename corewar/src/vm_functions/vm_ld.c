@@ -59,9 +59,9 @@ int vm_ld(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 		return (-1);
 	types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 	if (FIRST_PARAM_TYPE(types) == DIRECT_TYPE)
-		load_direct_to_register(instruction_pos, champion);
+		load_direct_to_register(vm->ram, champion);
 	else
-		load_indirect_to_register(instruction_pos, champion);
+		load_indirect_to_register(vm->ram, champion);
 	return (((FIRST_PARAM_TYPE(types) == DIRECT_TYPE) ? \
 3 + DIR_SIZE : 3 + IND_SIZE));
 }

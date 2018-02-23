@@ -16,8 +16,10 @@ int vm_live(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 
 	if (vm == NULL || instruction_pos == NULL)
 		return (-1);
-	champion_nb = (instruction_pos[1] << 24 | instruction_pos[2] << 16 | \
-instruction_pos[3] << 8 | instruction_pos[4]);
+	champion_nb = (vm->ram[(champion->pc + 1) % MEM_SIZE] << 24 | \
+vm->ram[(champion->pc + 2) % MEM_SIZE] << 16 | \
+vm->ram[(champion->pc + 3) % MEM_SIZE] << 8 | \
+vm->ram[(champion->pc + 4) % MEM_SIZE]);
 	champion = get_champion_by_number(vm, champion_nb);
 	if (champion)
 		my_printf(LIVE_STR, champion_nb, champion->header.prog_name);

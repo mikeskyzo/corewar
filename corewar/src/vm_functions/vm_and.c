@@ -53,7 +53,6 @@ int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 	int result = 0;
 	byte_t types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 
-	(void)instruction_pos;
 	if (vm == NULL || instruction_pos == NULL || champion == NULL)
 		return (-1);
 	value1 = get_value(vm, champion, 1);
