@@ -14,7 +14,7 @@ static void copy_champ_tab(champ_t *tab, int champ_nb, linked_list_t *list)
 		append(&list, &(tab[i]));
 }
 
-static void execute_cycle(champ_t *champ)
+static void execute_cycle(vm_t *vm, champ_t *champ)
 {
 	int ins_nb = -1;
 
@@ -23,7 +23,7 @@ static void execute_cycle(champ_t *champ)
 		return;
 	for (ins_nb = 0; op_tab[ins_nb].mnemonique; ins_nb++);
 	if (0 < *(champ->pc) && *(champ->pc) < ins_nb)
-		my_putstr(op_tab[*(champ->pc)]);
+		(void)champ->pc;
 	else
 		champ->pc = (byte_t *)((long)(champ->pc + 1) % MEM_SIZE);
 }
@@ -33,7 +33,7 @@ int vm_run(vm_t *vm)
 	copy_champ_tab(vm->champ_tab, vm->nb_champ, vm->programs);
 	while (1 < my_list_size(vm->programs)) {
 		for (linked_list_t *cur = vm->programs; cur; cur = cur->next)
-			execute_cycle(cur->data);
+			execute_cycle(vm, cur->data);
 	}
 	return (0);
 }

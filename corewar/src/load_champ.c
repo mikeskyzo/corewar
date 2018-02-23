@@ -17,7 +17,7 @@ static int compute_spacement(champ_t *tab, int champ_nb)
 	if (MEM_SIZE < tot_size)
 		return (-1);
 	else
-		return (tot_size / champ_nb);
+		return ((MEM_SIZE - tot_size) / champ_nb);
 }
 
 static int compute_rampos(champ_t *champ_tab, int champ_ind, int champ_nb)
