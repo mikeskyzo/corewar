@@ -87,6 +87,6 @@ champ_t *read_arg(char **av, int ac, int *nb_champ, int *dump)
 		exit(84);
 	}
 	for (int i = 1; av[i]; i++)
-		*dump = loop_read(av, &i, champ_tab, &*nb_champ);
+		*dump = loop_read(av, &i, champ_tab, nb_champ);
 	return (champ_tab);
 }
