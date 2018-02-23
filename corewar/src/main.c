@@ -15,7 +15,6 @@ int main(int ac, char **av)
 	vm = init_game(ac, av);
 	if (!vm)
 		return (84);
-	display_coredump(vm);
-	start_game(vm);
+	vm_run(vm);
 	return (0);
 }

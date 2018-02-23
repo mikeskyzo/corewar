@@ -8,10 +8,10 @@
 #include "mylist.h"
 #include "corewar.h"
 
-static void copy_champ_tab(champ_t *tab, int champ_nb, linked_list_t *list)
+static void copy_champ_tab(vm_t *vm)
 {
-	for (int i = 0; i < champ_nb; i++)
-		append(&list, &(tab[i]));
+	for (int i = 0; i < vm->nb_champ; i++)
+		append(&(vm->programs), &(vm->champ_tab[i]));
 }
 
 static void execute_cycle(vm_t *vm, champ_t *champ)
@@ -30,10 +30,16 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 
 int vm_run(vm_t *vm)
 {
-	copy_champ_tab(vm->champ_tab, vm->nb_champ, vm->programs);
+	copy_champ_tab(vm);
 	while (1 < my_list_size(vm->programs)) {
 		for (linked_list_t *cur = vm->programs; cur; cur = cur->next)
 			execute_cycle(vm, cur->data);
+		vm->current_cycle++;
+		if (vm->dump < vm->current_cycle) {
+			display_coredump(vm);
+			return (0);
+		}
 	}
+	find_win(vm);
 	return (0);
 }
