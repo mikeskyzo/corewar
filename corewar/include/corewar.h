@@ -11,8 +11,10 @@
 	#include "op.h"
 	#include "mylist.h"
 
-	#define LIVE_STR "The player %d(%s) is alive.\n" /* player number/player name */
-	#define WON_STR "The player %d(%s) has won.\n" /* player number/player name */
+	/* player number/player name */
+	#define LIVE_STR "The player %d(%s) is alive.\n"
+	/* player number/player name */
+	#define WON_STR "The player %d(%s) has won.\n"
 
 	#define MAX(value1, value2) ((value1 > value2) ? value1 : value2)
 	#define MIN(value1, value2) ((value1 > value2) ? value2 : value1)
