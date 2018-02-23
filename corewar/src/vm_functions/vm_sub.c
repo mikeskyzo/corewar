@@ -30,9 +30,12 @@ int vm_sub(vm_t *vm, byte_t *instruction, champ_t *champ)
 
 	if (vm == NULL || instruction == NULL || champ == NULL)
 		return (-1);
-	first_from = &(champ->registers[(*(instruction + 2) - 1) * REG_SIZE]);
-	second_from = &(champ->registers[(*(instruction + 3) - 1) * REG_SIZE]);
-	to = &(champ->registers[(*(instruction + 4) - 1) * REG_SIZE]);
+	first_from = &(champ->registers[(vm->ram[(champ->pc + 2) % MEM_SIZE] \
+- 1) * REG_SIZE]);
+	second_from = &(champ->registers[(vm->ram[(champ->pc + 3) % MEM_SIZE] \
+- 1) * REG_SIZE]);
+	to = &(champ->registers[(vm->ram[(champ->pc + 4) % MEM_SIZE] \
+- 1) * REG_SIZE]);
 	perform_sub(first_from, second_from, to);
 	champ->carry = ((get_register_as_int(to) == 0) ? 1 : 0);
 	return (5);
