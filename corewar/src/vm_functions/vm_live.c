@@ -23,5 +23,6 @@ instruction_pos[3] << 8 | instruction_pos[4]);
 		my_printf(LIVE_STR, champion_nb, champion->header.prog_name);
 	else
 		my_printf(LIVE_STR, champion_nb, "unknown");
+	champion->nb_cycle_live = 0;
 	return (5);
 }

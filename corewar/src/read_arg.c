@@ -74,7 +74,7 @@ champ_t *read_arg(char **av, int ac, int *nb_champ)
 {
 	champ_t *champ_tab;
 
-	if (ac < 1) {
+	if (ac < 2) {
 		puts_help();
 		exit(84);
 	}
