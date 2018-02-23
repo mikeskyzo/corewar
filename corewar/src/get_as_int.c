@@ -47,10 +47,11 @@ int get_indirect_value_as_int(int indirect, byte_t *ram, int pc)
 {
 	int result = 0;
 
-	if (pc == NULL)
+	if (ram == NULL)
 		return (0);
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++) {
 		result = (result << 8) | \
 (ram[(pc + (indirect + i) % IDX_MOD) % MEM_SIZE]);
+	}
 	return (result);
 }

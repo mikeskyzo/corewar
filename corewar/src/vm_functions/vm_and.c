@@ -58,7 +58,7 @@ int vm_and(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
 	value1 = get_value(vm, champion, 1);
 	value2 = get_value(vm, champion, 2);
 	result = value1 & value2;
-	set_register_value(result, champion, instruction_pos);
+	set_register_value(vm, result, champion);
 	champion->carry = !(result);
 	return (3 + SIZEOF_PARAM(FIRST_PARAM_TYPE(types)) + \
 SIZEOF_PARAM(SECOND_PARAM_TYPE(types)));
