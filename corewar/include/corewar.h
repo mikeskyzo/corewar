@@ -49,7 +49,7 @@
 		char *prog;
 		int nb_prog;
 		int load;
-		byte_t *pc;
+		int pc;
 		bool carry;
 		byte_t registers[REG_SIZE * REG_NUMBER];
 	};
