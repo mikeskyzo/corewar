@@ -14,7 +14,7 @@ vm_t *init_game(int ac, char **av)
 	vm_t *vm;
 
 	vm = create_vm();
-	vm->champ_tab = read_arg(av, ac, &vm->nb_champ);
+	vm->champ_tab = read_arg(av, ac, &vm->nb_champ, &vm->dump);
 	if (vm->nb_champ < 2 || vm->nb_champ > 4) {
 		my_putstr("Need 2 to 4 champ\n");
 		exit(84);
