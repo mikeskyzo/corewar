@@ -30,9 +30,11 @@ SRC_FILES	=	main.c						\
 			puts_help.c					\
 			init_game.c					\
 			start_game.c					\
+			core_dumped.c					\
 			find_win.c
 
-SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(FUNC_DIR)/, $(FUNC_FILES))
+SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
+			$(addprefix $(FUNC_DIR)/, $(FUNC_FILES))
 
 OBJ		=	$(SRC:%.c=%.o)
 
