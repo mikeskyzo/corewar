@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-void puts_help()
+void puts_help(void)
 {
 	my_putstr("USAGE\n");
 	my_putstr("\t./corewar [-dump nbr_cycle] [[-n prog_number]");
