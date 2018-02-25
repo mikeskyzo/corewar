@@ -7,6 +7,7 @@
 
 #include "mylist.h"
 #include "corewar.h"
+#include <stdlib.h>
 
 static void copy_champ_tab(vm_t *vm)
 {
@@ -19,6 +20,8 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 	int ins_nb = -1;
 
 	champ->nb_next_ins++;
+	champ->registers[4] = 42;
+	vm_aff(vm, NULL, champ);
 	if (0 < champ->nb_next_ins)
 		return;
 	for (ins_nb = 0; op_tab[ins_nb].mnemonique; ins_nb++);
@@ -36,7 +39,7 @@ int vm_run(vm_t *vm)
 			execute_cycle(vm, cur->data);
 		vm->current_cycle++;
 		if (vm->dump < vm->current_cycle) {
-			display_coredump(vm);
+			//display_coredump(vm);
 			return (0);
 		}
 	}

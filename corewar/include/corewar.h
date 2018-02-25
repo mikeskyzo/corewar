@@ -112,6 +112,9 @@
 	int vm_and	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 	int vm_or	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 	int vm_xor	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+	int vm_zjmp	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+	int vm_sti	(vm_t *vm, byte_t *instruction_pos, champ_t *champ);
+	int vm_aff	(vm_t *vm, byte_t *instruction_pos, champ_t *champ);
 
 	int vm_run(vm_t *vm);
 	void display_coredump(vm_t *vm);
