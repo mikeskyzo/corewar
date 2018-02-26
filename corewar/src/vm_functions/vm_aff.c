@@ -7,6 +7,7 @@
 
 #include "corewar.h"
 #include <stdio.h>
+#include "my.h"
 
 int vm_aff(vm_t *vm, byte_t *instruction_pos, champ_t *champ)
 {
