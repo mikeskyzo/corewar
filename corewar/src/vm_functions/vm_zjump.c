@@ -10,7 +10,7 @@
 
 int vm_zjmp(vm_t *vm, byte_t *instruction_pos, champ_t *champ)
 {
-	int arg = get_indirect_as_int(vm->ram, champ->pc + 1);
+	int arg = get_indirect_as_int(vm->ram, champ->pc + 1 % MEM_SIZE);
 
 	if (vm == NULL || champ == NULL)
 		return (-1);

@@ -15,6 +15,7 @@ int vm_aff(vm_t *vm, byte_t *instruction_pos, champ_t *champ)
 
 	if (vm == NULL || champ == NULL)
 		return (-1);
-	my_putchar((champ->registers[arg - 1]) % 256);
+	for (int i = 0; i < REG_SIZE; i++)
+		my_putchar((champ->registers[(arg - 1 + i) * REG_SIZE]) % 256);
 	return (0);
 }

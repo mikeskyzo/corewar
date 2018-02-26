@@ -20,8 +20,8 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 	int ins_nb = -1;
 
 	champ->nb_next_ins++;
-	//champ->registers[4] = 42;
-	vm_zjmp(vm, NULL, champ);
+	champ->registers[0 * REG_SIZE] = 42;
+	vm_aff(vm, NULL, champ);
 	if (0 < champ->nb_next_ins)
 		return;
 	for (ins_nb = 0; op_tab[ins_nb].mnemonique; ins_nb++);
