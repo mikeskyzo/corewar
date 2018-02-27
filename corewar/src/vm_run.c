@@ -20,6 +20,7 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 	int ins_nb = -1;
 
 	champ->nb_next_ins++;
+	vm_lldi(vm, NULL, champ);
 	if (0 < champ->nb_next_ins)
 		return;
 	for (ins_nb = 0; op_tab[ins_nb].mnemonique; ins_nb++);
