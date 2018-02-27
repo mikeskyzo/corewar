@@ -23,6 +23,7 @@ IDX_MOD) % MEM_SIZE);
 	s += sec;
 	reg_start = &(champ->registers[(reg - 1) * REG_SIZE]);
 	for (int i = 0; i < REG_SIZE; i++)
-		reg_start[i] = vm->ram[((champ->pc + s + i) % IDX_MOD) % MEM_SIZE];
+		reg_start[i] = vm->ram[((champ->pc + s + i) % IDX_MOD) \
+% MEM_SIZE];
 	return (7);
 }

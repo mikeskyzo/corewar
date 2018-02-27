@@ -33,7 +33,6 @@ SRC_FILES	=	main.c						\
 			read_arg.c					\
 			puts_help.c					\
 			init_game.c					\
-			start_game.c					\
 			core_dumped.c					\
 			find_win.c					\
 			vm_run.c
