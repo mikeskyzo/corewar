@@ -118,6 +118,8 @@
 	int vm_ldi	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 	int vm_lld	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
 	int vm_lldi	(vm_t *vm, byte_t *instruction_pos, champ_t *champion);
+	int vm_fork	(vm_t *vm, champ_t *champion);
+	int vm_lfork	(vm_t *vm, champ_t *champion);
 
 	int vm_run(vm_t *vm);
 	void display_coredump(vm_t *vm);

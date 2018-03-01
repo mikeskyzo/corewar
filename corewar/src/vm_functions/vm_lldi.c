@@ -16,7 +16,6 @@ int vm_lldi(vm_t *vm, byte_t *instruction, champ_t *champ)
 	int s;
 	byte_t *reg_start = NULL;
 
-	my_printf("%d - %d\n", ind, sec);
 	if (vm == NULL || champ == NULL)
 		return (-1);
 	s = get_indirect_as_int(vm->ram, (champ->pc + ind) % IDX_MOD);

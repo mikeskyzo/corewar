@@ -20,7 +20,9 @@ FUNC_FILES	=	vm_live.c					\
 			vm_aff.c					\
 			vm_ldi.c					\
 			vm_lld.c					\
-			vm_lldi.c
+			vm_lldi.c					\
+			vm_fork.c					\
+			vm_lfork.c
 
 SRC_DIR		=	$(realpath src)
 
