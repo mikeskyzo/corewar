@@ -10,11 +10,11 @@
 #include "corewar.h"
 #include "my.h"
 
-int vm_live(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_live(vm_t *vm, champ_t *champion)
 {
 	int champion_nb = 0;
 
-	if (vm == NULL || instruction_pos == NULL || champion == NULL)
+	if (vm == NULL || champion == NULL)
 		return (-1);
 	champion_nb = (vm->ram[(champion->pc + 1) % MEM_SIZE] << 24 | \
 vm->ram[(champion->pc + 2) % MEM_SIZE] << 16 | \

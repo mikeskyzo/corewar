@@ -22,13 +22,13 @@ static void perform_sub(byte_t *from_1, byte_t *from_2, byte_t *to)
 	to[3] = (result >> 0) & 0xff;
 }
 
-int vm_sub(vm_t *vm, byte_t *instruction, champ_t *champ)
+int vm_sub(vm_t *vm, champ_t *champ)
 {
 	byte_t *first_from = NULL;
 	byte_t *second_from = NULL;
 	byte_t *to = NULL;
 
-	if (vm == NULL || instruction == NULL || champ == NULL)
+	if (vm == NULL || champ == NULL)
 		return (-1);
 	first_from = &(champ->registers[(vm->ram[(champ->pc + 2) % MEM_SIZE] \
 - 1) * REG_SIZE]);

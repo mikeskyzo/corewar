@@ -8,7 +8,7 @@
 #include "corewar.h"
 #include <stdlib.h>
 
-int vm_ldi(vm_t *vm, byte_t *instruction, champ_t *champ)
+int vm_ldi(vm_t *vm, champ_t *champ)
 {
 	int ind = get_indirect_as_int(vm->ram, (champ->pc + 2) % MEM_SIZE);
 	int sec = get_indirect_as_int(vm->ram, (champ->pc + 4) % MEM_SIZE);

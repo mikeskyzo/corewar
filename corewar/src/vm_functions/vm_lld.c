@@ -51,7 +51,7 @@ ram[(direct_start + DIR_SIZE - i) % MEM_SIZE];
 	return (0);
 }
 
-int vm_lld(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_lld(vm_t *vm, champ_t *champion)
 {
 	byte_t types = 0;
 

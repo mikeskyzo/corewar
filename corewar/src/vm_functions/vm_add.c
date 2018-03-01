@@ -27,14 +27,14 @@ static byte_t perform_add(byte_t byte_1, byte_t byte_2, unsigned short *carry)
 	return (result & ((unsigned short)0x00ff));
 }
 
-int vm_add(vm_t *vm, byte_t *instruction, champ_t *champ)
+int vm_add(vm_t *vm, champ_t *champ)
 {
 	byte_t *first_from = NULL;
 	byte_t *second_from = NULL;
 	byte_t *to = NULL;
 	unsigned short carry = 0;
 
-	if (vm == NULL || instruction == NULL || champ == NULL)
+	if (vm == NULL || champ == NULL)
 		return (-1);
 	first_from = &(champ->registers[(vm->ram[(champ->pc + 2) % \
 MEM_SIZE] - 1) * REG_SIZE]);

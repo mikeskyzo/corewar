@@ -46,14 +46,14 @@ get_indirect_as_int(ram, arg), ram, champion->pc));
 	}
 }
 
-int vm_xor(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_xor(vm_t *vm, champ_t *champion)
 {
 	int value1 = 0;
 	int value2 = 0;
 	int result = 0;
 	byte_t types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 
-	if (vm == NULL || instruction_pos == NULL || champion == NULL)
+	if (vm == NULL || champion == NULL)
 		return (-1);
 	value1 = get_value(vm->ram, champion, 1);
 	value2 = get_value(vm->ram, champion, 2);

@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "my.h"
 
-int vm_aff(vm_t *vm, byte_t *instruction_pos, champ_t *champ)
+int vm_aff(vm_t *vm, champ_t *champ)
 {
 	int arg = vm->ram[(champ->pc + 2) % MEM_SIZE];
 

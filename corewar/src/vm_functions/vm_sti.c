@@ -8,7 +8,7 @@
 #include "corewar.h"
 #include <stdlib.h>
 
-int vm_sti(vm_t *vm, byte_t *instruction, champ_t *champ)
+int vm_sti(vm_t *vm, champ_t *champ)
 {
 	int reg;
 	byte_t *reg_start = NULL;

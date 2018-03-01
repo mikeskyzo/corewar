@@ -38,11 +38,11 @@ static int register_to_register(byte_t *ram, champ_t *champion)
 	return (4);
 }
 
-int vm_st(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_st(vm_t *vm, champ_t *champion)
 {
 	byte_t types = 0;
 
-	if (vm == NULL || instruction_pos == NULL || champion == NULL)
+	if (vm == NULL || champion == NULL)
 		return (-1);
 	types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 	if (SECOND_PARAM_TYPE(types) == REGISTER_TYPE)

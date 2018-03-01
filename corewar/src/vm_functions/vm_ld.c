@@ -51,11 +51,11 @@ ram[(direct_start + DIR_SIZE - i) % MEM_SIZE];
 	return (0);
 }
 
-int vm_ld(vm_t *vm, byte_t *instruction_pos, champ_t *champion)
+int vm_ld(vm_t *vm, champ_t *champion)
 {
 	byte_t types = 0;
 
-	if (vm == NULL || instruction_pos == NULL || champion == NULL)
+	if (vm == NULL || champion == NULL)
 		return (-1);
 	types = vm->ram[(champion->pc + 1) % MEM_SIZE];
 	if (FIRST_PARAM_TYPE(types) == DIRECT_TYPE)
