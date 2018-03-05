@@ -44,6 +44,7 @@
 		header_t header;
 		int champion_nb;
 		int nb_next_ins;
+		int next_ins;
 		int nb_cycle_live;
 		bool alive;
 		char *prog;
@@ -83,6 +84,8 @@
 	int load_champ_all(vm_t *vm, champ_t *champ, int champ_nb);
 
 	void puts_help(void);
+
+	int nb_prog_alive(vm_t*);
 
 	vm_t *create_vm(void);
 	champ_t *create_blank_champion(void);

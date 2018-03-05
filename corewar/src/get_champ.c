@@ -73,6 +73,7 @@ champ_t read_champ(char *file, int *fd)
 
 champ_t get_champ(char *file, int load, int nb_prog)
 {
+	static int nb = 1;
 	int fd;
 	champ_t champ;
 
@@ -80,8 +81,12 @@ champ_t get_champ(char *file, int load, int nb_prog)
 	champ.prog = get_prog(champ.header.prog_size, fd);
 	champ.load = load;
 	champ.nb_prog = nb_prog;
+	if (nb_prog == -1)
+		champ.nb_prog = nb;
 	champ.nb_next_ins = 0;
 	champ.nb_cycle_live = 0;
+	champ.next_ins = -1;
 	close(fd);
+	nb++;
 	return (champ);
 }

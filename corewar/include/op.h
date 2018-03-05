@@ -48,6 +48,7 @@ struct op_s
 	bool		encode_byte;
 	bool		uses_ind;
 	char		*comment;
+	int		(*funct_vm)();
 };
 
 typedef struct op_s op_t;

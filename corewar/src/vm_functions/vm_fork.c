@@ -16,6 +16,7 @@ void copi_champ(champ_t *champ, champ_t *new, int arg)
 	new->champion_nb = champ->champion_nb;
 	new->nb_next_ins = 0;
 	new->alive = true;
+	new->nb_cycle_live = champ->nb_cycle_live;
 	new->prog = my_strdup(champ->prog);
 	new->nb_prog = champ->nb_prog;
 	new->load = champ->load;

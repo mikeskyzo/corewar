@@ -17,5 +17,5 @@ int vm_zjmp(vm_t *vm, champ_t *champ)
 	if (champ->carry == false)
 		return (3);
 	champ->pc += (arg % IDX_MOD);
-	return (3);
+	return (0);
 }

@@ -10,6 +10,18 @@
 #include "corewar.h"
 #include "my.h"
 
+void set_all_live_zero(vm_t *vm, int nb)
+{
+	champ_t *champ;
+	linked_list_t *cur = vm->programs;
+
+	for (; cur != NULL; cur = cur->next) {
+		champ = (champ_t*)cur->data;
+		if (champ->nb_prog == nb)
+			champ->nb_cycle_live = 0;
+	}
+}
+
 int vm_live(vm_t *vm, champ_t *champion)
 {
 	int champion_nb = 0;
@@ -21,9 +33,9 @@ vm->ram[(champion->pc + 2) % MEM_SIZE] << 16 | \
 vm->ram[(champion->pc + 3) % MEM_SIZE] << 8 | \
 vm->ram[(champion->pc + 4) % MEM_SIZE]);
 	champion = get_champion_by_number(vm, champion_nb);
-	if (champion) {
+	if (champion != NULL) {
 		my_printf(LIVE_STR, champion_nb, champion->header.prog_name);
-		champion->nb_cycle_live = 0;
+		set_all_live_zero(vm, champion_nb);
 	} else
 		my_printf(LIVE_STR, champion_nb, "unknown");
 	return (5);

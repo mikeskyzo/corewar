@@ -7,20 +7,30 @@
 
 #include "corewar.h"
 #include "my.h"
+#include "mylist.h"
+
+int is_alive(champ_t *champ)
+{
+	if (champ->alive == true)
+		return (1);
+	return (0);
+}
+
+void print_win(champ_t *champ)
+{
+	my_printf(WON_STR, champ->nb_prog, champ->header.prog_name);
+}
 
 void find_win(vm_t *vm)
 {
-	champ_t champ;
-	int i = 0;
+	linked_list_t *cur = vm->programs;
+	int i = 1;
 
-	for (; i < vm->nb_champ; i++)
-		if (vm->champ_tab[i].alive == true)
+	for (; cur != NULL; i++, cur = cur->next)
+		if (is_alive(cur->data) == 1)
 			break;
-	if (i >= vm->nb_champ)
+	if (i >= my_list_size(vm->programs))
 		my_printf("Equality, no winner\n");
-	else {
-		i--;
-		champ = vm->champ_tab[i];
-		my_printf(WON_STR, champ.nb_prog, champ.header.prog_name);
-	}
+	else
+		print_win(cur->data);
 }

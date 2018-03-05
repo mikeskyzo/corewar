@@ -20,8 +20,9 @@ champ_t *get_champion_by_number(vm_t *vm, int champion_nb)
 	curr_index = vm->programs;
 	for (int i = 0; curr_index != NULL; i++) {
 		curr_champ = (champ_t *)curr_index->data;
-		if (curr_champ->champion_nb == champion_nb)
+		if (curr_champ->nb_prog == champion_nb) {
 			return (curr_champ);
+		}
 		curr_index = curr_index->next;
 	}
 	return (NULL);

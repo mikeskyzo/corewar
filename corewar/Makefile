@@ -39,7 +39,8 @@ SRC_FILES	=	main.c						\
 			init_game.c					\
 			core_dumped.c					\
 			find_win.c					\
-			vm_run.c
+			vm_run.c					\
+			nb_prog_alive.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 			$(addprefix $(FUNC_DIR)/, $(FUNC_FILES))
