@@ -107,22 +107,22 @@
 	** the functions will return the size of himself in memory
 	** (ex live return 5)
 	*/
-	int vm_live	(vm_t *vm, champ_t *champion);
-	int vm_ld	(vm_t *vm, champ_t *champion);
-	int vm_st	(vm_t *vm, champ_t *champion);
-	int vm_add	(vm_t *vm, champ_t *champion);
-	int vm_sub	(vm_t *vm, champ_t *champion);
-	int vm_and	(vm_t *vm, champ_t *champion);
-	int vm_or	(vm_t *vm, champ_t *champion);
-	int vm_xor	(vm_t *vm, champ_t *champion);
-	int vm_zjmp	(vm_t *vm, champ_t *champion);
-	int vm_sti	(vm_t *vm, champ_t *champion);
-	int vm_aff	(vm_t *vm, champ_t *champion);
-	int vm_ldi	(vm_t *vm, champ_t *champion);
-	int vm_lld	(vm_t *vm, champ_t *champion);
-	int vm_lldi	(vm_t *vm, champ_t *champion);
-	int vm_fork	(vm_t *vm, champ_t *champion);
-	int vm_lfork	(vm_t *vm, champ_t *champion);
+	int vm_live(vm_t *vm, champ_t *champion);
+	int vm_ld(vm_t *vm, champ_t *champion);
+	int vm_st(vm_t *vm, champ_t *champion);
+	int vm_add(vm_t *vm, champ_t *champion);
+	int vm_sub(vm_t *vm, champ_t *champion);
+	int vm_and(vm_t *vm, champ_t *champion);
+	int vm_or(vm_t *vm, champ_t *champion);
+	int vm_xor(vm_t *vm, champ_t *champion);
+	int vm_zjmp(vm_t *vm, champ_t *champion);
+	int vm_sti(vm_t *vm, champ_t *champion);
+	int vm_aff(vm_t *vm, champ_t *champion);
+	int vm_ldi(vm_t *vm, champ_t *champion);
+	int vm_lld(vm_t *vm, champ_t *champion);
+	int vm_lldi(vm_t *vm, champ_t *champion);
+	int vm_fork(vm_t *vm, champ_t *champion);
+	int vm_lfork(vm_t *vm, champ_t *champion);
 
 	int vm_run(vm_t *vm);
 	void display_coredump(vm_t *vm);
