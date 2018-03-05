@@ -13,25 +13,17 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-static int reverse_endian(int val, int size)
+static int get_bigendian(int nb, int size)
 {
 	unsigned int x = 0x76543210;
 	char *checker = (char *)&x;
-	int b0 = (val & 0xff) << 24;
-	int b1 = (val & 0xff00) << 8;
-	int b2 = (val & 0xff0000) >> 8;
-	int b3 = (val & 0xff000000) >> 24;
-	int res = b0 | b1 | b2 | b3;
+	byte_t vm_endian_int[size];
 
 	if (*checker == 0x76)
-		return (val);
-	switch (size) {
-		case 1: return (val);
-		case 2:	return ((val >> 8) | (val & 0xff) << 8);
-		case 3: return (val);
-		case 4: return (b0 | b1 | b2 | b3);
-	}
-	return (res);
+		return (nb);
+	for (int i = 0; i < size; i++)
+		vm_endian_int[i] = ((byte_t *)&nb)[size - (i + 1)];
+	return (*(int *)vm_endian_int);
 }
 
 char *get_prog(int size, int fd)
@@ -65,8 +57,9 @@ champ_t read_champ(char *file, int *fd)
 		my_puterror("Fail to read\n");
 		exit(84);
 	}
-	champ.header.magic = reverse_endian(champ.header.magic, 4);
-	champ.header.prog_size = reverse_endian(champ.header.prog_size, 4);
+	champ.header.magic = get_bigendian(champ.header.magic, sizeof(int));
+	champ.header.prog_size = get_bigendian(champ.header.prog_size, \
+sizeof(int));
 	champ.alive = true;
 	return (champ);
 }
@@ -85,6 +78,7 @@ champ_t get_champ(char *file, int load, int nb_prog)
 		champ.nb_prog = nb;
 	champ.nb_next_ins = 0;
 	champ.nb_cycle_live = 0;
+	((int *)champ.registers)[0] = get_bigendian(champ.nb_prog, sizeof(int));
 	champ.next_ins = -1;
 	close(fd);
 	nb++;
