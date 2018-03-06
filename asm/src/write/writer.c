@@ -34,6 +34,7 @@ static char *get_write_name(char *base_name)
 	if (match(res, "*.s")) {
 		res[size - 1] = 0;
 		my_strdupcat(&res, "cor");
+		free_null_terminated_word_array((void *)arr);
 		return (res);
 	}
 	my_strdupcat(&res, ".cor");
