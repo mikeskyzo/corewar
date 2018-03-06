@@ -13,6 +13,8 @@
 
 void free_node(linked_list_t *node)
 {
+	if (node == NULL)
+		return;
 	free(((label_get_t *)node->data)->name);
 	free(node->data);
 	free(node);
