@@ -11,3 +11,4 @@ asm/asm
 corewar/corewar
 dontpush
 asm/zchamp.cor
+*.cor
