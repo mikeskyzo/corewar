@@ -28,7 +28,8 @@ void write_error_message(assembly_data_t *data)
 int main(int ac, char **av)
 {
 	int fd = (ac >= 1) ? open(av[1], O_RDONLY) : -1;
-	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, 0, {0}, 0};
+	assembly_data_t data = {{COREWAR_EXEC_MAGIC, {0}, 0, {0}}, \
+0, 0, {0}, 0};
 	int is_valid = 0;
 
 	if (fd == -1)

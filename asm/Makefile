@@ -23,7 +23,8 @@ VERIF_FILES	=	verify_instruction.c				\
 			verify_file.c					\
 			detect_types.c					\
 			parse_labels_and_verify_instruction.c		\
-			header_info.c
+			header_info.c					\
+			verify_label_get.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(VERIF_DIR)/, $(VERIF_FILES))
 

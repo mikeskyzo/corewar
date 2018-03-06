@@ -21,6 +21,7 @@
 #define ERR_TOO_LONG_COMMENT "comment is too long."
 #define ERR_NO_NAME_DEFINED "no name specified."
 #define ERR_MULTIPLE_LABEL_DEFINITION "multiple definitions of the label."
+#define ERR_UNKNOWN_LABEL "unknown label."
 #define WARNING_NO_COMMENT_DEFINED "asm : warning : no comment specified.\n"
 
 #define ERROR_MSG_SIZE 128
@@ -28,11 +29,19 @@
 struct assembly_data_s {
 	header_t header;
 	linked_dict_t *labels;
+	linked_list_t *label_gets;
 	char error_msg[ERROR_MSG_SIZE];
 	int error_line;
 };
 
 typedef struct assembly_data_s assembly_data_t;
+
+struct label_get_s {
+	char *name;
+	int line;
+};
+
+typedef struct label_get_s label_get_t;
 
 void clean_str(char **str);
 void clean_word_array(char ***word_array);
@@ -42,8 +51,10 @@ int process_header_info(char *instruction, assembly_data_t *data);
 
 int is_file_valid(int fd, assembly_data_t *data);
 int parse_label_and_return_instruction_size(char *instruction, \
-assembly_data_t *data);
+assembly_data_t *data, int instruction_line);
 int verify_instruction(char *instruction, assembly_data_t *data);
+int are_label_get_valid(assembly_data_t *data);
+void write_error_message(assembly_data_t *data);
 
 op_t *get_op_by_mnemonic(char *mnemonique);
 

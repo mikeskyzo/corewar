@@ -28,8 +28,31 @@ int set_label(char **words, assembly_data_t *data, int *curr_prog_size)
 	return (0);
 }
 
+void parse_label_get(char **words, assembly_data_t *data, int line)
+{
+	label_get_t *label = NULL;
+
+	if (words == NULL || data == NULL)
+		return;
+	for (int i = 0; words[i]; i++) {
+		if (is_label_get(words[i])) {
+			label = malloc(sizeof(*label));
+			label->name = my_strdup(words[i]);
+		}
+		if (my_strlen(words[i]) >= 2 && is_label_get(&(words[i][1]))) {
+			label = malloc(sizeof(*label));
+			label->name =  my_strdup(&(words[i][1]));
+		}
+		if (label == NULL)
+			continue;
+		label->line = line;
+		push(&(data->label_gets), label);
+		label = NULL;
+	}
+}
+
 int parse_label_and_return_instruction_size(char *instruction, \
-assembly_data_t *data)
+assembly_data_t *data, int instruction_line)
 {
 	char **words = my_str_to_word_array(instruction, " ");
 	int *current_prog_size = malloc(sizeof(*current_prog_size));
@@ -43,6 +66,7 @@ assembly_data_t *data)
 		if (set_label(words, data, current_prog_size))
 			return (-1);
 	}
+	parse_label_get(words, data, instruction_line);
 	free_null_terminated_word_array((void **)words);
 	if (instruction[label_length] != '\0')
 		return (verify_instruction(&instruction[label_length], data));
