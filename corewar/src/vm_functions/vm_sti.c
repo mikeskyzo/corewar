@@ -45,6 +45,6 @@ int vm_sti(vm_t *vm, champ_t *champ)
 	for (int i = 0; i < REG_SIZE; i++)
 		vm->ram[(champ->pc + ((sec + last) % IDX_MOD + i)) % MEM_SIZE] \
 = reg_start[i];
-	return (3 + SIZEOF_PARAM(SECOND_PARAM_TYPE(types)) + \
-SIZEOF_PARAM(THIRD_PARAM_TYPE(types)));
+	return (3 + MIN(SIZEOF_PARAM(SECOND_PARAM_TYPE(types)), 2) + \
+MIN(SIZEOF_PARAM(THIRD_PARAM_TYPE(types)), 2));
 }
