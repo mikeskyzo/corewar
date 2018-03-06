@@ -17,6 +17,6 @@ int vm_zjmp(vm_t *vm, champ_t *champ)
 	if (champ->carry == false)
 		return (3);
 	arg = get_indirect_as_int(vm->ram, (champ->pc + 1) % MEM_SIZE);
-	champ->pc = ((champ->pc + arg) % IDX_MOD);
+	champ->pc = (champ->pc + (arg % IDX_MOD));
 	return (0);
 }
