@@ -12,8 +12,8 @@ int vm_sti(vm_t *vm, champ_t *champ)
 {
 	int reg;
 	byte_t *reg_start = NULL;
-	int sec = get_indirect_as_int(vm->ram ,(champ->pc + 3) % MEM_SIZE);
-	int last = get_indirect_as_int(vm->ram ,(champ->pc + 5) % MEM_SIZE);
+	int sec = get_indirect_as_int(vm->ram, (champ->pc + 3) % MEM_SIZE);
+	int last = get_indirect_as_int(vm->ram, (champ->pc + 5) % MEM_SIZE);
 
 	if (vm == NULL || champ == NULL)
 		return (-1);
