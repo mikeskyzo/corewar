@@ -10,6 +10,19 @@
 #include "corewar.h"
 #include "my.h"
 
+static int get_bigendian(int nb, int size)
+{
+	unsigned int x = 0x76543210;
+	char *checker = (char *)&x;
+	byte_t vm_endian_int[size];
+
+	if (*checker == 0x76)
+		return (nb);
+	for (int i = 0; i < size; i++)
+		vm_endian_int[i] = ((byte_t *)&nb)[size - (i + 1)];
+	return (*(int *)vm_endian_int);
+}
+
 void set_all_live_zero(vm_t *vm, int nb)
 {
 	champ_t *champ;
@@ -28,10 +41,8 @@ int vm_live(vm_t *vm, champ_t *champion)
 
 	if (vm == NULL || champion == NULL)
 		return (-1);
-	champion_nb = (vm->ram[(champion->pc + 1) % MEM_SIZE] << 24 | \
-vm->ram[(champion->pc + 2) % MEM_SIZE] << 16 | \
-vm->ram[(champion->pc + 3) % MEM_SIZE] << 8 | \
-vm->ram[(champion->pc + 4) % MEM_SIZE]);
+	champion_nb = \
+get_bigendian(*(int *)(&vm->ram[(champion->pc + 1) % MEM_SIZE]), sizeof(int));
 	champion = get_champion_by_number(vm, champion_nb);
 	if (champion != NULL) {
 		my_printf(LIVE_STR, champion_nb, champion->header.prog_name);

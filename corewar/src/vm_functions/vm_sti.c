@@ -22,7 +22,7 @@ int vm_sti(vm_t *vm, champ_t *champ)
 		return (-1);
 	reg_start = &(champ->registers[(reg - 1) * REG_SIZE]);
 	for (int i = 0; i < REG_SIZE; i++)
-		vm->ram[((champ->pc + sec + last + i) % IDX_MOD) % MEM_SIZE] = \
-reg_start[i];
+		vm->ram[(champ->pc + ((sec + last + i) % IDX_MOD)) % MEM_SIZE] \
+= reg_start[i];
 	return (7);
 }
