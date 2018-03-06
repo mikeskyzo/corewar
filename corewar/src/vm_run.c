@@ -15,16 +15,17 @@ static void copy_champ_tab(vm_t *vm)
 		append(&(vm->programs), &(vm->champ_tab[i]));
 }
 
-void do_funct(vm_t *vm, champ_t *champ, int ins)
+static void do_funct(vm_t *vm, champ_t *champ, int ins)
 {
 	if (ins != champ->next_ins) {
 		champ->next_ins = ins;
-		champ->nb_next_ins = op_tab[ins - 1].nbr_cycles;
-	}
-	else if (champ->nb_next_ins <= 0) {
+		champ->nb_next_ins = op_tab[ins - 1].nbr_cycles - 1;
+	} else if (champ->nb_next_ins <= 0) {
 		champ->pc += op_tab[ins - 1].funct_vm(vm, champ);
-	}
-	else
+		ins = vm->ram[champ->pc % MEM_SIZE];
+		champ->next_ins = ins;
+		champ->nb_next_ins = op_tab[ins - 1].nbr_cycles - 1;
+	} else
 		champ->nb_next_ins--;
 
 }
@@ -38,7 +39,7 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 		champ->alive = false;
 		return;
 	}
-	if (ins == 0 || ins > 16) {
+	if (ins <= 0 || 16 < ins) {
 		champ->pc++;
 		return;
 	}
@@ -51,11 +52,13 @@ int vm_run(vm_t *vm)
 	while (1 < nb_prog_alive(vm)) {
 		for (linked_list_t *cur = vm->programs; cur; cur = cur->next)
 			execute_cycle(vm, cur->data);
-		vm->current_cycle++;
-		if (vm->dump == vm->current_cycle) {
+		if (vm->dump != -1 && vm->dump <= vm->current_cycle) {
 			display_coredump(vm);
-			return (0);
+			break;
 		}
+		if (vm->dump == -1 && VM_DUMP_CYCLE <= vm->current_cycle)
+			break;
+		vm->current_cycle++;
 	}
 	find_win(vm);
 	free(vm);
