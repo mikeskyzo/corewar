@@ -23,5 +23,6 @@ int vm_lldi(vm_t *vm, champ_t *champ)
 	reg_start = &(champ->registers[(reg - 1) * REG_SIZE]);
 	for (int i = 0; i < REG_SIZE; i++)
 		reg_start[i] = vm->ram[(champ->pc + s + i) % MEM_SIZE];
+	champ->carry = !(get_register_as_int(reg_start));
 	return (7);
 }
