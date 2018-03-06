@@ -17,7 +17,6 @@ static void copy_champ_tab(vm_t *vm)
 
 static void do_funct(vm_t *vm, champ_t *champ, int ins)
 {
-	// my_printf("name: %s, pc = %d, ins = %d\n", champ->header.prog_name, champ->pc, ins);
 	if (ins != champ->next_ins) {
 		champ->next_ins = ins;
 		champ->nb_next_ins = op_tab[ins - 1].nbr_cycles - 1;

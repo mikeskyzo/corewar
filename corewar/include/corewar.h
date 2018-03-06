@@ -97,7 +97,7 @@
 	int get_register_as_int		(byte_t *start);
 	int get_direct_as_int		(byte_t *ram, int start);
 	int get_indirect_as_int		(byte_t *ram, int start);
-	int get_indirect_value_as_int	(int indirect, byte_t *ram, int pc);
+	int get_indirect_value_as_int (int indirect, byte_t *ram, int pc);
 
 	/*
 	** Functions vm (mnemonics) prototyped as follow:
