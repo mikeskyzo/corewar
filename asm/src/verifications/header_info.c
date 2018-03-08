@@ -65,7 +65,8 @@ int process_header_info(char *line, assembly_data_t *data)
 	if (!my_strncmp(line, NAME_CMD_STRING, name_cmd_len)) {
 		if (is_invalid_name(data, &line[name_cmd_len + 1]))
 			return (-1);
-		my_strcpy(data->header.prog_name, &line[name_cmd_len + 1]);
+		line[my_strlen(line) - 1] = 0;
+		my_strcpy(data->header.prog_name, &line[name_cmd_len + 2]);
 	} else {
 		if (is_invalid_comment(data, &line[comment_cmd_len + 1]))
 			return (-1);
