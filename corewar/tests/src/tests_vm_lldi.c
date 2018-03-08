@@ -49,8 +49,6 @@ Test(vm_lldi, correct_direct_register, .timeout=10)
 		load_in_ram(vm, instruction, 7);
 		champ->pc = 0;
 		vm_lldi(vm, champ);
-		for (int i = 0; i < 16; i++)
-			printf("%d %d %d %d\n", champ->registers[i * 4], champ->registers[(i * 4) + 1], champ->registers[(i * 4) + 2], champ->registers[(i * 4) + 3]);
 		cr_expect(champ->registers[0] == (byte_t)0x00);
 		cr_expect(champ->registers[1] == (byte_t)0x00);
 		cr_expect(champ->registers[2] == (byte_t)0x01);
