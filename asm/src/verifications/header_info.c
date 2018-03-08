@@ -29,6 +29,10 @@ int is_header_info(char *instruction)
 
 int is_invalid_name(assembly_data_t *data, char *name)
 {
+	if (name[0] != '"') {
+		my_strcpy(data->error_msg, ERR_SYNTAX);
+		return (-1);
+	}
 	if (my_strlen(data->header.prog_name)) {
 		my_strcpy(data->error_msg, ERR_NAME_REDEFINED);
 		return (-1);

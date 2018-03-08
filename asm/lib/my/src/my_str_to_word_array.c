@@ -31,9 +31,8 @@ int get_next_word_size(char const *str, int index, char *delim)
 	if (str == NULL)
 		return (0);
 	if (str[index] == '"') {
-		index++;
-		for (i = index; str[i] != 0 && str[i] != '"'; i++);
-		return (i);
+		for (i = index + 1; str[i] != 0 && str[i] != '"'; i++);
+		return (i + 1);
 	}
 	for (i = index; str[i] != 0 && !is_delim(str[i], delim); i++);
 	return (i);
@@ -47,10 +46,11 @@ char *get_next_word(char const *str, int index, char *delim)
 	if (str == NULL || delim == NULL)
 		return (NULL);
 	if (str[index] == '"') {
-		index++;
-		for (i = index; str[i] != 0 && str[i] != '"'; i++)
+		res[0] = str[index];
+		for (i = index + 1; str[i] != 0 && str[i] != '"'; i++)
 			res[i - index] = str[i];
-		res[i - 1] = 0;
+		res[i - index] = str[i];
+		res[i - index + 1] = 0;
 		return (res);
 	}
 	for (i = index; str[i] != 0 && !is_delim(str[i], delim); i++) {
