@@ -32,7 +32,8 @@ Test(vm_xor, perform_and_with_registers, .timeout=10)
 	champion->registers[5] = 0xd0;
 	champion->registers[6] = 0x06;
 	champion->registers[7] = 0x66;
-	cr_expect(vm_xor(vm, instruction, champion) == 5);
+	champion->pc = 0;
+	cr_expect(vm_xor(vm, champion) == 5);
 	cr_expect(champion->registers[8] == 0x90);
 	cr_expect(champion->registers[9] == 0x90);
 	cr_expect(champion->registers[10] == 0xad);
@@ -47,7 +48,8 @@ Test(vm_xor, perform_and_with_directs, .timeout=10)
 0x90, 0xd0, 0x06, 0x66, 0x03};
 
 	load_in_ram(vm, instruction, 11);
-	cr_expect(vm_xor(vm, instruction, champion) == 11);
+	champion->pc = 0;
+	cr_expect(vm_xor(vm, champion) == 11);
 	cr_expect(champion->registers[8] == 0x90);
 	cr_expect(champion->registers[9] == 0x90);
 	cr_expect(champion->registers[10] == 0xad);
@@ -61,7 +63,8 @@ Test(vm_xor, perform_and_with_indirects, .timeout=10)
 	byte_t instruction[7] = {0x06, 0xf4, 0x00, 0x01, 0x00, 0x02, 0x03};
 
 	load_in_ram(vm, instruction, 7);
-	cr_expect(vm_xor(vm, instruction, champion) == 7);
+	champion->pc = 0;
+	cr_expect(vm_xor(vm, champion) == 7);
 	cr_expect(champion->registers[8] == 0xf4);
 	cr_expect(champion->registers[9] == 0x01);
 	cr_expect(champion->registers[10] == 0x01);
@@ -79,7 +82,8 @@ Test(vm_xor, mixed_register_direct, .timeout=10)
 	champion->registers[1] = 0xff;
 	champion->registers[2] = 0x84;
 	champion->registers[3] = 0xfa;
-	cr_expect(vm_xor(vm, instruction, champion) == 8);
+	champion->pc = 0;
+	cr_expect(vm_xor(vm, champion) == 8);
 	cr_expect(champion->registers[8] == 0x77);
 	cr_expect(champion->registers[9] == 0x6f);
 	cr_expect(champion->registers[10] == 0xe2);
@@ -94,7 +98,8 @@ Test(vm_xor, mixed_direct_indirect, .timeout=10)
 0x00, 0x02, 0x01};
 
 	load_in_ram(vm, instruction, 9);
-	cr_expect(vm_xor(vm, instruction, champion) == 9);
+	champion->pc = 0;
+	cr_expect(vm_xor(vm, champion) == 9);
 	cr_expect(champion->registers[0] == 0x00);
 	cr_expect(champion->registers[1] == 0x00);
 	cr_expect(champion->registers[2] == 0x00);

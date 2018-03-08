@@ -23,8 +23,10 @@ static void do_funct(vm_t *vm, champ_t *champ, int ins)
 	} else if (champ->nb_next_ins <= 0) {
 		champ->pc += op_tab[ins - 1].funct_vm(vm, champ);
 		ins = vm->ram[champ->pc % MEM_SIZE];
-		if (0 <= ins || 16 < ins)
+		if (0 <= ins || 16 < ins) {
+			champ->next_ins = -1;
 			return;
+		}
 		champ->next_ins = ins;
 		champ->nb_next_ins = op_tab[ins - 1].nbr_cycles - 1;
 	} else
@@ -36,14 +38,12 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 	int ins = vm->ram[champ->pc % MEM_SIZE];
 
 	champ->nb_cycle_live++;
-	if (champ->nb_cycle_live > CYCLE_TO_DIE) {
-		champ->alive = false;
-		return;
-	}
 	if (ins <= 0 || 16 < ins) {
 		champ->pc++;
 		return;
 	}
+	if (champ->nb_cycle_live >= CYCLE_TO_DIE)
+		champ->alive = false;
 	do_funct(vm, champ, ins);
 }
 

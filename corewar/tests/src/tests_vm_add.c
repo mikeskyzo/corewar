@@ -35,7 +35,7 @@ Test(vm_add, register_were_added_basic, .timeout=10)
 	champion->registers[5] = 0x00;
 	champion->registers[6] = 0x10;
 	champion->registers[7] = 0x0a;
-	cr_expect(vm_add(vm, instruction, champion) == 5);
+	cr_expect(vm_add(vm, champion) == 5);
 	cr_expect(champion->registers[8] == 0x00);
 	cr_expect(champion->registers[9] == 0x00);
 	cr_expect(champion->registers[10] == 0x11);
@@ -59,7 +59,7 @@ Test(vm_add, register_were_added_looping, .timeout=10)
 	champion->registers[5] = 0x00;
 	champion->registers[6] = 0x00;
 	champion->registers[7] = 0x02;
-	cr_expect(vm_add(vm, instruction, champion) == 5);
+	cr_expect(vm_add(vm, champion) == 5);
 	cr_expect(champion->registers[8] == 0x00);
 	cr_expect(champion->registers[9] == 0x00);
 	cr_expect(champion->registers[10] == 0x00);
