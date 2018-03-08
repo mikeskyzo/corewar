@@ -27,7 +27,7 @@ Test(vm_ld, correct_indirect_register, .timeout=10)
 		cr_assert_fail();
 	else {
 		load_in_ram(vm, instruction, 5);
-		vm_ld(vm, instruction, champ);
+		vm_ld(vm, champ);
 		cr_expect(champ->registers[2 * REG_SIZE + 0] == (byte_t)0xd0);
 		cr_expect(champ->registers[2 * REG_SIZE + 1] == (byte_t)0x00);
 		cr_expect(champ->registers[2 * REG_SIZE + 2] == (byte_t)0x01);
@@ -47,7 +47,7 @@ Test(vm_ls, correct_direct_register, .timeout=10)
 		cr_assert_fail();
 	else {
 		load_in_ram(vm, instruction, 7);
-		vm_ld(vm, instruction, champ);
+		vm_ld(vm, champ);
 		cr_expect(champ->registers[3 * REG_SIZE + 0] == (byte_t)0x0a);
 		cr_expect(champ->registers[3 * REG_SIZE + 1] == (byte_t)0x70);
 		cr_expect(champ->registers[3 * REG_SIZE + 2] == (byte_t)0xff);

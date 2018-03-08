@@ -35,7 +35,7 @@ Test(vm_sub, register_were_substracted_basic, .timeout=10)
 	champion->registers[5] = 0x00;
 	champion->registers[6] = 0x01;
 	champion->registers[7] = 0x50;
-	cr_expect(vm_sub(vm, instruction, champion) == 5);
+	cr_expect(vm_sub(vm, champion) == 5);
 	cr_expect(champion->registers[8] == 0x00);
 	cr_expect(champion->registers[9] == 0x00);
 	cr_expect(champion->registers[10] == 0x0e);
@@ -59,7 +59,7 @@ Test(vm_sub, register_were_substracted_looping, .timeout=10)
 	champion->registers[5] = 0x00;
 	champion->registers[6] = 0x00;
 	champion->registers[7] = 0x04;
-	cr_expect(vm_sub(vm, instruction, champion) == 5);
+	cr_expect(vm_sub(vm, champion) == 5);
 	cr_expect(champion->registers[8] == 0xff);
 	cr_expect(champion->registers[9] == 0xff);
 	cr_expect(champion->registers[10] == 0xff);

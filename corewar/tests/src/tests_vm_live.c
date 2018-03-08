@@ -35,8 +35,9 @@ Test(vm_live, correct_champion, .init=redirect_all, .timeout=10)
 	load_in_ram(vm, instruction, 5);
 	champion->champion_nb = 1;
 	champion->header.prog_name[0] = 'A';
+	champion->pc = 0;
 	push(&(vm->programs), champion);
-	cr_assert(vm_live(vm, instruction, champion) == 5);
+	cr_assert(vm_live(vm, champion) == 5);
 	cr_expect_stdout_eq_str("The player 1(A) is alive.\n");
 	free(vm);
 	free(champion);
@@ -51,11 +52,11 @@ Test(vm_live, incorrect_champion, .init=redirect_all, .timeout=10)
 	if (vm == NULL)
 		cr_assert_fail();
 	load_in_ram(vm, instruction, 5);
-	cr_assert(vm_live(NULL, NULL, NULL) == -1);
-	cr_assert(vm_live(NULL, instruction, NULL) == -1);
-	cr_assert(vm_live(vm, NULL, NULL) == -1);
-	cr_assert(vm_live(vm, instruction, NULL) == -1);
-	cr_assert(vm_live(vm, instruction, champ) == 5);
+	cr_assert(vm_live(NULL, NULL) == -1);
+	cr_assert(vm_live(NULL, NULL) == -1);
+	cr_assert(vm_live(vm, NULL) == -1);
+	cr_assert(vm_live(vm, NULL) == -1);
+	cr_assert(vm_live(vm, champ) == 5);
 	cr_expect_stdout_eq_str("The player 1(unknown) is alive.\n");
 	free(vm);
 	free(champ);
