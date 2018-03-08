@@ -36,6 +36,7 @@ int vm_sti(vm_t *vm, champ_t *champ)
 	byte_t types = vm->ram[(champ->pc + 1) % MEM_SIZE];
 	int ins_len = 3 + MIN(sizeof_param(SECOND_PARAM_TYPE(types)), 2) + \
 MIN(sizeof_param(THIRD_PARAM_TYPE(types)), 2);
+
 	if (vm == NULL || champ == NULL)
 		return (-1);
 	get_sec_last(vm, champ, &sec, &last);

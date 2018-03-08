@@ -46,7 +46,7 @@ int get_nb_prog(champ_t *champ_tab, int nb_champ, int nb_prog)
 
 int loop_read(char **av, int *i, champ_t *champ_tab, int *nb_champ)
 {
-	static int dump = -1;
+	static int dump = 0;
 	static int n = 0;
 	static int load = -1;
 	static int nb_prog = -1;
