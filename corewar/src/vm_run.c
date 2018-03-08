@@ -42,6 +42,8 @@ static void execute_cycle(vm_t *vm, champ_t *champ)
 		champ->pc++;
 		return;
 	}
+	if (champ->nb_cycle_live >= CYCLE_TO_DIE)
+		champ->alive = false;
 	do_funct(vm, champ, ins);
 }
 
