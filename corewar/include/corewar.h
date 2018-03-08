@@ -39,6 +39,17 @@
 
 	typedef unsigned char byte_t;
 
+	static inline int sizeof_param(byte_t param)
+	{
+		switch (param) {
+			case (REGISTER_TYPE): return (1);
+			case (DIRECT_TYPE): return (DIR_SIZE);
+			case (INDIRECT_TYPE): return (IND_SIZE);
+			default: return (0);
+		}
+		return (0);
+	}
+
 	struct champ_s
 	{
 		header_t header;

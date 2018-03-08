@@ -34,17 +34,17 @@ int vm_sti(vm_t *vm, champ_t *champ)
 	int sec = 0;
 	int last = 0;
 	byte_t types = vm->ram[(champ->pc + 1) % MEM_SIZE];
-
+	int ins_len = 3 + MIN(sizeof_param(SECOND_PARAM_TYPE(types)), 2) + \
+MzIN(sizeof_param(THIRD_PARAM_TYPE(types)), 2);
 	if (vm == NULL || champ == NULL)
 		return (-1);
 	get_sec_last(vm, champ, &sec, &last);
 	reg = vm->ram[(champ->pc + 2) % MEM_SIZE];
 	if (reg < 1 || reg > REG_NUMBER)
-		return (-1);
+		return (ins_len);
 	reg_start = &(champ->registers[(reg - 1) * REG_SIZE]);
 	for (int i = 0; i < REG_SIZE; i++)
 		vm->ram[(champ->pc + ((sec + last) % IDX_MOD + i)) % MEM_SIZE] \
 = reg_start[i];
-	return (3 + MIN(SIZEOF_PARAM(SECOND_PARAM_TYPE(types)), 2) + \
-MIN(SIZEOF_PARAM(THIRD_PARAM_TYPE(types)), 2));
+	return (ins_len);
 }

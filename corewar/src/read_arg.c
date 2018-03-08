@@ -23,7 +23,7 @@ int check_option(char **av, int *i)
 		exit(84);
 	}
 	option = my_getnbr(av[*i]);
-	if (option < 0 || option > MEM_SIZE) {
+	if (option < 0) {
 		puts_help();
 		exit(84);
 	}
