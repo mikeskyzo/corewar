@@ -58,7 +58,6 @@ int vm_run(vm_t *vm)
 		if (vm->dump == -1 && VM_DUMP_CYCLE <= vm->current_cycle)
 			break;
 		vm->current_cycle++;
-		my_printf("%d\n", vm->current_cycle);
 	}
 	find_win(vm);
 	free(vm);
