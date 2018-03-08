@@ -45,8 +45,10 @@ int vm_live(vm_t *vm, champ_t *champion)
 get_bigendian(*(int *)(&vm->ram[(champion->pc + 1) % MEM_SIZE]), sizeof(int));
 	champion = get_champion_by_number(vm, champion_nb);
 	if (champion != NULL) {
-		my_printf(LIVE_STR, champion_nb, champion->header.prog_name);
-		set_all_live_zero(vm, champion_nb);
+		if (champion->alive == true) {
+			my_printf(LIVE_STR, champion_nb, champion->header.prog_name);
+			set_all_live_zero(vm, champion_nb);
+		}
 	} else
 		my_printf(LIVE_STR, champion_nb, "unknown");
 	return (5);
