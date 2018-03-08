@@ -29,7 +29,9 @@ int is_header_info(char *instruction)
 
 int is_invalid_name(assembly_data_t *data, char *name)
 {
-	if (name[0] != '"') {
+	char **name_array = my_str_to_word_array(name, "\"");
+
+	if (name[0] != '"' || name_array[1] != 0) {
 		my_strcpy(data->error_msg, ERR_SYNTAX);
 		return (-1);
 	}
@@ -46,7 +48,9 @@ int is_invalid_name(assembly_data_t *data, char *name)
 
 int is_invalid_comment(assembly_data_t *data, char *comment)
 {
-	if (comment[0] != '"') {
+	char **comment_array = my_str_to_word_array(comment, "\"");
+
+	if (comment[0] != '"' || comment_array[1] != 0) {
 		my_strcpy(data->error_msg, ERR_SYNTAX);
 		return (-1);
 	}

@@ -1,4 +1,4 @@
-	.name
+	.name "Yolo is a swq"
 	.comment "Op in ARAM"
 
 	ld %0, r2
