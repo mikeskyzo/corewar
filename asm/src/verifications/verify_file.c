@@ -20,7 +20,7 @@ int is_comment(char *instruction)
 	return (0);
 }
 
-int process_instruction(char *line, assembly_data_t *data)
+int process_instruction(char *line, assembly_data_t *data, int line_nb)
 {
 	int size = 0;
 
@@ -28,17 +28,22 @@ int process_instruction(char *line, assembly_data_t *data)
 		return (0);
 	if (is_header_info(line))
 		return (process_header_info(line, data));
-	size = parse_label_and_return_instruction_size(line, data);
+	size = parse_label_and_return_instruction_size(line, data, line_nb);
 	if (size == -1)
 		return (-1);
 	(data->header.prog_size) += size;
 	return (0);
 }
 
-int is_valid_header(assembly_data_t *data)
+int is_valid_header_and_label_get(assembly_data_t *data)
 {
 	if (my_strlen(data->header.prog_name) == 0) {
 		my_strcpy(data->error_msg, ERR_NO_NAME_DEFINED);
+		return (0);
+	}
+	if (!are_label_get_valid(data)) {
+		my_strcpy(data->error_msg, ERR_UNKNOWN_LABEL);
+		data->error_line = 0;
 		return (0);
 	}
 	if (my_strlen(data->header.comment) == 0)
@@ -58,7 +63,7 @@ int is_file_valid(int fd, assembly_data_t *data)
 	}
 	for (int i = 1; instruction; i++) {
 		clean_str(&instruction);
-		was_valid = !process_instruction(instruction, data);
+		was_valid = !process_instruction(instruction, data, i);
 		free(instruction);
 		if (!was_valid) {
 			data->error_line = i;
@@ -67,5 +72,5 @@ int is_file_valid(int fd, assembly_data_t *data)
 		instruction = get_next_line(fd);
 	}
 	lseek(fd, 0, SEEK_SET);
-	return (is_valid_header(data));
+	return (is_valid_header_and_label_get(data));
 }
