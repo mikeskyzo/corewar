@@ -78,7 +78,9 @@ champ_t get_champ(char *file, int load, int nb_prog)
 	else
 		champ.nb_prog = nb_prog;
 	champ.nb_next_ins = 0;
+	champ.next_ins = -1;
 	champ.nb_cycle_live = 0;
+	champ.carry = false;
 	((int *)champ.registers)[0] = get_bigendian(champ.nb_prog, sizeof(int));
 	champ.next_ins = -1;
 	close(fd);
