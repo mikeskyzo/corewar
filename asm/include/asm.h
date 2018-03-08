@@ -22,6 +22,7 @@
 #define ERR_NO_NAME_DEFINED "no name specified."
 #define ERR_MULTIPLE_LABEL_DEFINITION "multiple definitions of the label."
 #define ERR_UNKNOWN_LABEL "unknown label."
+#define ERR_SYNTAX "syntax error."
 #define WARNING_NO_COMMENT_DEFINED "asm : warning : no comment specified.\n"
 
 #define ERROR_MSG_SIZE 128
