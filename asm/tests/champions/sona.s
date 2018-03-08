@@ -1,4 +1,4 @@
-	.name sona
+	.name
 	.comment "Op in ARAM"
 
 	ld %0, r2

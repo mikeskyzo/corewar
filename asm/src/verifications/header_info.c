@@ -46,6 +46,10 @@ int is_invalid_name(assembly_data_t *data, char *name)
 
 int is_invalid_comment(assembly_data_t *data, char *comment)
 {
+	if (comment[0] != '"') {
+		my_strcpy(data->error_msg, ERR_SYNTAX);
+		return (-1);
+	}
 	if (my_strlen(data->header.comment)) {
 		my_strcpy(data->error_msg, ERR_COMMENT_REDEFINED);
 		return (-1);
@@ -70,7 +74,8 @@ int process_header_info(char *line, assembly_data_t *data)
 	} else {
 		if (is_invalid_comment(data, &line[comment_cmd_len + 1]))
 			return (-1);
-		my_strcpy(data->header.comment, &line[comment_cmd_len + 1]);
+		line[my_strlen(line) - 1] = 0;
+		my_strcpy(data->header.comment, &line[comment_cmd_len + 2]);
 	}
 	return (0);
 }
