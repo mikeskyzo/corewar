@@ -19,7 +19,15 @@ SRC_FILES	=	get_as_int.c					\
 			vm_functions/vm_sub.c				\
 			vm_functions/vm_and.c				\
 			vm_functions/vm_or.c				\
-			vm_functions/vm_xor.c
+			vm_functions/vm_zjump.c				\
+			vm_functions/vm_xor.c				\
+			vm_functions/vm_ldi.c				\
+			vm_functions/vm_sti.c				\
+			vm_functions/vm_fork.c				\
+			vm_functions/vm_lldi.c				\
+			vm_functions/vm_lld.c				\
+			vm_functions/vm_lfork.c				\
+			vm_functions/vm_aff.c				\
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
@@ -31,6 +39,9 @@ TESTS_FILES	=	tests_get_as_int.c				\
 			tests_get_champion.c				\
 			tests_vm_live.c					\
 			tests_vm_ld.c					\
+			tests_vm_ldi.c					\
+			tests_vm_lld.c					\
+			tests_vm_lldi.c					\
 			tests_vm_st.c					\
 			tests_vm_add.c					\
 			tests_vm_sub.c					\
