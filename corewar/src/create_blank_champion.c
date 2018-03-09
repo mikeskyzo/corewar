@@ -28,6 +28,7 @@ champ_t *create_blank_champion(void)
 	new_champ->nb_prog = 0;
 	new_champ->load = 0;
 	new_champ->pc = 0;
+	new_champ->alive = true;
 	for (int i = 0; i < REG_SIZE * REG_NUMBER; i++)
 		new_champ->registers[i] = 0;
 	return (new_champ);

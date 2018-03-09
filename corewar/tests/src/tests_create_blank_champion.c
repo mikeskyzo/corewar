@@ -27,6 +27,7 @@ Test(create_blank_champion, champion_is_initialized, .timeout=10)
 		cr_expect(champ->nb_cycle_live == 0);
 		cr_expect(champ->nb_next_ins == 0);
 		cr_expect(champ->pc == 0);
+		cr_expect(champ->alive == true);
 		for (int i = 0; i < REG_NUMBER * REG_SIZE; i++)
 			cr_expect(champ->registers[i] == 0);
 		free(champ);

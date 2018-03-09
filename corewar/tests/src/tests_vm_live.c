@@ -33,10 +33,10 @@ Test(vm_live, correct_champion, .init=redirect_all, .timeout=10)
 	if (vm == NULL || champion == NULL)
 		cr_assert_fail();
 	load_in_ram(vm, instruction, 5);
-	champion->champion_nb = 1;
+	champion->nb_prog = 1;
 	champion->header.prog_name[0] = 'A';
 	champion->pc = 0;
-	push(&(vm->programs), champion);
+	append(&(vm->programs), champion);
 	cr_assert(vm_live(vm, champion) == 5);
 	cr_expect_stdout_eq_str("The player 1(A) is alive.\n");
 	free(vm);
