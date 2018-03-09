@@ -41,6 +41,31 @@ is_direct(params[i + 1]) | is_indirect(params[i + 1]));
 	return (size);
 }
 
+static int test_register(char *elem)
+{
+	int value = 0;
+
+	if (is_register(elem)) {
+		value = my_getnbr(&elem[1]);
+		return (value > 0 && value < REG_NUMBER);
+	}
+	return (1);
+}
+
+int has_invalid_register(char *instruction)
+{
+	char **array = my_str_to_word_array(instruction, " ");
+
+	for (int i = 0; array[i]; i++) {
+		if (!test_register) {
+			free_null_terminated_word_array(array);
+			return (0);
+		}
+	}
+	free_null_terminated_word_array(array);
+	return (1);
+}
+
 int verify_instruction(char *instruction, assembly_data_t *data)
 {
 	char **word_tab = NULL;
@@ -59,7 +84,13 @@ int verify_instruction(char *instruction, assembly_data_t *data)
 		my_strcpy(data->error_msg, ERR_OP_NOT_FOUND);
 		return (-1);
 	}
+	if (has_invalid_register(instruction)) {
+		my_strcpy(data->error_msg, ERR_OP_NOT_FOUND);
+		return (-1);
+	}
 	size = get_instruction_size(word_tab, op, data);
 	free_null_terminated_word_array((void **)word_tab);
 	return ((size != -1) ? (size + 1 + op->encode_byte) : -1);
 }
+
+
