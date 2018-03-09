@@ -11,6 +11,7 @@ SRC_FILES	=	main.c					\
 			op.c					\
 			get_op_by_mnemonic.c			\
 			clean_str.c				\
+			write_error_message.c			\
 			write/args_manager.c			\
 			write/op_manager.c			\
 			write/writer.c				\
