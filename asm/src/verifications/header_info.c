@@ -31,7 +31,8 @@ int is_invalid_name(assembly_data_t *data, char *name)
 {
 	char **name_array = my_str_to_word_array(name, "\"");
 
-	if (name[0] != '"' || name_array[1] != 0) {
+	if (name[0] != '"' || name_array[1] != 0 ||\
+name[my_strlen(name) - 1] != '"') {
 		my_strcpy(data->error_msg, ERR_SYNTAX);
 		return (-1);
 	}
@@ -50,7 +51,8 @@ int is_invalid_comment(assembly_data_t *data, char *comment)
 {
 	char **comment_array = my_str_to_word_array(comment, "\"");
 
-	if (comment[0] != '"' || comment_array[1] != 0) {
+	if (comment[0] != '"' || comment_array[1] != 0 ||\
+comment[my_strlen(comment) - 1] != '"') {
 		my_strcpy(data->error_msg, ERR_SYNTAX);
 		return (-1);
 	}
