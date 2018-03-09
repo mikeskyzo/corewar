@@ -57,12 +57,12 @@ int has_invalid_register(char *instruction)
 	char **array = my_str_to_word_array(instruction, " ");
 
 	for (int i = 0; array[i]; i++) {
-		if (!test_register) {
-			free_null_terminated_word_array(array);
+		if (!test_register(array[i])) {
+			free_null_terminated_word_array((void **)array);
 			return (0);
 		}
 	}
-	free_null_terminated_word_array(array);
+	free_null_terminated_word_array((void **)array);
 	return (1);
 }
 
