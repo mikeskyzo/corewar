@@ -59,11 +59,11 @@ int has_invalid_register(char *instruction)
 	for (int i = 0; array[i]; i++) {
 		if (!test_register(array[i])) {
 			free_null_terminated_word_array((void **)array);
-			return (0);
+			return (1);
 		}
 	}
 	free_null_terminated_word_array((void **)array);
-	return (1);
+	return (0);
 }
 
 int verify_instruction(char *instruction, assembly_data_t *data)
